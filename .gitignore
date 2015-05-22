@@ -1,0 +1,7 @@
+# ignore support directory and uploads
+support
+uploads
+uploads_*
+
+# ignore .DS_Store
+.DS_Store

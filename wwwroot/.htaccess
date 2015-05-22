@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/\.]+)/?$ /index.php?guid=$1
+RewriteRule ^([^/\.]+)/([^/\.]+)/?$ /index.php?guid=$1&action=$2
+#RewriteRule ^journal/([^/\.]+)/?$ /index.php?guid=journal&action=$1
+RewriteRule ^journal/([^/\.]+)/([^/\.]+)/?$ /index.php?guid=journal&action=$1&mid=$2
+RewriteRule ^activate/([^/]+)/([^/\.]+)/?$ /index.php?guid=activate&e=$1&k=$2
+RewriteRule ^resetpassword/([^/]+)/([^/\.]+)/?$ /index.php?guid=resetpassword&e=$1&t=$2
+#RewriteRule . /index.php
+</IfModule>
