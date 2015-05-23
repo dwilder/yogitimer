@@ -1,11 +1,9 @@
 <?php
 namespace Src\Includes\User;
 
+use Src\Includes\Database\DB;
+use Src\Includes\Session\Session;
 use Src\Includes\User\UserRoles;
-
-/*
- * Singleton
- */
 
 class User
 {
@@ -41,11 +39,6 @@ class User
     protected $background_image = null;
     
     /*
-     * PDO object
-     */
-    protected $pdo;
-    
-    /*
      * Prevent duplicates
      */
     private function __construct() {}
@@ -60,14 +53,6 @@ class User
             self::$instance = new User();
         }
         return self::$instance;
-    }
-    
-    /*
-     * Set the PDO reference
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
     }
     
     /*

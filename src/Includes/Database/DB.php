@@ -1,5 +1,5 @@
 <?php
-namespace Src\Includes;
+namespace Src\Includes\Database;
 
 // Singleton
 

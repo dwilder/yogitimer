@@ -18,8 +18,10 @@ class Config
 	/*
 	 * Environment variables
 	 */
+    private $live = false;
 	private $environment = 'dev';		// dev, stage, demo, live
 	private $memory_limit = '128M';
+    private $timezone = 'US/Eastern';
 
 	/*
 	 * System settings
@@ -27,10 +29,20 @@ class Config
 	private $url = 'meditate.dev';
 	private $sitename = 'Meditate';
     private $siteemail = 'meditate@davewilder.ca';
-	private $timezone = 'America/Toronto';
-	
+    
     /*
-     * Store a single instance of the class
+     * Upload directories
+     */
+    private $upload_dir = 'uploads_2015';
+    
+    /*
+     * Stripe keys
+     */
+    private $stripe_private_key = null;
+    private $stripe_public_key = null;
+
+    /*
+     * Config instance
      */
     static private $instance = null;
     
@@ -51,11 +63,36 @@ class Config
         return self::$instance;
     }
     
-	/*
-	 * Method to return one of the arrays
-	 */
-	public function get( $property )
-	{
-		return $this->$property;
-	}
+    /*
+     * Set Stripe keys
+     */
+    private function setStripeKeys()
+    {
+        if ( $this->live ) {
+            $this->stripe_private_key = null;
+            $this->stripe_public_key = null;
+        } else {
+            $this->stripe_private_key = null;
+            $this->stripe_public_key = null;
+        }
+    }
+    
+    /*
+     * Initialize configuration
+     */
+    public function init()
+    {
+        date_default_timezone_set($this->timezone);
+    }
+    
+    /*
+     * Getter
+     */
+    public function get( $key )
+    {
+        if ( $this->$key ) {
+            return $this->$key;
+        }
+        return null;
+    }
 }

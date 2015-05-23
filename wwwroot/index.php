@@ -1,4 +1,4 @@
 <?php
 
 // Load the program file.
-require '../src/App/App.php';
+require '../src/App/Bootstrap.php';

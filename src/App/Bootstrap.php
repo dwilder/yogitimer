@@ -1,6 +1,6 @@
 <?php
 namespace Src\App;
 
-require 'AppController.php';
+require 'App.php';
 
-(new AppController());
+(new App());
