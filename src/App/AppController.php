@@ -1,5 +1,5 @@
 <?php
-namespace Src\Program;
+namespace Src\App;
 
 require 'Initialize.php';
 	
@@ -11,7 +11,7 @@ require 'Initialize.php';
  *	- Store the User
  *	- Store the Http object
  */
-class Program
+class AppController
 {
 	/*
 	 * Initializer
