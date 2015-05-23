@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
 /*
  * The purpose of this class is to determine if a value already exists in a database table.

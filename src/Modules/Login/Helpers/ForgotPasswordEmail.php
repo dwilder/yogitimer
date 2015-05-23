@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Login\Helpers;
 
-use Src\Lib\Email\AdminEmail;
+use Src\Includes\Email\AdminEmail;
 
 class ForgotPasswordEmail extends AdminEmail
 {

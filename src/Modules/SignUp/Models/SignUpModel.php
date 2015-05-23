@@ -1,14 +1,14 @@
 <?php
 namespace Src\Modules\SignUp\Models;
 
-use Src\Lib\Data\Username;
-use Src\Lib\Data\Email;
-use Src\Lib\Data\Password;
-use Src\Lib\Data\ActivationKey;
-use Src\Lib\Data\Roles;
-use Src\Lib\User\User;
-use Src\Lib\User\UserRoles;
-use Src\Lib\Session\Session;
+use Src\Includes\Data\Username;
+use Src\Includes\Data\Email;
+use Src\Includes\Data\Password;
+use Src\Includes\Data\ActivationKey;
+use Src\Includes\Data\Roles;
+use Src\Includes\User\User;
+use Src\Includes\User\UserRoles;
+use Src\Includes\Session\Session;
 use Src\Config\Config;
 use Src\Modules\SignUp\Helpers\VerificationEmail;
 

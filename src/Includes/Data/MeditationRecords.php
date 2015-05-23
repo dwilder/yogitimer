@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
-use Src\Lib\User\User;
+use Src\Includes\User\User;
 
 /*
  * Class to retrieve a user's meditation history.

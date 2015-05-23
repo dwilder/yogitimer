@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\User;
+namespace Src\Includes\User;
 
-use Src\Lib\User\UserRoles;
+use Src\Includes\User\UserRoles;
 
 /*
  * Singleton

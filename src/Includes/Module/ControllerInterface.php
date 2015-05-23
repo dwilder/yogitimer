@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Module;
+namespace Src\Includes\Module;
 
 /*
  * Interface for module controllers

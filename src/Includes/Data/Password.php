@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
 /*
  * Password class

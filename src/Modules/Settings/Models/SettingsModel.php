@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Settings\Models;
 
-use Src\Lib\Form\Form;
+use Src\Includes\Form\Form;
 
 class SettingsModel
 {	

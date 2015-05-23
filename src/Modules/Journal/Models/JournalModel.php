@@ -1,9 +1,9 @@
 <?php
 namespace Src\Modules\Journal\Models;
 
-use Src\Lib\Module\Model;
-use Src\Lib\User\User;
-use Src\Lib\Data\MeditationRecords;
+use Src\Includes\Module\Model;
+use Src\Includes\User\User;
+use Src\Includes\Data\MeditationRecords;
 use Src\Modules\Journal\Helpers\tDummyData;
 
 /*

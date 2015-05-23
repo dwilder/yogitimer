@@ -1,10 +1,10 @@
 <?php
-namespace Src\Program;
+namespace Src\App;
 	
-use Src\Config\Config as Config;
-use Src\Program\Controller;
-use Src\Lib\Session\Session as Session;
-use Src\Lib\User\User as User;
+use Src\Config\Config;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
+use Src\Includes\User\User;
 
 require 'Autoload.php';
 	

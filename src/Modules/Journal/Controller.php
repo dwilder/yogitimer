@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Journal;
 
-use Src\Lib\User\User;
-use Src\Lib\Module\MultiUIController;
+use Src\Includes\User\User;
+use Src\Includes\Module\MultiUIController;
 use Src\Modules\Journal\Models\ActionModel;
 use Src\Modules\Journal\Views\JournalView;
 use Src\Modules\Journal\Views\AddView;

@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\User;
+namespace Src\Includes\User;
 
 interface iUserImage
 {   

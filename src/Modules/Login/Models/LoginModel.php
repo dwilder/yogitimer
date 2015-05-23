@@ -1,11 +1,11 @@
 <?php
 namespace Src\Modules\Login\Models;
 
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
-use Src\Lib\Data\Username;
-use Src\Lib\Data\Email;
-use Src\Lib\Data\Password;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
+use Src\Includes\Data\Username;
+use Src\Includes\Data\Email;
+use Src\Includes\Data\Password;
 
 /*
  * Attempts to log a user in.

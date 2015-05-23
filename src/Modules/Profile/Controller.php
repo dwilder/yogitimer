@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Profile;
 
-use Src\Lib\Module\UIController;
-use Src\Lib\User\User;
+use Src\Includes\Module\UIController;
+use Src\Includes\User\User;
 use Src\Modules\Profile\Models\BannerModel;
 use Src\Modules\Profile\Models\MomentumModel;
 use Src\Modules\Profile\Models\StabilityModel;

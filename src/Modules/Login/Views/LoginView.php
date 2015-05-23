@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Login\Views;
 
-use Src\Lib\Form\Form;
+use Src\Includes\Form\Form;
 
 class LoginView
 {

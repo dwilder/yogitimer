@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Logout\Models;
 
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
 
 class LogoutModel
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Profile\Models;
 
-use Src\Lib\Module\Model;
+use Src\Includes\Module\Model;
 
 /*
  * Momentum represents the meditation requency

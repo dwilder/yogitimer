@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
 /*
  * The sole purpose of this class is define the available user roles

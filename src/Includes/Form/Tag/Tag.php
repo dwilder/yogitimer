@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Form\HTML;
+namespace Src\Includes\Form\HTML;
 
 /*
  * Creates an HTML element to add to a form

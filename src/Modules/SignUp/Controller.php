@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\SignUp;
 
-use Src\Lib\Module\MultiUIController;
+use Src\Includes\Module\MultiUIController;
 
 /*
  * Controller class for signing up.

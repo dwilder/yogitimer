@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Form\Inputs;
+namespace Src\Includes\Form\Inputs;
 
 /*
  * A trait to define input labelling

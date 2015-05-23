@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\UIElements;
+namespace Src\Includes\UIElements;
 
 class LinkButton
 {

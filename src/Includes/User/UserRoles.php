@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\User;
+namespace Src\Includes\User;
 
-use Src\Lib\Data\Roles;
+use Src\Includes\Data\Roles;
 
 /*
  * This class retrieves and updates user roles

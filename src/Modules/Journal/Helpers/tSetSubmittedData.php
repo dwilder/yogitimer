@@ -1,9 +1,9 @@
 <?php
 namespace Src\Modules\Journal\Helpers;
 
-use Src\Lib\User\User;
-use Src\Lib\Data\Date;
-use Src\Lib\Data\Time;
+use Src\Includes\User\User;
+use Src\Includes\Data\Date;
+use Src\Includes\Data\Time;
 
 trait tSetSubmittedData
 {

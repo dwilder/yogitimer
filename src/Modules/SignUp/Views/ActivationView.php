@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\SignUp\Views;
 
-use Src\Lib\UIElements\LinkButton;
+use Src\Includes\UIElements\LinkButton;
 
 class ActivationView
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\Form\Inputs;
+namespace Src\Includes\Form\Inputs;
 
-use Src\Lib\Form\Inputs\InputInterface;
+use Src\Includes\Form\Inputs\InputInterface;
 
 abstract class AbstractInput implements InputInterface
 {	

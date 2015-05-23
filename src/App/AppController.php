@@ -119,5 +119,3 @@ class AppController
 		}
 	}
 }
-
-(new Program());

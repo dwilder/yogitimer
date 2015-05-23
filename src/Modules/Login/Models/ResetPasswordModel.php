@@ -1,10 +1,10 @@
 <?php
 namespace Src\Modules\Login\Models;
 
-use Src\Lib\Data\LoginToken;
-use Src\Lib\Data\Password;
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
+use Src\Includes\Data\LoginToken;
+use Src\Includes\Data\Password;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
 
 class ResetPasswordModel
 {

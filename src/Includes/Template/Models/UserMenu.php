@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\Template\Models;
+namespace Src\Includes\Template\Models;
 
-use Src\Lib\User\User;
+use Src\Includes\User\User;
 
 class UserMenu
 {

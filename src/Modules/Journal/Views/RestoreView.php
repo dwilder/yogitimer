@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
-use Src\Lib\Module\View;
-use Src\Lib\Form\Form;
+use Src\Includes\Module\View;
+use Src\Includes\Form\Form;
 use Src\Modules\Journal\Helpers\tNotFound;
 
 class RestoreView extends View

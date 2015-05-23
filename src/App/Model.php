@@ -1,5 +1,5 @@
 <?php
-namespace Src\Program;
+namespace Src\App;
 
 /*
  * Class to model the modules in the system.

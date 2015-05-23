@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
-use Src\Lib\Form\Form;
+use Src\Includes\Form\Form;
 
 /*
  * Creates the form for the Add and Edit views

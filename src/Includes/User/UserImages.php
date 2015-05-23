@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\User;
+namespace Src\Includes\User;
 
 /*
  * Looks up images for a single user.

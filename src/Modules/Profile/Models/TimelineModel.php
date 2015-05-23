@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Profile\Models;
 
-use Src\Lib\Module\Model;
+use Src\Includes\Module\Model;
 
 class TimelineModel extends Model
 {	

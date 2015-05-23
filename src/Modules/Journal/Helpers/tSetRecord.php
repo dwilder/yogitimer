@@ -1,9 +1,9 @@
 <?php
 namespace Src\Modules\Journal\Helpers;
 
-use Src\Lib\User\User;
-use Src\Lib\Data\MeditationRecord;;
-use Src\Lib\Data\DateTime;
+use Src\Includes\User\User;
+use Src\Includes\Data\MeditationRecord;;
+use Src\Includes\Data\DateTime;
 
 trait tSetRecord
 {

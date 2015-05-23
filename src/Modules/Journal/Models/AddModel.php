@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Journal\Models;
 
-use Src\Lib\Module\Model;
-use Src\Lib\Data\MeditationRecord;
+use Src\Includes\Module\Model;
+use Src\Includes\Data\MeditationRecord;
 use Src\Modules\Journal\Helpers\tSetSubmittedData;
 
 class AddModel extends Model

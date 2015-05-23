@@ -1,9 +1,9 @@
 <?php
 namespace Src\Modules\Login\Models;
 
-use Src\Lib\User\User;
+use Src\Includes\User\User;
 use Src\Config\Config;
-use Src\Lib\Data\LoginToken;
+use Src\Includes\Data\LoginToken;
 use Src\Modules\Login\Helpers\ForgotPasswordEmail;
 
 class ForgotPasswordModel

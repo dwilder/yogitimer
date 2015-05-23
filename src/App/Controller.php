@@ -1,8 +1,8 @@
 <?php
-namespace Src\Program;
+namespace Src\App;
 
-use Src\Program\GuidParser;
-use Src\Program\Model;
+use Src\App\GuidParser;
+use Src\App\Model;
 use Src\Modules\Admin\Controller as Admin;
 use Src\Modules\Content\Controller as Content;
 use Src\Modules\Index\Controller as Index;
@@ -75,7 +75,7 @@ class Controller
     /*
      * Set the session
      */
-    public function setSession( \Src\Lib\Session\Session $session )
+    public function setSession( \Src\Includes\Session\Session $session )
     {
         $this->session = $session;
     }
@@ -83,7 +83,7 @@ class Controller
     /*
      * Set the User
      */
-    public function setUser( \Src\Lib\User\User $user )
+    public function setUser( \Src\Includes\User\User $user )
     {
         $this->user = $user;
     }

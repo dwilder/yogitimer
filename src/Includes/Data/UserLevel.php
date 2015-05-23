@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
 /*
  * User Level is a word that describes how the user is progressing.

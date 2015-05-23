@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\SignUp\Views;
 
-use Src\Lib\Form\Form;
+use Src\Includes\Form\Form;
 
 class SignUpView
 {

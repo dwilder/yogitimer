@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Form;
+namespace Src\Includes\Form;
 
 /*
  * Class for creating forms

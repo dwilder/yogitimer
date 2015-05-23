@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\Form;
+namespace Src\Includes\Form;
 
-use Src\Lib\Form\HTML\Tag;
+use Src\Includes\Form\HTML\Tag;
 
 /*
  * Creates form inputs and html elements
@@ -20,7 +20,7 @@ class HtmlFactory
 	public function newHtml( $tag, $content = null )
 	{
 		
-		$class = 'Src\Lib\Form\HTML\Tag' ;
+		$class = 'Src\Includes\Form\HTML\Tag' ;
 		$object = new $class( $tag, $content );
 		return $object;
 	}

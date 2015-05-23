@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\SignUp\Helpers;
 
-use Src\Lib\Email\AdminEmail;
+use Src\Includes\Email\AdminEmail;
 
 class VerificationEmail extends AdminEmail
 {

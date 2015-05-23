@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Session;
+namespace Src\Includes\Session;
 
 /*
  * Sessions are stored in the database

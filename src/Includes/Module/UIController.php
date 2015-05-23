@@ -1,10 +1,10 @@
 <?php
-namespace Src\Lib\Module;
+namespace Src\Includes\Module;
 
-use Src\Lib\Module\ControllerInterface;
-use Src\Lib\Template\Controller as Template;
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
+use Src\Includes\Module\ControllerInterface;
+use Src\Includes\Template\Controller as Template;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
 use Src\Config\Config;
 
 /*

@@ -1,15 +1,15 @@
 <?php
-namespace Src\Lib\Template;
+namespace Src\Includes\Template;
 
-use Src\Lib\Module\UIController;
-use Src\Lib\Template\Views\Menu;
-use Src\Lib\Template\Views\Header;
-use Src\Lib\Template\Views\Footer;
-use Src\Lib\Template\Views\Page;
-use Src\Lib\Template\Models\HeaderMenu;
-use Src\Lib\Template\Models\UserMenu;
-use Src\Lib\Template\Models\FooterMenu;
-use Src\Lib\Template\Models\ColophonMenu;
+use Src\Includes\Module\UIController;
+use Src\Includes\Template\Views\Menu;
+use Src\Includes\Template\Views\Header;
+use Src\Includes\Template\Views\Footer;
+use Src\Includes\Template\Views\Page;
+use Src\Includes\Template\Models\HeaderMenu;
+use Src\Includes\Template\Models\UserMenu;
+use Src\Includes\Template\Models\FooterMenu;
+use Src\Includes\Template\Models\ColophonMenu;
 
 class Controller extends UIController
 {

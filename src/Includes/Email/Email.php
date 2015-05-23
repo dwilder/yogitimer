@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Email;
+namespace Src\Includes\Email;
 
 /*
  * This is a base class for sending email

@@ -1,8 +1,8 @@
 <?php
-namespace Src\Lib\Data;
+namespace Src\Includes\Data;
 
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
 
 /*
  * Manage data for a single meditation

@@ -1,31 +1,31 @@
 <?php
-namespace Src\Lib\Form;
+namespace Src\Includes\Form;
 
-use Src\Lib\Form\Inputs\Button as Button;
-use Src\Lib\Form\Inputs\Checkbox;
-use Src\Lib\Form\Inputs\Color;
-use Src\Lib\Form\Inputs\Date;
-use Src\Lib\Form\Inputs\Datetime;
-use Src\Lib\Form\Inputs\DatetimeLocal;
-use Src\Lib\Form\Inputs\Email;
-use Src\Lib\Form\Inputs\File;
-use Src\Lib\Form\Inputs\Hidden;
-use Src\Lib\Form\Inputs\Image;
-use Src\Lib\Form\Inputs\Month;
-use Src\Lib\Form\Inputs\Number;
-use Src\Lib\Form\Inputs\Password;
-use Src\Lib\Form\Inputs\Radio;
-use Src\Lib\Form\Inputs\Range;
-use Src\Lib\Form\Inputs\Reset;
-use Src\Lib\Form\Inputs\Search;
-use Src\Lib\Form\Inputs\Select;
-use Src\Lib\Form\Inputs\Submit;
-use Src\Lib\Form\Inputs\Tel;
-use Src\Lib\Form\Inputs\Text;
-use Src\Lib\Form\Inputs\Textarea;
-use Src\Lib\Form\Inputs\Time;
-use Src\Lib\Form\Inputs\Url;
-use Src\Lib\Form\Inputs\Week;
+use Src\Includes\Form\Inputs\Button as Button;
+use Src\Includes\Form\Inputs\Checkbox;
+use Src\Includes\Form\Inputs\Color;
+use Src\Includes\Form\Inputs\Date;
+use Src\Includes\Form\Inputs\Datetime;
+use Src\Includes\Form\Inputs\DatetimeLocal;
+use Src\Includes\Form\Inputs\Email;
+use Src\Includes\Form\Inputs\File;
+use Src\Includes\Form\Inputs\Hidden;
+use Src\Includes\Form\Inputs\Image;
+use Src\Includes\Form\Inputs\Month;
+use Src\Includes\Form\Inputs\Number;
+use Src\Includes\Form\Inputs\Password;
+use Src\Includes\Form\Inputs\Radio;
+use Src\Includes\Form\Inputs\Range;
+use Src\Includes\Form\Inputs\Reset;
+use Src\Includes\Form\Inputs\Search;
+use Src\Includes\Form\Inputs\Select;
+use Src\Includes\Form\Inputs\Submit;
+use Src\Includes\Form\Inputs\Tel;
+use Src\Includes\Form\Inputs\Text;
+use Src\Includes\Form\Inputs\Textarea;
+use Src\Includes\Form\Inputs\Time;
+use Src\Includes\Form\Inputs\Url;
+use Src\Includes\Form\Inputs\Week;
 
 /*
  * Creates form inputs and html elements
@@ -80,7 +80,7 @@ class InputFactory
 			$class = 'Text';
         }
 		
-		$class = 'Src\Lib\Form\Inputs\\' . $class;
+		$class = 'Src\Includes\Form\Inputs\\' . $class;
 		return new $class;
 	}
 }

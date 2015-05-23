@@ -1,5 +1,5 @@
 <?php
-namespace Src\Lib\Template\Views;
+namespace Src\Includes\Template\Views;
 
 /*
  * Header class returns the HTML footer

@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Index;
 
-use Src\Lib\Module\UIController;
+use Src\Includes\Module\UIController;
 use Src\Modules\Index\Models\BannerModel as BannerModel;
 use Src\Modules\Index\Models\MeditationBlockModel as MeditationBlockModel;
 use Src\Modules\Index\Models\JoinBlockModel as JoinBlockModel;

@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\SignUp\Models;
 
-use Src\Lib\User\User;
-use Src\Lib\Session\Session;
+use Src\Includes\User\User;
+use Src\Includes\Session\Session;
 /*
  * - Test if user is logged in
  * - Check for email address and activation key /

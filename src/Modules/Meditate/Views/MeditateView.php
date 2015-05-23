@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Meditate\Views;
 
-use Src\Lib\Form\Form;
-use Src\Lib\Module\View;
+use Src\Includes\Form\Form;
+use Src\Includes\Module\View;
 
 class MeditateView extends View
 {	

@@ -1,9 +1,9 @@
 <?php
-namespace Src\Lib\Form\Inputs;
+namespace Src\Includes\Form\Inputs;
 
-use Src\Lib\Form\Inputs\AbstractInput;
-use Src\Lib\Form\Inputs\LabelTrait;
-use Src\Lib\Form\Inputs\InputTrait;
+use Src\Includes\Form\Inputs\AbstractInput;
+use Src\Includes\Form\Inputs\LabelTrait;
+use Src\Includes\Form\Inputs\InputTrait;
 
 class Email extends AbstractInput
 {

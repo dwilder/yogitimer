@@ -1,7 +1,7 @@
 <?php
-namespace Src\Lib\Module;
+namespace Src\Includes\Module;
 
-use Src\Lib\Module\UIController;
+use Src\Includes\Module\UIController;
 
 /*
  * Abstract class for module UI controllers
