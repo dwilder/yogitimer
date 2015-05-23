@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Journal\Models;
 
-use Src\Includes\Module\Model;
+use Src\Includes\SuperClasses\Model;
 use Src\Includes\User\User;
 use Src\Includes\Data\MeditationRecords;
 use Src\Modules\Journal\Helpers\tDummyData;

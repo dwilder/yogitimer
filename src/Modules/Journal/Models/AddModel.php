@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Journal\Models;
 
-use Src\Includes\Module\Model;
+use Src\Includes\SuperClasses\Model;
 use Src\Includes\Data\MeditationRecord;
 use Src\Modules\Journal\Helpers\tSetSubmittedData;
 

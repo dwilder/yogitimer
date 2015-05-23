@@ -2,7 +2,7 @@
 namespace Src\Modules\Journal;
 
 use Src\Includes\User\User;
-use Src\Includes\Module\MultiUIController;
+use Src\Includes\SuperClasses\MultiUIController;
 use Src\Modules\Journal\Models\ActionModel;
 use Src\Modules\Journal\Views\JournalView;
 use Src\Modules\Journal\Views\AddView;

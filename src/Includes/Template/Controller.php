@@ -1,7 +1,7 @@
 <?php
 namespace Src\Includes\Template;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Includes\Template\Views\Menu;
 use Src\Includes\Template\Views\Header;
 use Src\Includes\Template\Views\Footer;

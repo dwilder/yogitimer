@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Profile\Models;
 
-use Src\Includes\Module\Model;
+use Src\Includes\SuperClasses\Model;
 
 class MeditationTimeModel extends Model
 {	

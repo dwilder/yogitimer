@@ -1,7 +1,7 @@
 <?php
-namespace Src\Includes\Module;
+namespace Src\Includes\SuperClasses;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 
 /*
  * Abstract class for module UI controllers

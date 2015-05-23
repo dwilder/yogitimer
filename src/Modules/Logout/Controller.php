@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Logout;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Modules\Logout\Models\LogoutModel;
 
 /*

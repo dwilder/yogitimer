@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Settings;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 
 /*
  * Controller class for the user settings section.

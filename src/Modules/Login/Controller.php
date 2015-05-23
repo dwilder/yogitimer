@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Login;
 
-use Src\Includes\Module\MultiUIController;
+use Src\Includes\SuperClasses\MultiUIController;
 use Src\Modules\Login\Models\LoginModel;
 use Src\Modules\Login\Models\ForgotPasswordModel;
 use Src\Modules\Login\Models\ResetPasswordModel;

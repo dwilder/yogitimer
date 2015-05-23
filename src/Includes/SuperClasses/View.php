@@ -1,5 +1,5 @@
 <?php
-namespace Src\Includes\Module;
+namespace Src\Includes\SuperClasses;
 
 abstract class View
 {

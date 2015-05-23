@@ -30,14 +30,6 @@ class Controller
 	private $guid_parser;
 	
 	/*
-	 * Store a reference to config, PDO, session and user
-	 */
-    private $config;
-	private $pdo;
-	private $session;
-	private $user;
-	
-	/*
 	 * Store the program model
 	 */
 	private $model;

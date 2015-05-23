@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Journal\Models;
 
-use Src\Includes\Module\Model;
+use Src\Includes\SuperClasses\Model;
 use Src\Modules\Journal\Helpers\tSetRecord;
 
 class DeleteModel extends Model

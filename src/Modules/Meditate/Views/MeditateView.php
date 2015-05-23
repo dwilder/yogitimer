@@ -2,7 +2,7 @@
 namespace Src\Modules\Meditate\Views;
 
 use Src\Includes\Form\Form;
-use Src\Includes\Module\View;
+use Src\Includes\SuperClasses\View;
 
 class MeditateView extends View
 {	

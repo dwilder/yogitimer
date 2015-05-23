@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Content;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Modules\Content\ContentFactory;
 use Src\Modules\Content\NotFound;
 

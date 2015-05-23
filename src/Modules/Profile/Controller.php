@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Profile;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Includes\User\User;
 use Src\Modules\Profile\Models\BannerModel;
 use Src\Modules\Profile\Models\MomentumModel;

@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Meditate;
 
-use Src\Includes\Module\UIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Modules\Meditate\Models\MeditateModel;
 use Src\Modules\Meditate\Views\MeditateView;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
-use Src\Includes\Module\View;
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 use Src\Modules\Journal\Helpers\tNotFound;
 

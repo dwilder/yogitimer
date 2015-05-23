@@ -1,7 +1,7 @@
 <?php
-namespace Src\Includes\Module;
+namespace Src\Includes\SuperClasses;
 
-use Src\Includes\Module\ControllerInterface;
+use Src\Includes\SuperClasses\ControllerInterface;
 use Src\Includes\Template\Controller as Template;
 use Src\Includes\User\User;
 use Src\Includes\Session\Session;
