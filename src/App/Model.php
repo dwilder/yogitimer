@@ -11,103 +11,172 @@ namespace Src\App;
 
 class Model
 {
+    /*
+     * Store the guid
+     */
+    private $guid = null;
+    
+    /*
+     * Store the module
+     */
+    private $module = null;
+    
 	/*
 	 * An array of guids with corresponding modules and access rules
 	 */
 	private $modules = array(
         'index' => array(
             'module' => 'Index',
-            'login_state' => 'all',
+            'login_access' => 'all',
             'ssl' => false
         ),
 //        'contact' => array(
 //            'module' => 'Contact',
-//            'login_state' => 'all',
+//            'login_access' => 'all',
 //            'ssl' => false
 //        ),
 		'signup' => array(
             'module' => 'SignUp',
-            'login_state' => 'anonymous',
+            'login_access' => 'anonymous',
             'ssl' => true
         ),
 		'activate' => array(
             'module' => 'SignUp',
-            'login_state' => 'anonymous',
+            'login_access' => 'anonymous',
             'ssl' => true
         ),
 		'login' => array(
             'module' => 'Login',
-            'login_state' => 'anonymous',
+            'login_access' => 'anonymous',
             'ssl' => true
         ),
         'forgotpassword' => array(
             'module' => 'Login',
-            'login_state' => 'anonymous',
+            'login_access' => 'anonymous',
             'ssl' => true
         ),
 		'resetpassword' => array(
             'module' => 'Login',
-            'login_state' => 'anonymous',
+            'login_access' => 'anonymous',
             'ssl' => true
         ),
 		'logout' => array(
             'module' => 'Logout',
-            'login_state' => 'authenticated',
+            'login_access' => 'authenticated',
             'ssl' => true
         ),
 		'meditate' => array(
             'module' => 'Meditate',
-            'login_state' => 'all',
+            'login_access' => 'all',
             'ssl' => false
         ),
 		'profile' => array(
             'module' => 'Profile',
-            'login_state' => 'authenticate',
+            'login_access' => 'authenticate',
             'ssl' => false
         ),
 		'journal' => array(
             'module' => 'Journal',
-            'login_state' => 'authenticated',
+            'login_access' => 'authenticated',
             'ssl' => false
         ),
 		'settings' => array(
             'module' => 'Settings',
-            'login_state' => 'authenticated',
+            'login_access' => 'authenticated',
             'ssl' => true
         ),
-//        'admin' => array(
-//            'module' => 'Admin',
-//            'login_state' => 'authenticated',
-//            'ssl' => true
-//        )
+        'default' => array(
+            'module' => 'Content',
+            'login_access' => 'all',
+            'ssl' => false
+        )
 	);
+    
+    /*
+     * Set guid
+     */
+    public function setGuid( $guid = null )
+    {
+		$this->guid = $guid;
+    }
+    
+    /*
+     * Set the module
+     */
+    private function setModule()
+    {
+        if ( $this->module ) {
+            return;
+        }
+        
+        $default = 'index';
+        
+		if ( $this->guid == null ) {
+			$this->module = $default;
+            return;
+		}
+		
+		if ( array_key_exists( $this->guid, $this->modules ) ) {
+			$this->module = $this->guid;
+            return;
+		}
+		
+		$this->module = 'default';
+    }
 	
     /*
      * Return an array for a specific module
      */
-    public function getModuleData( $guid )
+    public function getData()
     {
-        if ( array_key_exists( $guid, $this->modules ) ) {
-            return $this->modules[$guid];
-        }
-        return array();
+        return $this->getModuleData();
+    }
+    
+    /*
+     * Return the authentication requirement
+     */
+    public function getLoginAccess()
+    {
+        return $this->getModuleData('login_access');
     }
     
 	/*
-	 * Return the module
+	 * Return the module name
 	 */
-	public function getModuleName( $guid = null )
+	public function getModule()
 	{
-        $default = 'Index';
-        
-		if ( $guid == null ) {
-			return $default;
-		}
-		
-		if ( array_key_exists( $guid, $this->modules ) ) {
-			return $this->modules[$guid]['module'];
-		}
-		
-		return 'Content';
+        return $this->getModuleData('module');
 	}
+    
+	/*
+	 * Return the module name
+	 */
+	public function getSSL()
+	{
+        return $this->getModuleData('ssl');
+	}
+    
+    /*
+     * Get a module data element
+     */
+    private function getModuleData( $element = null )
+    {
+        if ( ! $this->module ) {
+            $this->setModule();
+        }
+        
+        if ( array_key_exists( $this->module, $this->modules ) ) {
+            $module = $this->module;
+        }
+        else {
+            $module = 'default';
+        }
+        
+        if ( $element ) {
+            return $this->modules[$module][$element];
+        }
+        else {
+            return $this->modules[$module];
+        }
+    }
 }

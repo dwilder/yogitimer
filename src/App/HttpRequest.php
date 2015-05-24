@@ -16,6 +16,17 @@ class HttpRequest
         $this->setProtocol();
 		$this->processRequest();
 	}
+    
+    /*
+     * Check for and return a query element
+     */
+    public function getQueryValue( $key )
+    {
+        if ( isset( $this->request[$key] ) ) {
+            return $this->request[$key];
+        }
+        return null;
+    }
 	
     /*
      * Set the protocol ( http / https )
