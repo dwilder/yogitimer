@@ -1,43 +1,25 @@
 <?php
 namespace Src\Modules\SignUp\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\UIElements\LinkButton;
 
-class ActivationView
+class ActivationView extends View
 {
 	/*
 	 * Store the content
 	 */
-	private $content = null;
+	protected $content = null;
     
     /*
      * Model data, status
      */
-    private $data;
     private $status;
-    
-    /*
-     * Set the data
-     */
-    public function setData( $data = array() )
-    {
-        $this->data = $data;
-    }
-	
-	/*
-	 * Get the content of the page
-	 */
-	public function getContent()
-	{
-        //echo $this->data['error'];
-		$this->setContent();
-		return $this->content;
-	}
 	
 	/*
 	 * Determine what content to display
 	 */
-	private function setContent()
+	public function run()
 	{
         $this->setStatus();
 		switch( $this->status ) {

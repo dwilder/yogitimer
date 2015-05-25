@@ -39,7 +39,6 @@ class ActivationModel extends Model
     /*
      * Track errors
      */
-    private $data = array();
     private $error = false;
     
     /*
@@ -75,7 +74,7 @@ class ActivationModel extends Model
             }
             return;
         } // Account is not active
-        
+
         // If the user is already logged in, make sure the current user matches the activation
         if ( ! $this->verifySignedInUser() ) {
             return;
@@ -100,13 +99,13 @@ class ActivationModel extends Model
     private function setUrlEmail()
     {
         $email = null;
-        if ( ! isset($_GET['e'] ) ) {
+        if ( ! isset($this->request['e'] ) ) {
             $this->error = true;
             $this->data['error'] = 'NO EMAIL';
             return false;
         }
         
-        $email = urldecode( $_GET['e'] );
+        $email = urldecode( $this->request['e'] );
         
         if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
             $this->error = true;
@@ -124,13 +123,13 @@ class ActivationModel extends Model
     private function setUrlActivationKey()
     {
         $key = null;
-        if ( ! isset( $_GET['k'] ) ) {
+        if ( ! isset( $this->request['k'] ) ) {
             $this->error = true;
             $this->data['error'] = 'NO KEY';
             return false;
         }
         
-        if ( ! preg_match( '/^([a-zA-Z0-9]{1,})$/', $_GET['k'] ) ) {
+        if ( ! preg_match( '/^([a-zA-Z0-9]{1,})$/', $this->request['k'] ) ) {
             $this->error = true;
             $this->data['error'] = 'INVALID KEY';
             return false;
@@ -147,9 +146,11 @@ class ActivationModel extends Model
     {
         if ( $this->url_email ) {
             
+            $pdo = DB::getInstance();
+            
             $q = "SELECT * FROM users WHERE registered_email=:registered_email";
             
-            $stmt = $this->pdo->prepare($q);
+            $stmt = $pdo->prepare($q);
             $stmt->bindParam( ':registered_email', $this->url_email );
             
             if ( ! $stmt->execute() ) {
@@ -213,11 +214,13 @@ class ActivationModel extends Model
      */
     private function activateAccount()
     {
-        if ( isset( $this->user_data['id'] ) && $this->pdo ) {
+        if ( isset( $this->user_data['id'] ) ) {
+            
+            $pdo = DB::getInstance();
             
             $q = "UPDATE users SET activation_key=null WHERE id=:id LIMIT 1;";
             
-            $stmt = $this->pdo->prepare($q);
+            $stmt = $pdo->prepare($q);
             $stmt->bindParam(':id', $this->user_data['id']);
             
             if ( $stmt->execute() ) {
