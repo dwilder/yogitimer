@@ -1,7 +1,8 @@
 <?php
 namespace Src\Modules\SignUp;
 
-use Src\Includes\SuperClasses\MultiUIController;
+use Src\Includes\SuperClasses\UIController;
+use Src\Includes\User\User;
 
 /*
  * Controller class for signing up.
@@ -11,34 +12,45 @@ use Src\Includes\SuperClasses\MultiUIController;
  * - Activation			/activate/[email]/[token]
  */
 
-class Controller extends MultiUIController
+class Controller extends UIController
 {
-    /*
-     * Set the module name
-     */
-    protected function setModuleName()
-    {
-        $this->module_name = 'SignUp';
-    }
-    
     /*
      * A method to get the class
      */
-    protected function getClass()
+    protected function setClass()
     {
-		switch( $this->guid ) {
+		switch( $this->request['guid'] ) {
 			case 'activate':
 				$class = 'Activation';
 				break;
 			case 'signup':
 			default:
-				if ( $_GET['action'] == 'success' ) {
+				if ( isset( $this->request['action'] ) && $this->request['action'] == 'success' ) {
 					$class = 'SignUpComplete';
+                    $this->checkLoginStatus('authenticated');
 				} else {
 					$class = 'SignUp';
+                    $this->checkLoginStatus('anonymous');
 				}
 				break;
 		}
-        return $class;
+        $this->class = $class;
+    }
+    
+    /*
+     * Manage redirection
+     */
+    protected function checkLoginStatus( $login_access = 'anonymous' )
+    {
+        $user = User::getInstance();
+        
+        if ( $login_access == 'anonymous' && $user->isSignedIn() ) {
+            $this->redirect('profile');
+            return;
+        }
+        if ( $login_access == 'authenticated' && ! $user->isSignedIn() ) {
+            $this->redirect('login');
+            return;
+        }
     }
 }

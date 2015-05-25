@@ -38,8 +38,6 @@ class SignUpView
 	 */
 	public function getContent()
 	{
-		$this->setContent();
-		
 		return $this->content;
 	}
 	
@@ -54,10 +52,9 @@ class SignUpView
 	/*
 	 * Set the content
 	 */
-	public function setContent()
+	public function run()
 	{
 		$content = $this->getTitle();
-		
         // Form errors
         if ( isset( $this->data['error']['form'] ) ) {
             $content .= '<p class="error">';
@@ -69,7 +66,7 @@ class SignUpView
 		$content .= $this->Form->getHTML();
 		
 		$content .= '<p>Have an account? <a href="/login">Sign In</a></p>';
-		
+
 		$this->content = $content;
 	}
 	

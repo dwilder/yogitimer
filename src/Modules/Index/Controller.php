@@ -19,18 +19,6 @@ class Controller extends UIController
 	 */
 	private $models = array();
 	private $views = array();
-	
-	/*
-	 * Run the module
-	 */
-	public function request()
-	{
-		$this->setModels();
-		$this->setViews();
-		$this->setTemplate();
-		
-		return $this->buildOutput();
-	}
     
     /*
      * Set module name
@@ -40,7 +28,7 @@ class Controller extends UIController
 	/*
 	 * Set models
 	 */
-	private function setModels()
+	protected function setModel()
 	{
 		$this->models['banner'] = new BannerModel;
 		$this->models['meditation'] = new MeditationBlockModel;
@@ -50,7 +38,7 @@ class Controller extends UIController
 	/*
 	 * Set views
 	 */
-	private function setViews()
+	protected function setView()
 	{
 		$this->views['banner'] = new BannerView;
 		$this->views['meditation'] = new BlockView;
@@ -60,7 +48,7 @@ class Controller extends UIController
 	/*
 	 * Build the HTML
 	 */
-	private function buildOutput()
+	protected function respond()
 	{
 		$content = $this->getBanner();
 		
@@ -70,7 +58,7 @@ class Controller extends UIController
 
 		$this->template->setContent( $content );
 		
-		return $this->template->request();
+		echo $this->template->request();
 	}
 	
 	/*

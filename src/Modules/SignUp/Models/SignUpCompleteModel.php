@@ -1,6 +1,7 @@
 <?php
 namespace Src\Modules\SignUp\Models;
 
+use Src\Includes\SuperClasses\Model;
 use Src\Includes\User\User;
 use Src\Includes\Session\Session;
 
@@ -11,26 +12,8 @@ use Src\Includes\Session\Session;
  *
  */
 
-class SignUpCompleteModel
+class SignUpCompleteModel extends Model
 {
-	/*
-	 * Store a reference to objects
-	 */
-	private $pdo;
-	
-	/*
-	 * Store the username
-	 */
-	private $data = array();
-	
-	/*
-	 * Set objects
-	 */
-	public function setPDO( \PDO $pdo )
-	{
-		$this->pdo = $pdo;
-	}
-	
 	/*
 	 * Run the necessary functions
 	 */
@@ -38,14 +21,6 @@ class SignUpCompleteModel
 	{
         $this->verifyUserIsSignedIn();
 		$this->verifyUserIsNew();
-	}
-	
-	/*
-	 * Return stored data. NOT password
-	 */
-	public function getData()
-	{	
-		return $this->data;
 	}
     
     /*

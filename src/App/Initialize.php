@@ -69,7 +69,7 @@ class Initialize
 		$user = User::getInstance();
 		
 		if ( $this->session->get( 'user_id' ) ) {
-			$user->set( 'id', $session->get( 'user_id' ) );
+			$user->set( 'id', $this->session->get( 'user_id' ) );
 			$user->read();
 		}
 	}

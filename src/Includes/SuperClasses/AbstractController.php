@@ -1,17 +1,13 @@
 <?php
 namespace Src\Includes\SuperClasses;
 
-abstract class Model
+abstract class AbstractController
 {
     /*
-     * Store the request
+     * Store the request and module parameters
      */
     protected $request = array();
-    
-    /*
-     * Store data
-     */
-    protected $data = array();
+    protected $parameters = array();
     
     /*
      * Set the request
@@ -22,11 +18,11 @@ abstract class Model
     }
     
     /*
-     * Return data
+     * Set the module data
      */
-    public function getData()
+    public function setModuleParameters( $params = array() )
     {
-        return $this->data;
+        $this->parameters = $params;
     }
     
     /*
@@ -37,11 +33,10 @@ abstract class Model
     /*
      * Redirect
      */
-    protected function redirect( $url )
+    protected function redirect( $url = null )
     {
         $location = '/' . $url;
         header('Location: ' . $location);
         exit;
     }
 }
-

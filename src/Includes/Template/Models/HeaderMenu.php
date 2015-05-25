@@ -84,11 +84,13 @@ class HeaderMenu
 	}
 	
 	/*
-	 * Build the menu link
+	 * Build the menu link. #id depends on login state of the user
 	 */
 	private function buildMenuLink()
 	{
-		$id = ( $this->userRole ) ? 'user-navigation' : 'site-navigation';
+		$user = User::getInstance();
+        
+		$id = ( $user->isSignedIn() ) ? 'user-navigation' : 'site-navigation';
 		
 		return '<a href="#' . $id . '" class="control nav-banner-menu">Menu</a>';		
 	}

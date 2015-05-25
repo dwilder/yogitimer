@@ -1,47 +1,15 @@
 <?php
 namespace Src\Modules\SignUp\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class SignUpCompleteView
+class SignUpCompleteView extends View
 {
 	/*
 	 * Set the title
 	 */
 	protected $title = 'You\'re Signed Up!';
-	
-	/*
-	 * Store the content
-	 */
-	protected $content;
-	
-	/*
-	 * Store the form
-	 */
-	protected $Form;
-	
-	/*
-	 * Store submitted data
-	 */
-	protected $data = array();
-	
-	/*
-	 * Set the data
-	 */
-	public function setData( array $data )
-	{
-		$this->data = $data;
-	}
-	
-	/*
-	 * Get the content
-	 */
-	public function getContent()
-	{
-		$this->setContent();
-		
-		return $this->content;
-	}
 	
 	/*
 	 * Build the title
@@ -54,7 +22,7 @@ class SignUpCompleteView
 	/*
 	 * Set the content
 	 */
-	public function setContent()
+	public function run()
 	{
 		$content = $this->getTitle();
 		

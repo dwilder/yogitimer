@@ -53,7 +53,7 @@ class SecurityLayer
     /*
      * Redirect
      */
-    protected function redirect( $url, $secure )
+    protected function redirect( $url )
     {
         $location = '/' . $url;
         

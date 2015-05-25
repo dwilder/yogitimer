@@ -49,8 +49,6 @@ class Controller extends UIController
 	 */
 	public function request()
 	{
-        $this->testAuthentication();
-        
 		$this->setModels();
 		$this->setViews();
 		
@@ -64,7 +62,7 @@ class Controller extends UIController
 	/*
 	 * Set models
 	 */
-	private function setModels()
+	protected function setModel()
 	{
 		$this->BannerModel = new BannerModel;
 		$this->BannerModel->run();
@@ -85,7 +83,7 @@ class Controller extends UIController
 	/*
 	 * Set views
 	 */
-	private function setViews()
+	protected function setView()
 	{
 		$this->BannerView = new BannerView;
 		$this->BannerView->setData( $this->BannerModel->getData() );
@@ -106,7 +104,7 @@ class Controller extends UIController
 	/*
 	 * Build the User Interface
 	 */
-	private function getUI()
+	protected function getUI()
 	{
 		$html = '';
 		$html .= $this->BannerView->getHtml();
@@ -118,11 +116,15 @@ class Controller extends UIController
 		return $html;
 	}
     
-    /*
-     * Set module name
-     */
-    protected function setModuleName()
-    {
-        $this->module_name = 'Profile';
-    }
+	/*
+	 * Return UI
+	 */
+	protected function respond()
+	{
+        if ( isset( $this->request['guid'] ) ) {
+    		$this->template->setGuid( $this->request['guid'] );
+        }
+		$this->template->setContent( $this->getUI() );
+		echo $this->template->request();
+	}
 }

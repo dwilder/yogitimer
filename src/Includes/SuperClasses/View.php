@@ -27,7 +27,7 @@ abstract class View
 	/*
 	 * Set data from the model
 	 */
-	public function setData( array $data = array() )
+	public function setData( $data = array() )
 	{
 		$this->data = $data;
 	}
@@ -37,15 +37,13 @@ abstract class View
 	 */
 	public function getContent()
 	{
-		$this->setContent();
-		
 		return $this->content;
 	}
 	
 	/*
 	 * Set the content
 	 */
-	abstract protected function setContent();
+	abstract protected function run();
     
 	/*
 	 * Build the title

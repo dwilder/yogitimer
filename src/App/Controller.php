@@ -36,7 +36,6 @@ class Controller
 		
 //		echo $response;
 		
-		$this->close();
 	}
     
     /*
@@ -54,6 +53,7 @@ class Controller
     {
         $this->model = new Model;
         $this->model->setGuid( $this->http_request->getQueryValue('guid') );
+        //echo $this->http_request->getQueryValue('guid');
     }
     
     /*
@@ -87,6 +87,7 @@ class Controller
 		$this->module = new $class;
 
 		$this->module->setRequest( $this->http_request->getRequest() );
+		$this->module->setModuleParameters( $this->model->getData() );
         $this->module->run();
 	}
 }

@@ -2,6 +2,7 @@
 namespace Src\Includes\User;
 
 use Src\Includes\Data\Roles;
+use Src\Includes\Database\DB;
 
 /*
  * This class retrieves and updates user roles
@@ -19,24 +20,37 @@ class UserRoles
     private $date = null;
     
     /*
-     * Store a reference to PDO
-     */
-    private $pdo = null;
-    
-    /*
      * Set the user id
      */
     public function setUserId( $user_id )
     {
         $this->user_id = $user_id;
     }
-    
+
     /*
-     * Set PDO
+     * Create an entry in the database
      */
-    public function setPDO( \PDO $pdo )
+    public function create()
     {
-        $this->pdo = $pdo;
+        if ( ! $this->user_id || empty( $this->roles ) ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+        
+        // Serialize the roles array
+        $roles = serialize( $this->roles );
+        
+        $q = "INSERT INTO user_roles (user_id, roles) VALUES (:user_id, :roles)";
+        
+        $stmt = $pdo->prepare($q);
+        $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->bindParam(':roles', $roles);
+        
+        if ( $stmt->execute() ) {
+            return true;
+        }
+        return false;
     }
     
     /*
@@ -44,21 +58,52 @@ class UserRoles
      */
     public function read()
     {
-        if ( $this->user_id && $this->pdo ) {
-            $q = "SELECT * FROM user_roles WHERE user_id=:user_id LIMIT 1";
-            
-            $stmt = $this->pdo->prepare($q);
-            $stmt->bindParam(':user_id', $this->user_id);
-            
-            if ( $stmt->execute ) {
-                $r = $stmt->fetch(\PDO::FETCH_ASSOC);
-            }
-            if ( $r ) {
-                $this->id = $r['id'];
-                $this->roles = unserialize( $r['roles'] );
-                $this->date = $r['date'];
-                return true;
-            }
+        if ( ! $this->user_id ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+        
+        $q = "SELECT * FROM user_roles WHERE user_id=:user_id LIMIT 1";
+        
+        $stmt = $pdo->prepare($q);
+        $stmt->bindParam(':user_id', $this->user_id);
+        
+        if ( $stmt->execute() ) {
+            $r = $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        if ( $r ) {
+            $this->id = $r['id'];
+            $this->roles = unserialize( $r['roles'] );
+            $this->date = $r['date'];
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * Update roles to the database
+     */
+    public function update()
+    {
+        if ( ! $this->user_id ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+        
+        // Serialize the roles array
+        $roles = serialize( $this->roles );
+        
+        $q = "UPDATE users_roles (roles) VALUES (:roles) WHERE user_id=:user_id LIMIT 1";
+        
+        $stmt = $pdo->prepare($q);
+        $stmt->bindParam(':roles', $roles);
+        $stmt->bindParam(':user_id', $this->user_id);
+        
+        if ( $stmt->execute() ) {
+            //Hooray!!!
+            return true;
         }
         return false;
     }
@@ -91,50 +136,5 @@ class UserRoles
             return;
         }
         array_splice( $this->roles, $offset, 1 );
-    }
-    
-    /*
-     * Update roles to the database
-     */
-    public function update()
-    {
-        if ( $this->user_id && $this->pdo ) {
-            // Serialize the roles array
-            $roles = serialize( $this->roles );
-            
-            $q = "UPDATE users_roles (roles) VALUES (:roles) WHERE user_id=:user_id LIMIT 1";
-            
-            $stmt = $this->pdo->prepare($q);
-            $stmt->bindParam(':roles', $roles);
-            $stmt->bindParam(':user_id', $this->user_id);
-            
-            if ( $stmt->execute() ) {
-                //Hooray!!!
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /*
-     * Create an entry in the database
-     */
-    public function create()
-    {
-        if ( $this->user_id && $this->pdo && ! empty( $this->roles ) ) {
-            // Serialize the roles array
-            $roles = serialize( $this->roles );
-            
-            $q = "INSERT INTO user_roles (user_id, roles) VALUES (:user_id, :roles)";
-            
-            $stmt = $this->pdo->prepare($q);
-            $stmt->bindParam(':user_id', $this->user_id);
-            $stmt->bindParam(':roles', $roles);
-            
-            if ( $stmt->execute() ) {
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -13,6 +13,11 @@ use Src\Includes\Template\Models\ColophonMenu;
 
 class Controller extends UIController
 {
+    /*
+     * Store the guid
+     */
+    protected $guid;
+    
 	/*
 	 * Store the page, header and footer
 	 */
@@ -59,14 +64,16 @@ class Controller extends UIController
 	}
     
     /*
-     * Set the module name
+     * Set the guid
      */
-    protected function setModuleName() {}
+    public function setGuid( $guid = null ) {
+        $this->guid = $guid;
+    }
 	
 	/*
 	 * Set the content
 	 */
-	public function setContent( $content )
+	public function setContent( $content = null )
 	{
 		$this->content = $content;
 	}

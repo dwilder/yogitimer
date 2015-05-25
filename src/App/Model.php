@@ -37,7 +37,7 @@ class Model
 //        ),
 		'signup' => array(
             'module' => 'SignUp',
-            'login_access' => 'anonymous',
+            'login_access' => 'variable',
             'ssl' => true
         ),
 		'activate' => array(
@@ -72,7 +72,7 @@ class Model
         ),
 		'profile' => array(
             'module' => 'Profile',
-            'login_access' => 'authenticate',
+            'login_access' => 'authenticated',
             'ssl' => false
         ),
 		'journal' => array(

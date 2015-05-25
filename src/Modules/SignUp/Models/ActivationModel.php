@@ -1,6 +1,8 @@
 <?php
 namespace Src\Modules\SignUp\Models;
 
+use Src\Includes\SuperClasses\Model;
+use Src\Includes\Database\DB;
 use Src\Includes\User\User;
 use Src\Includes\Session\Session;
 /*
@@ -21,7 +23,7 @@ use Src\Includes\Session\Session;
  *      - regenerate the session
  */
 
-class ActivationModel
+class ActivationModel extends Model
 {
     /*
      * Store activation key and email address from the url
@@ -35,31 +37,10 @@ class ActivationModel
     private $user_data = array();
     
     /*
-     * Store PDO
-     */
-    private $pdo = null;
-    
-    /*
      * Track errors
      */
     private $data = array();
     private $error = false;
-    
-    /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
-    
-    /*
-     * Return the data
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
     
     /*
      * Run

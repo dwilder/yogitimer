@@ -1,15 +1,17 @@
 <?php
 namespace Src\Modules\SignUp\Models;
 
+use Src\Includes\SuperClasses\Model;
+use Src\Config\Config;
+use Src\Includes\Database\DB;
+use Src\Includes\Session\Session;
+use Src\Includes\User\User;
 use Src\Includes\Data\Username;
 use Src\Includes\Data\Email;
 use Src\Includes\Data\Password;
 use Src\Includes\Data\ActivationKey;
 use Src\Includes\Data\Roles;
-use Src\Includes\User\User;
 use Src\Includes\User\UserRoles;
-use Src\Includes\Session\Session;
-use Src\Config\Config;
 use Src\Modules\SignUp\Helpers\VerificationEmail;
 
 /*
@@ -24,16 +26,12 @@ use Src\Modules\SignUp\Helpers\VerificationEmail;
  * - redirect to /signup/complete
  */
 
-class SignUpModel
+class SignUpModel extends Model
 {
-	/*
-	 * Store PDO
-	 */
-	private $pdo;
-	
 	/*
 	 * Store the Username, Email, Password, ActivationKey objects
 	 */
+    private $user;
 	private $username;
 	private $email;
 	private $password;
@@ -42,44 +40,23 @@ class SignUpModel
 	/*
 	 * Store the username, email, password, and errors
 	 */
-	private $data = array();
-	private $error = false;
+	protected $error = false;
     
     /*
      * Store the new user id
      */
     private $user_id;
 	
-	public function setPDO( \PDO $pdo )
-	{
-		$this->pdo = $pdo;
-	}
-	
 	/*
 	 * Run the necessary functions
 	 */
 	public function run()
 	{
-        // Make sure the user isn't logged in
-        $this->isUserLoggedIn();
-        
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			$this->registerUser();
 			return;
 		}
 	}
-    
-    /*
-     * Test if the user is logged in
-     */
-    private function isUserLoggedIn()
-    {
-        $user = User::getInstance();
-        if ( $user->isSignedIn() ) {
-            header( 'Location: /profile' );
-            exit;
-        }
-    }
 	
 	/*
 	 * Attempt to register a new user
@@ -98,7 +75,7 @@ class SignUpModel
 
 		$this->setSessionData();
 		$this->sendVerificationEmail();
-		$this->redirect();
+		$this->redirect('signup/success');
 	}
 	
 	/*
@@ -113,14 +90,6 @@ class SignUpModel
 	}
 	
 	/*
-	 * Return stored data. NOT password
-	 */
-	public function getData()
-	{	
-		return $this->data;
-	}
-	
-	/*
 	 * Set the username value
 	 */
 	private function setUsername()
@@ -131,7 +100,6 @@ class SignUpModel
 		}
 		
 		$this->username = new Username( $u );
-		$this->username->setPDO( $this->pdo );
 		
 		if ( ! $this->username->test() ) {
 			$this->error = true;
@@ -152,9 +120,8 @@ class SignUpModel
 		}
 		
 		$this->email = new Email( $e );
-		$this->email->setPDO( $this->pdo );
 		
-		if ( !$this->email->test() ) {
+		if ( ! $this->email->test() ) {
 			$this->error = true;
 			$this->data['error']['email'] = $this->email->getError();
 		}
@@ -174,7 +141,7 @@ class SignUpModel
 		
 		$this->password = new Password( $p );
 		
-		if ( !$this->password->test() ) {
+		if ( ! $this->password->test() ) {
 			$this->error = true;
 			$this->data['error']['password'] = $this->password->getError();
 		}
@@ -186,7 +153,7 @@ class SignUpModel
     private function setActivationKey()
     {
 		$this->activation_key = new ActivationKey;
-		$k = $this->activation_key->set();
+		$this->activation_key->set();
     }
     
 	/*
@@ -194,44 +161,16 @@ class SignUpModel
 	 */
 	private function createUser()
 	{
-		
-		$u = $this->username->getValue();
-		$e = $this->email->getValue();
-		$p = password_hash( $this->password->getValue(), PASSWORD_DEFAULT );
-		$k = $this->activation_key->get();
-		$s = $this->getUserStatus();
-		
-		// Build the query
-		$q = 'INSERT INTO users (
-			username,
-			email,
-			registered_email,
-			pass,
-			activation_key,
-			status,
-			date_added
-		) VALUES (
-			:username,
-			:email,
-			:registered_email,
-			:pass,
-			:activation_key,
-			:status,
-			UTC_TIMESTAMP()
-		)';
-	
-		$stmt = $this->pdo->prepare($q);
-		
-		$stmt->bindValue(':username', $u, \PDO::PARAM_STR);
-		$stmt->bindValue(':email', $e, \PDO::PARAM_STR);
-		$stmt->bindValue(':registered_email', $e, \PDO::PARAM_STR);
-		$stmt->bindValue(':pass', $p, \PDO::PARAM_STR);
-		$stmt->bindValue(':activation_key', $k, \PDO::PARAM_STR);
-		$stmt->bindValue(':status', $s, \PDO::PARAM_INT);
+		$this->user = User::getInstance();
+        
+		$this->user->set( 'username', $this->username->getValue() );
+		$this->user->set( 'email', $this->email->getValue() );
+		$this->user->set( 'pass', password_hash( $this->password->getValue(), PASSWORD_DEFAULT ) );
+		$this->user->set( 'activation_key', $this->activation_key->get() );
+		$this->user->set( 'status', $this->getUserStatus() );
 		
 		// Check for success and get the ID
-		if ( $stmt->execute() ) {
-			$this->user_id = $this->pdo->lastInsertId();
+		if ( $this->user->create() ) {
             return true;
 		} else {
 			$this->error = true;
@@ -250,8 +189,7 @@ class SignUpModel
         $newUserRole = $roles->getNewUserRole();
         
         $user_roles = new UserRoles;
-        $user_roles->setPDO( $this->pdo );
-        $user_roles->setUserId( $this->user_id );
+        $user_roles->setUserId( $this->user->get('id') );
         $user_roles->addRole( $newUserRole );
         
         if ( ! $user_roles->create() ) {
@@ -280,7 +218,7 @@ class SignUpModel
 		// Regenerate the session
         $session->regenerate();
         // Add the user id to the session
-        $session->set( 'user_id', $this->user_id );
+        $session->set( 'user_id', $this->user->get('id') );
     }
     
     /*
@@ -299,14 +237,5 @@ class SignUpModel
         $email->setBody();
         
         $email->send();
-    }
-    
-    /*
-     * Redirect to the completion page
-     */
-    private function redirect()
-    {
-        header('Location: /signup/success');
-        exit();
     }
 }

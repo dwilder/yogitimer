@@ -1,47 +1,61 @@
 <?php
 namespace Src\Includes\SuperClasses;
 
-use Src\Includes\SuperClasses\ControllerInterface;
 use Src\Includes\Template\Controller as Template;
-use Src\Includes\User\User;
-use Src\Includes\Session\Session;
-use Src\Config\Config;
 
 /*
  * Abstract class for module UI controllers
  */
-abstract class UIController implements ControllerInterface
-{
+abstract class UIController extends AbstractController
+{	
 	/*
-     * Does the user need to be authenticated to view all UIs
+	 * Store model, view, template
+	 */
+    protected $class;
+	protected $model;
+	protected $view;
+	protected $template;
+    /*
+     * Run
      */
-    protected $authenticated = false;
+    public function run()
+    {
+        $this->setClass();
+        $this->setModel();
+        $this->setView();
+        $this->setTemplate();
+        $this->respond();
+    }
     
     /*
-     * Store the module name
+     * Set the class name for the model and view
      */
-    protected $module_name;
-	
-	/*
-	 * Store the guid
-	 */
-	protected $guid;
+    protected function setClass() {}
     
-	/*
-	 * Store PDO
-	 */
-	protected $pdo;
-	
-	/*
-	 * Store page content
-	 */
-	protected $content;
-	
-	/*
-	 * Store the templating engine
-	 */
-	protected $template;
-	
+    /*
+     * Set the model(s)
+     */
+    protected function setModel()
+    {
+        $class = 'Src\Modules\\' . $this->parameters['module'] . '\Models\\' . $this->class . 'Model';
+        
+        $this->model = new $class;
+        $this->model->setRequest( $this->request );
+        $this->model->run();
+    }
+    
+    /*
+     * Set the view
+     */
+    protected function setView()
+    {
+        $class = 'Src\Modules\\' . $this->parameters['module'] . '\Views\\' . $this->class . 'View';
+        
+        $this->view = new $class;
+        $this->view->setData( $this->model->getData() );
+        $this->view->run();
+    }
+    
 	/*
 	 * Set the template engine
 	 */
@@ -53,67 +67,12 @@ abstract class UIController implements ControllerInterface
 	/*
 	 * Return UI
 	 */
-	public function request()
+	protected function respond()
 	{
-        $this->testAuthentication();
-        
-        $this->setModuleName();
-		$this->setContent();
-        
-		$this->setTemplate();
-		$this->template->setGuid( $this->guid );
-		$this->template->setContent( $this->content );
-		return $this->template->request();
-	}
-	
-	/*
-	 * Set the guid
-	 */
-	public function setGuid( $guid )
-	{
-		$this->guid = $guid;
-	}
-	
-	/*
-	 * Set the PDO object reference
-	 */
-	public function setPDO( \PDO $pdo )
-	{
-		$this->pdo = $pdo;
-	}
-    
-	/*
-	 * Set the content
-	 */
-	public function setContent( $content = null ) {
-		$this->content = $content;
-	}
-    
-    /*
-     * Test user authentication if required
-     */
-    protected function testAuthentication()
-    {
-        if ( $this->authenticated ) {
-            $user = User::getInstance();
-            if ( ! $user->isSignedIn() ) {
-                $this->redirect('/login');
-            }
+        if ( isset( $this->request['guid'] ) ) {
+    		$this->template->setGuid( $this->request['guid'] );
         }
-    }
-    
-    /*
-     * Redirect function
-     */
-    protected function redirect( $url = '/' )
-    {
-        header('Location: ' . $url );
-        exit;
-    }
-    
-    /*
-     * Set the module name
-     */
-    abstract protected function setModuleName();
-			
+		$this->template->setContent( $this->view->getContent() );
+		echo $this->template->request();
+	}
 }

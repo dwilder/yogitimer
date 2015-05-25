@@ -49,7 +49,12 @@ class HttpRequest
             return;
         }
 		
-        $query = explode( '/', $_SERVER['QUERY_STRING'] );
+        $pairs = explode( '&', $_SERVER['QUERY_STRING'] );
+        $query = array();
+        foreach ( $pairs as $pair ) {
+            list( $k, $v ) = explode( '=', $pair );
+            $query[$k] = $v;
+        }
         
         $this->request = array_merge( $this->request, $query );
 	}

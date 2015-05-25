@@ -71,30 +71,115 @@ class User
     }
     
     /*
+     * Create a user
+     */
+    public function create()
+    {
+        if ( ! $this->email || ! $this->pass ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+        
+		// Build the query
+		$q = 'INSERT INTO users (
+			username,
+			email,
+			registered_email,
+			pass,
+			activation_key,
+			status,
+			date_added
+		) VALUES (
+			:username,
+			:email,
+			:registered_email,
+			:pass,
+			:activation_key,
+			:status,
+			UTC_TIMESTAMP()
+		)';
+	
+		$stmt = $pdo->prepare($q);
+		
+		$stmt->bindValue(':username', $this->username, \PDO::PARAM_STR);
+		$stmt->bindValue(':email', $this->email, \PDO::PARAM_STR);
+		$stmt->bindValue(':registered_email', $this->email, \PDO::PARAM_STR);
+		$stmt->bindValue(':pass', $this->pass, \PDO::PARAM_STR);
+		$stmt->bindValue(':activation_key', $this->activation_key, \PDO::PARAM_STR);
+		$stmt->bindValue(':status', $this->status, \PDO::PARAM_INT);
+		
+		// Check for success and get the ID
+		if ( $stmt->execute() ) {
+			$this->id = $pdo->lastInsertId();
+            return true;
+		}
+		return false;
+    }
+    
+    /*
      * Get user data from the database
      */
     public function read()
     {
-        if ( $this->id && $this->pdo ) {
-            $q = 'SELECT * FROM users WHERE id=:id LIMIT 1';
-            
-            $stmt = $this->pdo->prepare($q);
-            $stmt->bindParam( ':id', $this->id );
-            
-            if ( $stmt->execute() ) {
-                $r = $stmt->fetch(\PDO::FETCH_ASSOC);
-            }
-            if ( $r ) {
-                foreach ( $r as $k => $v ) {
-                    $this->$k = $v;
-                }
-            }
-            // Get user roles
-            $this->setUserRoles();
+        if ( ! $this->id ) {
+            return false;
         }
+        
+        $pdo = DB::getInstance();
+    
+        $q = 'SELECT * FROM users WHERE id=:id LIMIT 1';
+        
+        $stmt = $pdo->prepare($q);
+        $stmt->bindParam( ':id', $this->id );
+        
+        if ( $stmt->execute() ) {
+            $r = $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        if ( $r ) {
+            foreach ( $r as $k => $v ) {
+                $this->$k = $v;
+            }
+        }
+        // Get user roles
+        $this->setUserRoles();
         
         // If we've made it this far, the user wasn't found. Make it anonymous.
         
+    }
+    
+    /*
+     * Update
+     */
+    public function update()
+    {
+        if ( ! $this->id ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+
+        $q = 'UPDATE users SET
+            username=:username,
+            email=:email,
+            pass=:pass,
+            activation_key=:activation_key,
+            status=:status
+        WHERE id=:id
+        LIMIT 1';
+        
+        $sh = $pdo->prepare($q);
+        $sh->bindParam( ':username', $this->username );
+        $sh->bindParam( ':email', $this->email );
+        $sh->bindParam( ':pass', $this->pass );
+        $sh->bindParam( ':activation_key', $this->activation_key );
+        $sh->bindParam( ':status', $this->status );
+        $sh->bindParam( ':id', $this->id );
+        
+        if ( $sh->execute() ) {
+            return true;
+        }
+        return false;
     }
     
     /*
@@ -104,19 +189,10 @@ class User
     {
         $roles = new UserRoles;
         
-        $roles->setPDO( $this->pdo );
         $roles->setUserId( $this->id );
         $roles->read();
         
         $this->user_roles = $roles->getRoles();
-    }
-    
-    /*
-     * Create a user
-     */
-    public function create()
-    {
-        
     }
     
     /*
