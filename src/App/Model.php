@@ -42,7 +42,7 @@ class Model
         ),
 		'activate' => array(
             'module' => 'SignUp',
-            'login_access' => 'anonymous',
+            'login_access' => 'all',
             'ssl' => true
         ),
 		'login' => array(
