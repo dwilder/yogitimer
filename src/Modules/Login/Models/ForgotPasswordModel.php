@@ -1,18 +1,19 @@
 <?php
 namespace Src\Modules\Login\Models;
 
+use Src\Includes\SuperClasses\Model;
+use Src\Includes\Database\DB;
 use Src\Includes\User\User;
 use Src\Config\Config;
 use Src\Includes\Data\LoginToken;
 use Src\Modules\Login\Helpers\ForgotPasswordEmail;
 
-class ForgotPasswordModel
+class ForgotPasswordModel extends Model
 {   
     /*
      * Store data and errors other than password
      */
     private $error = false;
-    private $data = array();
     
     /*
      * Store user data
@@ -25,28 +26,7 @@ class ForgotPasswordModel
     private $login_token;
     
     /*
-     * Store PDO
-     */
-    private $pdo;
-    
-    /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
-
-    /*
-     * Return data
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-    
-    /*
-     * Run the log in process
+     * Run the forgot password process
      */
     public function run()
     {
@@ -70,7 +50,7 @@ class ForgotPasswordModel
     {
         $user = User::getInstance();
         if ( $user->isSignedIn() ) {
-            $this->redirect('/profile');
+            $this->redirect('profile');
         }
     }
     
@@ -102,7 +82,7 @@ class ForgotPasswordModel
             $this->sendForgotPasswordEmail();
         }
         
-        $this->redirect('/forgotpassword/success');
+        $this->redirect('forgotpassword/success');
     }
     
     /*
@@ -131,11 +111,13 @@ class ForgotPasswordModel
      */
     private function lookUpUser()
     {
-        if ( isset( $this->data['username'] ) && $this->pdo ) {
+        if ( isset( $this->data['username'] ) ) {
+            
+            $pdo = DB::getInstance();
             
             $q = 'SELECT * FROM users WHERE username=:username OR email=:email LIMIT 1';
             
-            $stmt = $this->pdo->prepare($q);
+            $stmt = $pdo->prepare($q);
             $stmt->bindParam(':username', $this->data['username']);
             $stmt->bindParam(':email', $this->data['username']);
             
@@ -160,7 +142,6 @@ class ForgotPasswordModel
     private function createLoginToken()
     {
         $this->login_token = new LoginToken;
-        $this->login_token->setPDO( $this->pdo );
         $this->login_token->setUserId( $this->user_data['id'] );
         $this->login_token->generate();
     }
@@ -181,14 +162,5 @@ class ForgotPasswordModel
         $email->setBody();
         
         $email->send();
-    }
-    
-    /*
-     * Redirect
-     */
-    private function redirect( $url )
-    {
-        header('Location: ' . $url);
-        exit;
     }
 }

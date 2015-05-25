@@ -1,12 +1,14 @@
 <?php
 namespace Src\Modules\Login\Models;
 
+use Src\Includes\SuperClasses\Model;
+use Src\Includes\Database\DB;
+use Src\Includes\Session\Session;
+use Src\Includes\User\User;
 use Src\Includes\Data\LoginToken;
 use Src\Includes\Data\Password;
-use Src\Includes\User\User;
-use Src\Includes\Session\Session;
 
-class ResetPasswordModel
+class ResetPasswordModel extends Model
 {
     /*
      * Store the submitted passwords
@@ -29,33 +31,11 @@ class ResetPasswordModel
      * Store data, error status
      */
     private $error = false;
-    private $data = array();
     
     /*
      * Store user data
      */
     private $user_data = array();
-    
-    /*
-     * Store PDO
-     */
-    private $pdo = null;
-    
-    /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
-    
-    /*
-     * Return data
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
     
     /*
      * Run
@@ -83,7 +63,7 @@ class ResetPasswordModel
      */
     private function success()
     {
-        if ( ! isset($_GET['action'] ) || $_GET['action'] != 'success' ) {
+        if ( ! isset($this->request['action'] ) || $this->request['action'] != 'success' ) {
             return false;
         }
 
@@ -111,7 +91,6 @@ class ResetPasswordModel
         }
         
         $this->token = new LoginToken;
-        $this->token->setPDO( $this->pdo );
         $valid = $this->token->verify( $this->user_data['id'], $this->url_token );
         
         if ( ! $valid ) {
@@ -127,11 +106,11 @@ class ResetPasswordModel
      */
     private function setEmail()
     {
-        if ( ! isset( $_GET['e'] ) ) {
+        if ( ! isset( $this->request['e'] ) ) {
             return false;
         }
         
-        $e = trim( urldecode( $_GET['e'] ) );
+        $e = trim( urldecode( $this->request['e'] ) );
         
         if ( ! filter_var( $e, FILTER_VALIDATE_EMAIL ) ) {
             return false;
@@ -146,11 +125,11 @@ class ResetPasswordModel
      */
     private function setToken()
     {
-        if ( ! isset( $_GET['t'] ) ) {
+        if ( ! isset( $this->request['t'] ) ) {
             return false;
         }
         
-        $t = trim( urldecode( $_GET['t'] ) );
+        $t = trim( urldecode( $this->request['t'] ) );
 
         if ( $t == null ) {
             return false;
@@ -165,13 +144,15 @@ class ResetPasswordModel
      */
     protected function lookUpUser()
     {
-        if ( ! $this->url_email || ! $this->pdo ) {
+        if ( ! $this->url_email ) {
             return false;
         }
         
+        $pdo = DB::getInstance();
+        
         $q = "SELECT * FROM users WHERE email=:email";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':email', $this->url_email);
         
         if ( $stmt->execute() ) {
@@ -202,7 +183,7 @@ class ResetPasswordModel
         // Everything is good. Remove the token, sign in and redirect to success
         $this->token->delete();
         $this->signInUser();
-        $this->redirect();
+        $this->redirect('resetpassword/success');
     }
     
     /*
@@ -236,14 +217,5 @@ class ResetPasswordModel
         $session = Session::getInstance();
         $session->regenerate();
         $session->set('user_id', $this->user_data['id'] );
-    }
-    
-    /*
-     * Redirect to the success page
-     */
-    protected function redirect()
-    {
-        header('Location: /resetpassword/success');
-        exit;
     }
 }

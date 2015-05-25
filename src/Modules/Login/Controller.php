@@ -1,7 +1,7 @@
 <?php
 namespace Src\Modules\Login;
 
-use Src\Includes\SuperClasses\MultiUIController;
+use Src\Includes\SuperClasses\UIController;
 use Src\Modules\Login\Models\LoginModel;
 use Src\Modules\Login\Models\ForgotPasswordModel;
 use Src\Modules\Login\Models\ResetPasswordModel;
@@ -17,22 +17,14 @@ use Src\Modules\Login\Views\ResetPasswordView;
  * - Reset Password
  */
 
-class Controller extends MultiUIController
+class Controller extends UIController
 {
-    /*
-     * Set the module name
-     */
-    protected function setModuleName()
-    {
-        $this->module_name = 'Login';
-    }
-    
     /*
      * Figure out which class to use
      */
-    protected function getClass()
+    protected function setClass()
     {
-		switch ( $this->guid ) {
+		switch ( $this->request['guid'] ) {
 			case 'forgotpassword';
 				$class = 'ForgotPassword';
 				break;
@@ -44,6 +36,6 @@ class Controller extends MultiUIController
 				$class = 'Login';
 				break;
 		}
-        return $class;
+        $this->class = $class;
     }
 }

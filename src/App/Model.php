@@ -57,7 +57,7 @@ class Model
         ),
 		'resetpassword' => array(
             'module' => 'Login',
-            'login_access' => 'anonymous',
+            'login_access' => 'all',
             'ssl' => true
         ),
 		'logout' => array(

@@ -1,9 +1,10 @@
 <?php
 namespace Src\Modules\Login\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class LoginView
+class LoginView extends View
 {
 	/*
 	 * Set the title
@@ -14,33 +15,17 @@ class LoginView
 	 * Store the content
 	 */
 	protected $content;
-	
-	/*
-	 * Store submitted data
-	 */
-	protected $data = array();
-	
-	
+    
 	/*
 	 * Store the form
 	 */
 	protected $form;
 	
 	/*
-	 * Set the data
-	 */
-	public function setData( array $data )
-	{
-		$this->data = $data;
-	}
-    
-	/*
 	 * Get the content
 	 */
 	public function getContent()
 	{
-		$this->setContent();
-		
 		return $this->content;
 	}
 	
@@ -55,7 +40,7 @@ class LoginView
 	/*
 	 * Set the content
 	 */
-	public function setContent()
+	public function run()
 	{
 		$content = $this->getTitle();
 		

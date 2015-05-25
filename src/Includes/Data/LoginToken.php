@@ -1,6 +1,8 @@
 <?php
 namespace Src\Includes\Data;
 
+use Src\Includes\Database\DB;
+
 class LoginToken
 {
     /*
@@ -13,19 +15,6 @@ class LoginToken
      * Token data
      */
     private $data = array();
-    
-    /*
-     * Store the PDO
-     */
-    private $pdo = null;
-    
-    /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
     
     /*
      * Generate a token
@@ -66,16 +55,18 @@ class LoginToken
             $this->generate();
         }
         
-        if ( ! $this->user_id || ! $this->pdo ) {
+        if ( ! $this->user_id ) {
             return false;
         }
         
         // Delete all other tokens for this user
         $this->delete();
         
+        $pdo = DB::getInstance();
+        
         $q = "INSERT INTO login_tokens (user_id, token, date_expires) VALUES (:user_id, :token, DATE_ADD(NOW(), INTERVAL 60 MINUTE))";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':user_id', $this->user_id);
         $stmt->bindParam(':token', $this->token);
         
@@ -90,13 +81,15 @@ class LoginToken
      */
     public function delete()
     {
-        if ( ! $this->user_id || ! $this->pdo ) {
+        if ( ! $this->user_id ) {
             return false;
         }
         
+        $pdo = DB::getInstance();
+        
         $q = "DELETE FROM login_tokens WHERE user_id=:user_id";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':user_id', $this->user_id);
         
         if ( $stmt->execute() ) {
@@ -110,13 +103,15 @@ class LoginToken
      */
     public function read()
     {
-        if ( ! $this->user_id || ! $this->pdo ) {
+        if ( ! $this->user_id ) {
             return false;
         }
         
+        $pdo = DB::getInstance();
+        
         $q = "SELECT * FROM login_tokens WHERE user_id=:user_id";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':user_id', $this->user_id);
         
         if ( $stmt->execute() ) {

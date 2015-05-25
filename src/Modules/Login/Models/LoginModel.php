@@ -1,6 +1,8 @@
 <?php
 namespace Src\Modules\Login\Models;
 
+use Src\Includes\SuperClasses\Model;
+use Src\Includes\Database\DB;
 use Src\Includes\User\User;
 use Src\Includes\Session\Session;
 use Src\Includes\Data\Username;
@@ -10,7 +12,7 @@ use Src\Includes\Data\Password;
 /*
  * Attempts to log a user in.
  */
-class LoginModel
+class LoginModel extends Model
 {
     /*
      * Password, user data from the DB
@@ -22,28 +24,6 @@ class LoginModel
      * Store data and errors other than password
      */
     private $error = false;
-    private $data = array();
-    
-    /*
-     * Store PDO
-     */
-    private $pdo;
-    
-    /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
-
-    /*
-     * Return data
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
     
     /*
      * Run the log in process
@@ -83,7 +63,7 @@ class LoginModel
         
         if ( $this->lookUpUser() && $this->validatePassword() ) {
             $this->signInUser();
-            $this->redirect();
+            $this->redirect('profile');
         }
     }
     
@@ -136,11 +116,13 @@ class LoginModel
      */
     private function lookUpUser()
     {
-        if ( isset( $this->data['username'] ) && $this->password && $this->pdo ) {
+        if ( isset( $this->data['username'] ) && $this->password ) {
+            
+            $pdo = DB::getInstance();
             
             $q = 'SELECT * FROM users WHERE username=:username OR email=:email LIMIT 1';
             
-            $stmt = $this->pdo->prepare($q);
+            $stmt = $pdo->prepare($q);
             $stmt->bindParam(':username', $this->data['username']);
             $stmt->bindParam(':email', $this->data['username']);
             
@@ -189,14 +171,5 @@ class LoginModel
         $session = Session::getInstance();
         $session->regenerate();
         $session->set('user_id', $this->user_data['id'] );
-    }
-    
-    /*
-     * Redirect on success
-     */
-    private function redirect()
-    {
-        header('Location: /profile');
-        exit;
     }
 }

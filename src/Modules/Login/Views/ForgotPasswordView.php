@@ -1,9 +1,10 @@
 <?php
 namespace Src\Modules\Login\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class ForgotPasswordView
+class ForgotPasswordView extends View
 {
 	/*
 	 * Set the title
@@ -11,40 +12,20 @@ class ForgotPasswordView
 	protected $title = 'Forgot Password';
 	
 	/*
-	 * Store the content
-	 */
-	protected $content;
-	
-	/*
 	 * Store the form
 	 */
 	protected $form;
-    
-	/*
-	 * Store submitted data
-	 */
-	protected $data = array();
-	
-	/*
-	 * Set the data
-	 */
-	public function setData( array $data )
-	{
-		$this->data = $data;
-	}
 	
 	/*
 	 * Get the content
 	 */
-	public function getContent()
+	public function run()
 	{
         if ( isset( $this->data['success'] ) ) {
             $this->setSuccessContent();
         } else {
     		$this->setContent();
         }
-		
-		return $this->content;
 	}
 	
     /*

@@ -1,9 +1,10 @@
 <?php
 namespace Src\Modules\Login\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class ResetPasswordView
+class ResetPasswordView extends View
 {
 	/*
 	 * Set the title
@@ -11,37 +12,19 @@ class ResetPasswordView
 	protected $title = 'Reset Password';
 	
 	/*
-	 * Store the content
-	 */
-	protected $content;
-	
-	/*
 	 * Store the form
 	 */
 	protected $Form;
 	
     /*
-     * Store data
-     */
-    protected $data = array();
-    
-    /*
      * Access status
      */
     private $status;
     
-    /*
-     * Set data
-     */
-    public function setData( $data = array() )
-    {
-        $this->data = $data;
-    }
-    
 	/*
 	 * Get the content
 	 */
-	public function getContent()
+	public function run()
 	{
         $this->setStatus();
         
@@ -57,8 +40,6 @@ class ResetPasswordView
                 $this->setInvalidContent();
                 break;
         }
-		
-		return $this->content;
 	}
     
     /*
@@ -101,6 +82,7 @@ class ResetPasswordView
         
         $content = $this->getTitle();
         $content .= "<p>You're password has been successfully updated.</p>";
+        $content .= '<p class="link-button"><a href="/meditate">Start Meditating</a></p>';
         
         $this->content = $content;
     }
