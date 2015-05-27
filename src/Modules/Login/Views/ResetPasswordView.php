@@ -109,6 +109,8 @@ class ResetPasswordView extends View
 		$content = $this->getTitle();
 		$content .= '<p>Create a new password for your account.</p>';
 		
+        $content .= $this->formMessage();
+        
 		$this->Form = new Form;
 		$this->buildForm();
 		$content .= $this->Form->getHTML();
@@ -123,20 +125,39 @@ class ResetPasswordView extends View
 	{
 		$newpass = $this->Form->newInput( 'password' );
 		$newpass->setLabel( 'New Password' );
-		$newpass->set( 'name', 'newpass' );
-		$newpass->set( 'id', 'newpass' );
-        ( ! isset( $this->data['error']['new_password'] ) ) || $newpass->setError( $this->data['error']['new_password'] );
+		$newpass->set( 'name', 'new_pass' );
+		$newpass->set( 'id', 'new_pass' );
+        ( ! isset( $this->data['error']['new_pass'] ) ) || $newpass->setError( $this->data['error']['new_pass'] );
 
 		$confirmpass = $this->Form->newInput( 'password' );
 		$confirmpass->setLabel( 'Confirm Password' );
-		$confirmpass->set( 'name', 'confirmpass' );
-		$confirmpass->set( 'id', 'confirmpass' );
-        ( ! isset( $this->data['error']['confirm_password'] ) ) || $newpass->setError( $this->data['error']['confirm_password'] );
+		$confirmpass->set( 'name', 'confirm_pass' );
+		$confirmpass->set( 'id', 'confirm_pass' );
+        ( ! isset( $this->data['error']['confirm_pass'] ) ) || $confirmpass->setError( $this->data['error']['confirm_pass'] );
 		
 		$submit = $this->Form->newInput( 'submit' );
 		$submit->set( 'name', 'submit' );
 		$submit->set( 'id', 'submit' );
 		$submit->set( 'value', 'Submit' );
 	}
-	
+    
+    /*
+     * Create a success or failure message as needed
+     */
+    protected function formMessage()
+    {   
+        $message = '';
+        if ( isset( $this->data['success'] ) ) {
+            $message .= '<p class="form-success">Your password has been updated.</p>';
+        }
+
+        if ( isset( $this->data['error']['form'] ) ) {
+            $message .= '<p class="form-error">' . $this->data['error']['form'] . '</p>';
+        }
+        elseif ( isset( $this->data['error'] ) && ! empty( $this->data['error'] ) ) {
+            $message .= '<p class="form-error">Please check for errors.</p>';
+        }
+        
+        return $message;
+    }
 }

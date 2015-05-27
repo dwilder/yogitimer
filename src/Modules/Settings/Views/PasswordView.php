@@ -1,9 +1,10 @@
 <?php
 namespace Src\Modules\Settings\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class PasswordView
+class PasswordView extends View
 {
 	/*
 	 * Store title
@@ -16,34 +17,23 @@ class PasswordView
 	protected $form;
 	
 	/*
-	 * Store data
-	 */
-	protected $data = array();
-	
-	/*
-	 * Set the data
-	 */
-	public function setData( array $data = array() )
-	{
-		$this->data = $data;
-	}
-	
-	/*
 	 * Return the content
 	 */
-	public function getContent()
+	public function run()
 	{
 		$content = $this->getTitle();
 		
 		$content .= '<p>Please enter your current password to choose a new password.</p>';
 		
+        $content .= $this->formMessage();
+        
 		$this->form = new Form;
 		$this->buildForm();
 		$content .= $this->form->getHTML();
 		
 		$content .= $this->cancelLink();
 		
-		return $content;
+		$this->content = $content;
 	}
 	
 	/*
@@ -63,23 +53,46 @@ class PasswordView
 		$pass->setLabel( 'Current Password' );
 		$pass->set( 'name', 'pass' );
 		$pass->set( 'id', 'pass' );
+        if ( isset( $this->data['error']['pass'] ) ) $pass->setError( $this->data['error']['pass'] );
 
 		$new_pass = $this->form->newInput( 'password' );
 		$new_pass->setLabel( 'New Password' );
 		$new_pass->set( 'name', 'new_pass' );
 		$new_pass->set( 'id', 'new_pass' );
+        if ( isset( $this->data['error']['new_pass'] ) ) $new_pass->setError( $this->data['error']['new_pass'] );
 
 		$confirm_pass = $this->form->newInput( 'password' );
 		$confirm_pass->setLabel( 'Confirm Password' );
 		$confirm_pass->set( 'name', 'confirm_pass' );
 		$confirm_pass->set( 'id', 'confirm_pass' );
+        if ( isset( $this->data['error']['confirm_pass'] ) ) $confirm_pass->setError( $this->data['error']['confirm_pass'] );
 		
 		$save = $this->form->newInput( 'submit' );
 		$save->set( 'name', 'submit' );
 		$save->set( 'id', 'submit' );
 		$save->set( 'value', 'Save Changes' );
 	}
-	
+    
+    /*
+     * Create a success or failure message as needed
+     */
+    protected function formMessage()
+    {   
+        $message = '';
+        if ( isset( $this->data['success'] ) ) {
+            $message .= '<p class="form-success">Your settings been updated.</p>';
+        }
+
+        if ( isset( $this->data['error']['form'] ) ) {
+            $message .= '<p class="form-error">' . $this->data['error']['form'] . '</p>';
+        }
+        elseif ( isset( $this->data['error'] ) && ! empty( $this->data['error'] ) ) {
+            $message .= '<p class="form-error">Please check for errors.</p>';
+        }
+        
+        return $message;
+    }
+    
 	/*
 	 * Create a cancel link
 	 */

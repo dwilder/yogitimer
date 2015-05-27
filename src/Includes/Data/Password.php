@@ -80,4 +80,12 @@ class Password
 	{
 		return $this->error;
 	}
+    
+    /*
+     * Get the hashed value
+     */
+    public function getHashed()
+    {
+        return password_hash( $this->value, PASSWORD_DEFAULT );
+    }
 }

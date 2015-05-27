@@ -13,8 +13,8 @@ class ResetPasswordModel extends Model
     /*
      * Store the submitted passwords
      */
-    private $new_password = null;
-    private $confirm_password = null;
+    private $new_pass;
+    private $confirm_pass;
     
     /*
      * Store the login token and email
@@ -171,18 +171,22 @@ class ResetPasswordModel extends Model
      * Attempt to reset the password
      */
     private function resetPassword()
-    {
-        if ( ! isset( $_POST['newpass'] ) || ! isset( $_POST['confirmpass'] ) ) {
-            return false;
-        }
-        
+    {   
         if ( ! $this->setPasswords() ) {
             return false;
         }
         
         // Everything is good. Remove the token, sign in and redirect to success
-        $this->token->delete();
         $this->signInUser();
+        
+        if ( ! $this->updatePassword() ) {
+            $error = true;
+            $this->data['error']['form'] = 'An error occurred while updating your password. Please try again.';
+            return false;
+        }
+
+        $this->token->delete();
+        
         $this->redirect('resetpassword/success');
     }
     
@@ -191,22 +195,39 @@ class ResetPasswordModel extends Model
      */
     private function setPasswords()
     {
-        $this->new_password = new Password( trim( $_POST['newpass'] ) );
-        $this->confirm_password = new Password( trim( $_POST['confirmpass'] ) );
-        
-        if ( ! $this->new_password->isValid() ) {
-            $this->error = true;
-            $this->data['error']['new_password'] = $this->new_password->getError();
+        if ( ! isset( $_POST['new_pass'] ) || ! isset( $_POST['confirm_pass'] ) ) {
             return false;
         }
         
-        if ( $this->new_password->getValue() != $this->confirm_password->getValue() ) {
+        $this->new_pass = new Password( $_POST['new_pass'] );
+        $this->confirm_pass = new Password( $_POST['confirm_pass'] );
+        
+        if ( ! $this->new_pass->isValid() ) {
             $this->error = true;
-            $this->data['error']['confirm_password'] = "Your confirmed password did not match. Please try again.";
+            $this->data['error']['new_pass'] = $this->new_pass->getError();
+            return false;
+        }
+        
+        if ( $this->new_pass->getValue() != $this->confirm_pass->getValue() ) {
+            $this->error = true;
+            $this->data['error']['confirm_pass'] = "Your confirmed password did not match. Please try again.";
             return false;
         }
         
         return true;
+    }
+    
+    /*
+     * Update the users password
+     */
+    private function updatePassword()
+    {
+        $user = User::getInstance();
+        $user->set('id', $this->user_data['id'] );
+        $user->read();
+        
+        $user->set('pass', $this->new_pass->getHashed() );
+        return $user->update();
     }
     
     /*
