@@ -6,7 +6,7 @@ class AbstractDataValue
     /*
      * Store the value
      */
-    protected $value;
+    protected $value = null;
     
     /*
      * Get the value

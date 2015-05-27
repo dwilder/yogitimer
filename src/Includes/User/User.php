@@ -22,6 +22,7 @@ class User
     protected $pass = null;
     protected $activation_key = null;
     protected $status = null;
+    protected $directory = null;
     protected $date_added = null;
     protected $date_modified = null;
     
@@ -89,6 +90,7 @@ class User
 			pass,
 			activation_key,
 			status,
+            directory,
 			date_added
 		) VALUES (
 			:username,
@@ -97,6 +99,7 @@ class User
 			:pass,
 			:activation_key,
 			:status,
+            :directory,
 			UTC_TIMESTAMP()
 		)';
 	
@@ -108,6 +111,7 @@ class User
 		$stmt->bindValue(':pass', $this->pass, \PDO::PARAM_STR);
 		$stmt->bindValue(':activation_key', $this->activation_key, \PDO::PARAM_STR);
 		$stmt->bindValue(':status', $this->status, \PDO::PARAM_INT);
+		$stmt->bindValue(':directory', $this->directory, \PDO::PARAM_STR);
 		
 		// Check for success and get the ID
 		if ( $stmt->execute() ) {

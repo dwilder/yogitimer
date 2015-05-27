@@ -8,7 +8,7 @@ class RandomHash extends AbstractDataValue
     /*
      * Set a length for the return value
      */
-    private $length = 8;
+    protected $length = 8;
     
     /*
      * Change the length
@@ -30,6 +30,6 @@ class RandomHash extends AbstractDataValue
     	for ($i = 0; $i < 50; $i += 1) {
     		$random = hash( 'sha1', $random, FALSE );
     	}
-    	$this->value = $random;
+    	$this->value = substr( $random, 0, $this->length );
     }
 }

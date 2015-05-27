@@ -16,9 +16,10 @@ class UserDirectory extends AbstractDataValue
     protected $random_hash;
     
     /*
-     * Constructor
+     * Set
      */
-    
+    public function set() {}
+        
     /*
      * Create a unique directory
      */
@@ -26,7 +27,6 @@ class UserDirectory extends AbstractDataValue
     {
         $this->createUniqueDirectoryName();
         $this->makeDirectory();
-        
     }
     
     /*
@@ -41,7 +41,7 @@ class UserDirectory extends AbstractDataValue
         
         while ( $unique == false ) {
             $random_hash->set();
-            $random = $random_hash->set();
+            $random = $random_hash->get();
             if ( $this->isUnique( 'users', 'directory', $random ) ) {
                 $this->value = $random;
                 $unique = true;
@@ -56,9 +56,13 @@ class UserDirectory extends AbstractDataValue
     {
         $config = Config::getInstance();
         
-        $base_dir = '../' . $config->get('upload_dir') . '/users/' . $this->value;
+        $dir = '../' . $config->get('upload_dir') . '/users/' . $this->value;
         
-        if ( mkdir( $base_dir, 0757, true ) ) {
+        if ( is_dir( $dir ) ) {
+            return true;
+        }
+        
+        if ( mkdir( $dir, 0757 ) ) {
             return true;
         }
         return false;

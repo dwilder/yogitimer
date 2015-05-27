@@ -11,8 +11,8 @@ class ImagesModel extends Model
 	public function run()
 	{
 		$this->data = array(
-			'profile_image' => '/assets/img/profile_placeholder.jpg',
-			'background_image' => '/assets/img/profile_background.jpg'
+			'profile_image' => '/assets/img/profile-image.jpg',
+			'background_image' => '/assets/img/profile-background.jpg'
 		);
 	}
 }

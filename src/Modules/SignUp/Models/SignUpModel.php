@@ -11,6 +11,7 @@ use Src\Includes\Data\Email;
 use Src\Includes\Data\Password;
 use Src\Includes\Data\ActivationKey;
 use Src\Includes\Data\Roles;
+use Src\Includes\Data\UserDirectory;
 use Src\Includes\User\UserRoles;
 use Src\Modules\SignUp\Helpers\VerificationEmail;
 
@@ -36,6 +37,7 @@ class SignUpModel extends Model
 	private $email;
 	private $password;
 	private $activation_key;
+	private $user_directory;
 	
 	/*
 	 * Store the username, email, password, and errors
@@ -156,11 +158,14 @@ class SignUpModel extends Model
 		$this->activation_key->set();
     }
     
+    
 	/*
 	 * Add the user to the database
 	 */
 	private function createUser()
 	{
+        $this->createUploadDirectory();
+        
 		$this->user = User::getInstance();
         
 		$this->user->set( 'username', $this->username->getValue() );
@@ -168,6 +173,7 @@ class SignUpModel extends Model
 		$this->user->set( 'pass', password_hash( $this->password->getValue(), PASSWORD_DEFAULT ) );
 		$this->user->set( 'activation_key', $this->activation_key->get() );
 		$this->user->set( 'status', $this->getUserStatus() );
+		$this->user->set( 'directory', $this->user_directory->get() );
 		
 		// Check for success and get the ID
 		if ( $this->user->create() ) {
@@ -179,6 +185,15 @@ class SignUpModel extends Model
 		}
 		
 	}
+    
+    /*
+     * Create an upload directory for the user
+     */
+    private function createUploadDirectory()
+    {
+        $this->user_directory = new UserDirectory;
+        $this->user_directory->create();
+    }
     
     /*
      * Add the user role to the database

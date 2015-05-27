@@ -20,7 +20,7 @@ trait DatabaseValueTrait
 	public function isUnique( $table, $column, $value )
 	{
         if ( ! $this->pdo ) {
-            $pdo = DB::getInstance();
+            $this->pdo = DB::getInstance();
         }
         
 		$q = "SELECT id FROM $table WHERE $column = :column";
