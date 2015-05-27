@@ -58,6 +58,8 @@ class ForgotPasswordView extends View
 		$content = $this->getTitle();
 		$content .= '<p>Enter your email address or username and we\'ll send you instructions for resetting your password.</p>';
 		
+        $content .= $this->formMessage();
+        
 		$this->Form = new Form;
 		$this->buildForm();
 		$content .= $this->Form->getHTML();
@@ -84,4 +86,24 @@ class ForgotPasswordView extends View
 		$submit->set( 'id', 'submit' );
 		$submit->set( 'value', 'Send' );
 	}
+    
+    /*
+     * Create a success or failure message as needed
+     */
+    protected function formMessage()
+    {   
+        $message = '';
+        if ( isset( $this->data['success'] ) ) {
+            $message .= '<p class="form-success">Your settings been updated.</p>';
+        }
+
+        if ( isset( $this->data['error']['form'] ) ) {
+            $message .= '<p class="form-error">' . $this->data['error']['form'] . '</p>';
+        }
+        elseif ( isset( $this->data['error'] ) && ! empty( $this->data['error'] ) ) {
+            $message .= '<p class="form-error">Please check for errors.</p>';
+        }
+        
+        return $message;
+    }
 }

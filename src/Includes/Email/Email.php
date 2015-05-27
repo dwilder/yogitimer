@@ -15,6 +15,17 @@ class Email
     protected $from;
     
     /*
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subject();
+        $this->body();
+        $this->to();
+        $this->from();
+    }
+    
+    /*
      * Set data
      */
     public function subject( $value = null )

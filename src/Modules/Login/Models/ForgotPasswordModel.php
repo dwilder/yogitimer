@@ -77,6 +77,10 @@ class ForgotPasswordModel extends Model
         
         $this->lookUpUser();
         
+        if ( $this->error ) {
+            return;
+        }
+        
         if ( isset( $this->user_data['email'] ) ) {
             $this->createLoginToken();
             $this->sendForgotPasswordEmail();
@@ -129,6 +133,12 @@ class ForgotPasswordModel extends Model
                     $this->user_data[$k] = $v;
                 }
             }
+            if ( $this->isAccountDeleted() ) {
+                $this->error = true;
+                $this->data['error']['form'] = 'Your account was deleted. Contact support to restore your account.';
+                return false;
+            }
+            
             return true;
         }
         $this->error = true;
@@ -162,5 +172,16 @@ class ForgotPasswordModel extends Model
         $email->setBody();
         
         $email->send();
+    }
+    
+    /*
+     * Test if the user account has deleted status
+     */
+    private function isAccountDeleted()
+    {
+        if ( $this->user_data['status'] == 3 ) { // User is deleted
+            return true;
+        }
+        return false;
     }
 }

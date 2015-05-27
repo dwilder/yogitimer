@@ -1,6 +1,8 @@
 <?php
 namespace Src\Includes\SuperClasses;
 
+use Src\Config\Config;
+
 abstract class Model
 {
     /*
@@ -37,9 +39,17 @@ abstract class Model
     /*
      * Redirect
      */
-    protected function redirect( $url )
+    protected function redirect( $url = null )
     {
-        $location = '/' . $url;
+        $location = '';
+        
+        if ( ! $url ) {
+            $config = Config::getInstance();
+            $location .= $config->get('url');
+        }
+        
+        $location .= '/' . $url;
+        
         header('Location: ' . $location);
         exit;
     }

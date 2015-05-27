@@ -1,9 +1,10 @@
 <?php
 namespace Src\Modules\Settings\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
-class DeleteView
+class DeleteView extends View
 {
 	/*
 	 * Store title
@@ -16,22 +17,9 @@ class DeleteView
 	protected $form;
 	
 	/*
-	 * Store data
-	 */
-	protected $data = array();
-	
-	/*
-	 * Set the data
-	 */
-	public function setData( array $data = array() )
-	{
-		$this->data = $data;
-	}
-	
-	/*
 	 * Return the content
 	 */
-	public function getContent()
+	public function run()
 	{
 		$content = $this->getTitle();
 		
@@ -43,7 +31,7 @@ class DeleteView
 		
 		$content .= $this->cancelLink();
 		
-		return $content;
+		$this->content = $content;
 	}
 	
 	/*

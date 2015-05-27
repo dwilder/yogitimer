@@ -183,6 +183,29 @@ class User
     }
     
     /*
+     * Delete
+     */
+    public function delete()
+    {
+        if ( ! $this->id ) {
+            return false;
+        }
+        
+        $pdo = DB::getInstance();
+        
+        $q = "UPDATE users SET status=3 WHERE id=:id LIMIT 1";
+        
+        $sh = $pdo->prepare($q);
+        $sh->bindParam(':id', $this->id);
+        $sh->execute();
+        
+        if ( $sh->rowCount() == 1 ) {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
      * Set the user roles
      */
     protected function setUserRoles()
@@ -220,6 +243,17 @@ class User
     public function hasRole( $role )
     {
         if ( in_array( $role, $this->user_roles ) ) {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * Check if the status is delete
+     */
+    public function isDeleted()
+    {
+        if ( $this->status == 3 ) {
             return true;
         }
         return false;

@@ -1,30 +1,37 @@
 <?php
 namespace Src\Modules\Settings\Models;
 
-use Src\Includes\Form\Form;
+use Src\Includes\SuperClasses\Model;
+use Src\Includes\User\User;
 
-class DeleteModel
+class DeleteModel extends Model
 {	
-	/*
-	 * Store user data
-	 */
-	protected $data = array();
-	
 	/*
 	 * Set the data
 	 */
-	public function setData()
+	public function run()
 	{
-		$this->data = array();
+		$this->deleteUser();
 	}
-	
-	/*
-	 * Return the user data
-	 */
-	public function getData()
-	{
-		$this->setData();
-		
-		return $this->data;
-	}
+    
+    /*
+     * Delete the user
+     */
+    private function deleteUser()
+    {
+        $user = User::getInstance();
+        
+        if ( $user->delete() ) {
+            // $this->sendDeleteConfirmationEmail();
+            $this->redirect('logout');
+        }
+    }
+    
+    /*
+     * Send an email to confirm the account deletion
+     */
+    private function sendDeleteConfirmationEmail()
+    {
+        
+    }
 }
