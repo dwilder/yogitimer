@@ -32,19 +32,11 @@ class Controller extends MultiUIController
 	 * Store the meditation id if the action is edit or delete
 	 */
 	protected $mid = null;
-	
-    /*
-     * Set module name
-     */
-    protected function setModuleName()
-    {
-        $this->module_name = 'Journal';
-    }
     
     /*
      * Get the correct class name
      */
-    protected function getClass()
+    protected function setClass()
     {
 		if ( isset( $_GET['action'] ) ) {
 			switch ( $_GET['action'] ) {
@@ -67,6 +59,6 @@ class Controller extends MultiUIController
 		} else {
 		    $class = 'Journal';
 		}
-        return $class;
+        $this->class = $class;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
-use Src\Includes\Form\Form;
 use Src\Includes\SuperClasses\View;
+use Src\Includes\Form\Form;
 use Src\Modules\Journal\Helpers\tNotFound;
 
 class DeleteView extends View
@@ -17,7 +17,7 @@ class DeleteView extends View
 	/*
 	 * Set the content
 	 */
-	protected function setContent()
+	public function run()
 	{
 		if ( $this->notFound() ) {
 		    $this->setNotFoundContent();

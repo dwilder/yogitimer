@@ -22,8 +22,6 @@ trait tSetSubmittedData
         $this->setStartTime();
         $this->setDuration();
         $this->setAddMethod();
-        
-        $this->record->setPDO( $this->pdo );
     }
     
     /*
@@ -50,7 +48,7 @@ trait tSetSubmittedData
         }
         
         // Convert the separate date and time strings to a single UNIX datetime value
-        $timestamp = ( strtotime( $this->date->getFormatted() ) + $this->time->getSeconds() ) . ' ';
+        $timestamp = ( strtotime( $this->date->getFormatted() ) + $this->time->getSeconds() );
         $this->data['start_time'] = date( 'Y-m-d H:i:s', $timestamp );
         $this->record->set('start_time', $this->data['start_time']);
     }

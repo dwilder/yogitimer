@@ -16,6 +16,11 @@ class EditModel extends Model
     protected $record;
     
     /*
+     * Store an error
+     */
+    protected $error = false;
+    
+    /*
      * Run
      */
     public function run()

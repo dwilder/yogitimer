@@ -35,7 +35,6 @@ class JournalModel extends Model
 		//$this->data = $this->dummyData();
         
         $this->records = new MeditationRecords;
-        $this->records->setPDO( $this->pdo );
         
         $user = User::getInstance();
         if ( ! $this->records->read( $user->get('id') ) ) {

@@ -3,11 +3,13 @@ namespace Src\Includes\Form\Inputs;
 
 //use Src\Includes\Form\Inputs\AbstractInput;
 //use Src\Includes\Form\Inputs\LabelTrait;
+//use Src\Includes\Form\Inputs\InputTrait;
 
 class Select extends AbstractInput
 {
 	use LabelTrait;
-	
+	use InputTrait;
+    
 	/*
 	 * Store options
 	 */

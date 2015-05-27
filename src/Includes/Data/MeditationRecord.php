@@ -1,25 +1,27 @@
 <?php
 namespace Src\Includes\Data;
 
+use Src\Includes\SuperClasses\AbstractCrud;
+use Src\Includes\Database\DB;
 use Src\Includes\User\User;
 use Src\Includes\Session\Session;
 
 /*
  * Manage data for a single meditation
  */
-class MeditationRecord
+class MeditationRecord extends AbstractCrud
 {
     /*
      * Meditation record data
      */
-    private $id;
-    private $user_id;
-    private $start_time;
-    private $duration;
-    private $add_method;
-    private $status;
-    private $date_added;
-    private $date_modified;
+    protected $id;
+    protected $user_id;
+    protected $start_time;
+    protected $duration;
+    protected $add_method;
+    protected $status;
+    protected $date_added;
+    protected $date_modified;
     
     /*
      * Available add methods
@@ -29,11 +31,6 @@ class MeditationRecord
         'form'
     );
     
-    /*
-     * Store PDO
-     */
-    protected $pdo;
-
     /*
      * Track error
      */
@@ -56,33 +53,6 @@ class MeditationRecord
     }
     
     /*
-     * Set PDO
-     */
-    public function setPDO( \PDO $pdo )
-    {
-        $this->pdo = $pdo;
-    }
-    
-    /*
-     * Set data
-     */
-    public function set( $key, $value = null )
-    {
-        $this->$key = $value;
-    }
-    
-    /*
-     * Get data
-     */
-    public function get( $key )
-    {
-        if ( isset( $this->$key ) ) {
-            return $this->$key;
-        }
-        return null;
-    }
-    
-    /*
      * Add a meditation to the database
      */
     public function create()
@@ -95,12 +65,13 @@ class MeditationRecord
             || ! $this->start_time
             || ! $this->duration
             || ! $this->add_method
-            || ! $this->pdo
         ) {
             $this->error = true;
             $this->message = 'MISSING DATA';
             return false;
         }
+        
+        $pdo = DB::getInstance();
         
         $q = "INSERT INTO meditation_records (
             user_id,
@@ -118,14 +89,14 @@ class MeditationRecord
             UTC_TIMESTAMP()
         )";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':user_id', $this->user_id);
         $stmt->bindParam(':start_time', $this->start_time);
         $stmt->bindParam(':duration', $this->duration);
         $stmt->bindParam(':add_method', $this->add_method);
         
         if ( $stmt->execute() ) {
-            $this->id = $this->pdo->lastInsertId();
+            $this->id = $pdo->lastInsertId();
             return true;
         }
         
@@ -139,25 +110,28 @@ class MeditationRecord
      */
     public function read()
     {
-        if ( ! $this->id || ! $this->pdo ) {
+        if ( ! $this->id ) {
             return false;
         }
         
+        $pdo = DB::getInstance();
+        
         $q = "SELECT * FROM meditation_records WHERE id=:id";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         $stmt->bindParam(':id', $this->id);
         
         if ( ! $stmt->execute() ) {
             return false;
         }
-        $r = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if ( $r ) {
-            foreach ( $r as $k => $v ) {
+        $this->original = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ( $this->original ) {
+            foreach ( $this->original as $k => $v ) {
                 $this->$k = $v;
             }
             return true;
         }
+        $this->original = array();
         return false;
     }
     
@@ -169,16 +143,21 @@ class MeditationRecord
         // Required data
         if (   ! $this->start_time
             || ! $this->duration
-            || ! $this->pdo
         ) {
             $this->error = true;
             $this->message = 'MISSING DATA';
             return false;
         }
         
+        if ( ! $this->isChanged() ) {
+            return true;
+        }
+        
+        $pdo = DB::getInstance();
+        
         $q = "UPDATE meditation_records SET start_time=:start_time, duration=:duration, date_modified=NOW() WHERE id=:id LIMIT 1";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         
         $stmt->bindParam(':start_time', $this->start_time);
         $stmt->bindParam(':duration', $this->duration);
@@ -186,7 +165,7 @@ class MeditationRecord
         
         if ( ! $stmt->execute() ) {
             $this->message = 'NOT EXECUTED';
-            echo var_dump($stmt->errorInfo());
+            //echo var_dump($stmt->errorInfo());
             return false;
         }
         
@@ -202,13 +181,19 @@ class MeditationRecord
      */
     public function delete()
     {
-        if ( ! $this->id || ! $this->pdo ) {
+        if ( ! $this->id ) {
             return false;
         }
         
+        if ( $this->isDeleted() ) {
+            return true;
+        }
+        
+        $pdo = DB::getInstance();
+        
         $q = "UPDATE meditation_records SET status=0, date_modified=NOW() WHERE id=:id LIMIT 1";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         
         $stmt->bindParam(':id', $this->id);
         
@@ -223,13 +208,19 @@ class MeditationRecord
      */
     public function restore()
     {
-        if ( ! $this->id || ! $this->pdo ) {
+        if ( ! $this->id ) {
             return false;
         }
         
+        if ( ! $this->isDeleted() ) {
+            return true;
+        }
+        
+        $pdo = DB::getInstance();
+        
         $q = "UPDATE meditation_records SET status=1, date_modified=NOW() WHERE id=:id LIMIT 1";
         
-        $stmt = $this->pdo->prepare($q);
+        $stmt = $pdo->prepare($q);
         
         $stmt->bindParam(':id', $this->id);
         

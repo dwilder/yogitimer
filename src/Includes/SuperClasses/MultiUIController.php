@@ -13,14 +13,10 @@ abstract class MultiUIController extends UIController
 	 */
 	public function respond()
 	{
-        $this->setModuleName();
-		$this->setModel();
-		$this->setView();
-		
 		$this->setTemplate();
-		$this->template->setGuid( $this->guid );
+		$this->template->setGuid( $this->request['guid'] );
 		$this->template->setContent( $this->view->getContent() );
 	
-		return $this->template->request();	
+		echo $this->template->request();	
 	}	
 }

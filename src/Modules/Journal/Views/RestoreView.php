@@ -17,7 +17,7 @@ class RestoreView extends View
 	/*
 	 * Set the content
 	 */
-	protected function setContent()
+	public function run()
 	{
 		if ( $this->notFound() ) {
 		    $this->setNotFoundContent();

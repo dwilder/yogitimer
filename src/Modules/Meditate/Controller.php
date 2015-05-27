@@ -17,40 +17,22 @@ use Src\Modules\Meditate\Views\MeditateView;
 class Controller extends UIController
 {
 	/*
-	 * Store model and view objects
-	 */
-	private $model;
-	private $view;
-	
-	/*
 	 * Set the content
 	 */
-	public function setContent()
+	public function setClass()
 	{
-		$this->model = new MeditateModel;
-		$this->view = new MeditateView;
+		$this->class = 'Meditate';
 	}
 	
 	/*
 	 * Return the request
 	 */
-	public function request()
+	public function respond()
 	{
-		$this->setContent();
-		
-		$this->setTemplate();
-		$this->template->setGuid( $this->guid );
+		$this->template->setGuid( $this->request['guid'] );
 		$this->template->setTitle( 'Meditation Timer' );
 		$this->template->setContent( $this->view->getContent() );
 		
-		return $this->template->request();	
+		echo $this->template->request();	
 	}
-    
-    /*
-     * Set the module name
-     */
-    protected function setModuleName()
-    {
-        $this->module_name = 'Meditate';
-    }
 }

@@ -1,26 +1,14 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
-class JournalView
+use Src\Includes\SuperClasses\View;
+
+class JournalView extends View
 {
-	/*
-	 * Store the data
-	 */
-	private $data = array();
-	
-	/*
-	 * Set the data
-	 */
-	public function setData( array $data )
-	{
-		$this->data = $data;
-		//echo var_dump( $data );
-	}
-	
 	/*
 	 * Get the HTML content
 	 */
-	public function getContent()
+	public function run()
 	{
 		$start = '<div class="journal-entries">';
 		$end = '</div>';
@@ -29,7 +17,7 @@ class JournalView
 		
 		$entries = $this->getEntriesHtml();
 		
-		return $start . $header . $entries . $end;
+		$this->content = $start . $header . $entries . $end;
 	}
 	
 	/*
@@ -60,10 +48,24 @@ class JournalView
 		if ( !empty( $this->data ) ) {
 			$count = count( $this->data );
 			for ( $i = 0; $i < $count; $i++ ) {
-				// Check for a new month
-				$html .= ( $this->isNewMonth( $this->data[$i]['start_time'], $this->data[$i-1]['start_time'] ) ) ? $this->getMonthBannerHtml( $this->data[$i]['start_time'] ) : '';
-				// Parse the start time.
-				$html .= $this->getEntryHtml( $this->data[$i], $this->data[$i+1]['start_time'] );
+                
+                if ( $i == 0 ) {
+                    // Always start with a new month
+                    $html .= $this->getMonthBannerHtml( $this->data[$i]['start_time'] );
+                }
+                else {
+    				// Check for a new month
+    				$html .= ( $this->isNewMonth( $this->data[$i]['start_time'], $this->data[$i-1]['start_time'] ) ) ? $this->getMonthBannerHtml( $this->data[$i]['start_time'] ) : '';
+                }
+                
+                if ( $i + 1 == $count ) {
+                    // Always end the run at the end
+    				$html .= $this->getEntryHtml( $this->data[$i], null );
+                }
+                else {
+    				// Create html for an entry
+    				$html .= $this->getEntryHtml( $this->data[$i], $this->data[$i+1]['start_time'] );
+                }
 			}
 		}
 		else {

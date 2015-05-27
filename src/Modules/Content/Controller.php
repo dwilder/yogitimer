@@ -23,21 +23,28 @@ class Controller extends UIController
 	{
 		$this->ContentFactory = new ContentFactory;
 	}
-	
+    
+    /*
+     * Set the class name for the model and view
+     */
+    protected function setClass() {}
+    protected function setModel() {}
+    protected function setView() {}
+        
 	/*
 	 * Return the requested data
 	 */
-	public function request( )
+	public function respond( )
 	{
-		$content = $this->ContentFactory->getContent( $this->guid );
+		$content = $this->ContentFactory->getContent( $this->request['guid'] );
 		
 		if ( !$content ) {
 			$content = (new NotFound)->getContent();
 		}
 
 		$this->setTemplate();
-		$this->template->setGuid( $this->guid );
+		$this->template->setGuid( $this->request['guid'] );
 		$this->template->setContent( $content );
-		return $this->template->request();
+		echo $this->template->request();
 	}
 }

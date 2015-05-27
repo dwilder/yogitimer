@@ -1,22 +1,18 @@
 <?php
 namespace Src\Modules\Journal\Views;
 
+use Src\Includes\SuperClasses\View;
 use Src\Includes\Form\Form;
 
 /*
  * Creates the form for the Add and Edit views
  */
-class AbstractActionForm
+class AbstractActionForm extends View
 {
 	/*
 	 * Store the title
 	 */
 	protected $title;
-	
-	/*
-	 * Store the data
-	 */
-	protected $data = array();
 	
 	/*
 	 * Store the form
@@ -29,27 +25,17 @@ class AbstractActionForm
 	protected $content;
 	
 	/*
-	 * Set data from the model
-	 */
-	public function setData( array $data = array() )
-	{
-		$this->data = $data;
-	}
-	
-	/*
 	 * Get the content
 	 */
 	public function getContent()
 	{
-		$this->setContent();
-		
 		return $this->content;
 	}
 	
 	/*
 	 * Set the content
 	 */
-	protected function setContent()
+	public function run()
 	{
 		$content = $this->getTitle();
         

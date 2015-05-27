@@ -31,7 +31,7 @@ class DeleteModel extends Model
      */
     protected function isRecordDeleted() {
         if ( $this->record->isDeleted() ) {
-            $this->redirect('/journal/restore/' . $this->record->get('id'));
+            $this->redirect('journal/restore/' . $this->record->get('id'));
         }
     }
     
@@ -47,6 +47,6 @@ class DeleteModel extends Model
         }
     
         // Success!!
-        $this->redirect( '/journal/restore/' . $this->record->get('id') );
+        $this->redirect( 'journal/restore/' . $this->record->get('id') );
     }
 }

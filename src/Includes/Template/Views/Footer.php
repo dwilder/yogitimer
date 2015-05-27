@@ -1,8 +1,10 @@
 <?php
 namespace Src\Includes\Template\Views;
 
+use Src\Config\Config;
+
 /*
- * Header class returns the HTML footer
+ * Footer class returns the HTML footer
  */
 
 class Footer
@@ -12,6 +14,8 @@ class Footer
 	 */
 	public function getTemplate()
 	{
+        $config = Config::getInstance();
+        $url = $config->get('url');
 		$year = date('Y');
 		
 		$html = <<<EOT
@@ -24,7 +28,7 @@ class Footer
 			
 				{colophonmenu}
 				
-				<p class="copyright">&copy $year <a href="http://meditate.io">Meditate.io</a></p>
+				<p class="copyright">&copy $year <a href="http://$url">$url</a></p>
 				
 			</div>
 			

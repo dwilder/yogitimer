@@ -1,6 +1,7 @@
 <?php
 namespace Src\Includes\Template\Models;
 
+use Src\Config\Config;
 use Src\Includes\User\User;
 
 class HeaderMenu
@@ -36,11 +37,13 @@ class HeaderMenu
 	 */
 	public function getMenu()
 	{
+        $config = Config::getInstance();
+        
 		$html = '
 			<nav class="header-navigation">
 			';
 		
-		$html .= $this->buildTitle( 'Meditate' );
+		$html .= $this->buildTitle( $config->get('sitename') );
         
 		$user = User::getInstance();
         

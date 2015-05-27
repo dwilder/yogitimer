@@ -15,6 +15,11 @@ class AddModel extends Model
     protected $record;
     
     /*
+     * Store an error
+     */
+    protected $error = false;
+    
+    /*
      * Run
      */
     public function run()
@@ -53,10 +58,10 @@ class AddModel extends Model
     protected function setDefaults()
     {
         $time = time() - (60 * 60);
-        if ( ! $this->data['date'] ) {
+        if ( ! isset( $this->data['date'] ) ) {
             $this->data['date'] = date('d m Y', $time);
         }
-        if ( ! $this->data['time'] ) {
+        if ( ! isset( $this->data['time'] ) ) {
             $this->data['time'] = date('g:i a', $time);
         }
     }

@@ -28,7 +28,6 @@ trait tSetRecord
         $this->data['id'] = preg_replace('/[^0-9]/', '', $_GET['mid'] );
         
         $this->record->set('id', $this->data['id']);
-        $this->record->setPDO( $this->pdo );
         if ( ! $this->record->read() ) {
             $this->error = true;
             $this->data['status'] = 'NOT FOUND';

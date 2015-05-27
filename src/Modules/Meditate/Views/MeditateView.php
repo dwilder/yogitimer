@@ -16,15 +16,13 @@ class MeditateView extends View
 	 */
 	public function getContent()
 	{
-		$this->setContent();
-		
 		return $this->content;
 	}
 	
 	/*
 	 * Build the interface
 	 */
-	public function setContent()
+	public function run()
 	{
 		$content = $this->getTitle();
 		$content .= $this->getHelp();
