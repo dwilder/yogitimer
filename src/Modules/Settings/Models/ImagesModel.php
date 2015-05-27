@@ -1,33 +1,18 @@
 <?php
 namespace Src\Modules\Settings\Models;
 
-use Src\Includes\Form\Form;
+use Src\Includes\SuperClasses\Model;
 
-class ImagesModel
+class ImagesModel extends Model
 {	
-	/*
-	 * Store user data
-	 */
-	protected $data = array();
-	
 	/*
 	 * Set the data
 	 */
-	public function setData()
+	public function run()
 	{
 		$this->data = array(
 			'profile_image' => '/assets/img/profile_placeholder.jpg',
-			'background_image' => 'assets/img/profile_background.jpg'
+			'background_image' => '/assets/img/profile_background.jpg'
 		);
-	}
-	
-	/*
-	 * Return the user data
-	 */
-	public function getData()
-	{
-		$this->setData();
-		
-		return $this->data;
 	}
 }

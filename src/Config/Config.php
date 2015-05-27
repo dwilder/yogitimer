@@ -33,7 +33,7 @@ class Config
     /*
      * Upload directories
      */
-    private $upload_dir = 'uploads_2015';
+    private $upload_dir = 'uploads_meditate';
     
     /*
      * Stripe keys

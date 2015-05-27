@@ -1,6 +1,7 @@
 <?php
 namespace Src\Includes\Data;
 
+use Src\Includes\Database\DB;
 /*
  * The purpose of this trait is to determine if a value already exists in a database table.
  */
@@ -10,21 +11,17 @@ class DatabaseValue
 	/*
 	 * Store a reference to the database
 	 */
-	protected $pdo;
-	
-	/*
-	 * Set the database
-	 */
-	public function setDatabase( PDO $pdo )
-	{
-		$this->pdo = $pdo;
-	}
+	protected $pdo = null;
 	
 	/*
 	 * Lookup the table, column, and value
 	 */
 	public function isUnique( $table, $column, $value )
 	{
+        if ( ! $this->pdo ) {
+            $this->pdo = DB::getInstance();
+        }
+        
 		$q = "SELECT id FROM $table WHERE $column = :column";
 		$stmt = $this->pdo->prepare($q);
 		$stmt->bindValue(':column', $value);
