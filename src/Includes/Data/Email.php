@@ -27,8 +27,16 @@ class Email
 	 */
 	public function __construct( $value = null )
 	{
-		$this->value = trim($value);
+		$this->value = trim( $value );
 	}
+    
+    /*
+     * Set the value
+     */
+    public function setValue( $value )
+    {
+        $this->value = trim( $value );
+    }
 	
 	/*
 	 * Test the value
