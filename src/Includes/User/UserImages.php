@@ -1,92 +1,71 @@
 <?php
 namespace Src\Includes\User;
 
-/*
- * Looks up images for a single user.
- * Creates and returns UserImage objects for each user image
- */
-
 class UserImages
 {
     /*
-     * Store UserImage objects in an array
+     * User Image data elements
      */
-    protected $images = array();
+    protected $id = null;
+    protected $user_id = null;
+    protected $profile = null;
+    protected $banner = null;
+    protected $date_added = null;
+    protected $date_modified = null;
     
     /*
-     * Store PDO
+     * Set data element
      */
-    protected $pdo = null;
-        
-    /*
-     * Set PDO
-     */
-    public function setPDO( PDO $pdo )
+    public function set( $key, $value )
     {
-        $this->pdo = $pdo;
+        $this->$key = $value;
     }
     
     /*
-     * Get user images from the DB based on user id
+     * Get a data element
      */
-    public function setImages( $user_id )
+    public function get( $key )
     {
-        // Look in the database
-        if ( $this->pdo ) {
-            $q = "SELECT * FROM user_images WHERE user_id=:user_id";
-            
-            $stmt = $this->pdo->prepare($q);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            if ( $stmt->execute ) {
-                $stmt->fetchAll(PDO::FETCH_CLASS, 'UserImage');
-            }
+        if ( isset( $this->$key ) ) {
+            return $this->$key;
         }
-        
-        // Check if there is a profile image
-        if ( ! $this->testForImage('profile') ) {
-            $this->setDefaultImage( 'profile' );
-        }
-        
-        // Check if there is a background image
-        if ( ! $this->testForImage('background') ) {
-            $this->setDefaultImage( 'background' );
-        }
+        return null;
     }
-    
-    protected function testForImage( $type )
-    {
-        if ( ! empty( $this->images ) ) {
-            foreach ( $this->images as $image ) {
-                if ( $image->get( 'image_type' ) == $type ) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    protected function setDefaultImage( $type )
-    {
-        $image = new UserImage;
-        $image->set('image_type', $type);
-        $this->images[] = $image;
-    }
-    
     /*
-     * Return a user image of a particular type
+     * Return the HTML for display
      */
     public function getImage( $type )
     {
-        if ( empty( $this->images ) ) {
-            $this->setImages;
+        if ( ! $type ) {
+            $type = 'profile';
         }
+        // Path to uploads directory
+        $dir = '/uploads/';
         
-        foreach ( $this->images as $image ) {
-            if ( $image->get( 'image_type') == $type ) {
-                return $image;
-            }
+        // Path to default image
+        $default = '/assets/images/user_' . $this->image_type . '.jpg';
+        
+        $ground = '<div class="user-image-' . $this->image_type . '">';
+        $ground .= '<img src="';
+        
+        $path = '';
+        if ( $this->hash && $this->extension ) {
+            $path .= $dir;
+            $path .= $this->hash . '.' . $this->extension;
+        } else {
+            $path .= $default;
         }
+            
+        $fruition = '" alt="' . $this->image_type . ' image" /></div>';
+
+        return $ground . $path . $fruition;
+    }
+    
+    /*
+     * Test if the image exists
+     */
+    protected function doesFileExist()
+    {
         
-        return false;
     }
 }
