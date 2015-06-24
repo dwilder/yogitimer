@@ -42,12 +42,9 @@ class DeleteView extends View
 		$content .= $this->data['long_date'];
 		$content .= '</b>?</p>';
 		
-		$this->Form = new Form;
+		$this->form = new Form;
 		$this->buildForm();
-		$content .= $this->Form->getHtml();
-		
-		// Add the cancel link
-		$content .= $this->cancelLink();
+		$content .= $this->form->getHtml();
 		
 		$this->content = $content;
 	}
@@ -65,15 +62,18 @@ class DeleteView extends View
 	 */
 	protected function buildForm()
 	{	
-		$mid = $this->Form->newInput( 'hidden' );
+		$mid = $this->form->newInput( 'hidden' );
 		$mid->set( 'name', 'mid' );
 		$mid->set( 'id', 'mid' );
 		$mid->set( 'value', $this->data['id'] );
 		
-		$submit = $this->Form->newInput( 'submit' );
+		$submit = $this->form->newInput( 'submit' );
 		$submit->set( 'name', 'submit' );
 		$submit->set( 'id', 'submit' );
 		$submit->set( 'value', 'Delete' );
+        
+        $cancel = $this->form->newHtml( 'p', '<a href="/journal/edit/' . $this->data['id'] . '">Cancel</a>' );
+        $cancel->set( 'class', 'form-link-cancel' );
 	}
 	
 	/*

@@ -50,9 +50,6 @@ class AbstractActionForm extends View
 		$this->buildForm();
 		$content .= $this->form->getHtml();
 		
-		// Add the cancel link
-		$content .= $this->cancelLink();
-		
 		// Add the delete link
 		if ( isset( $this->data['id'] ) ) {
 			$content .= $this->deleteLink();
@@ -125,6 +122,9 @@ class AbstractActionForm extends View
 		$submit->set( 'name', 'submit' );
 		$submit->set( 'id', 'submit' );
 		$submit->set( 'value', 'Save' );
+        
+        $cancel = $this->form->newHtml( 'p', '<a href="/journal">Cancel</a>' );
+        $cancel->set( 'class', 'form-link-cancel' );
 	}
 	
 	/*

@@ -116,7 +116,7 @@ class JournalView extends View
 		
 		$path .= '<a href="/journal/edit/' . $current_data['id'] . '">';
 		$path .= '<span class="journal-entry-date">' . date( 'D', $ts ) . ' ';
-		$path .= date( 'j', $ts ) . '</span> ';
+		$path .= date( 'j', $ts ) . '</span>, ';
 		$path .= '<span class="journal-entry-time">' . date( 'g:ia', $ts ) . '</span> ';
 		$path .= '<span class="journal-entry-duration">' . $this->formatDuration( $current_data['duration'] ) . '</span>';
 		$path .= '</a>';
@@ -178,16 +178,16 @@ class JournalView extends View
 		
 		// Hours
 		if ( $hours == 1 ) {
-			$string .= '1 Hour ';
+			$string .= '1 hr ';
 		} elseif ( $hours > 1 ) {
-			$string .= $hours . ' Hours ';
+			$string .= $hours . ' hrs ';
 		}
 		
 		// Minutes
 		if ( $minutes == 1 ) {
-			$string .= '1 Minute';
+			$string .= '1 min';
 		} elseif ( $minutes > 1 ) {
-			$string .= $minutes . ' Minutes';
+			$string .= $minutes . ' min';
 		}
 		
 		return $string;

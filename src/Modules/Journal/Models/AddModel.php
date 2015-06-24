@@ -49,7 +49,7 @@ class AddModel extends Model
         }
     
         // Success!!
-        $this->redirect('/journal/edit/' . $this->record->get('id'));
+        $this->redirect('journal/edit/' . $this->record->get('id'));
     }
     
     /*
