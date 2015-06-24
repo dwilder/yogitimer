@@ -9,7 +9,7 @@ class LoginView extends View
 	/*
 	 * Set the title
 	 */
-	protected $title = 'Log In';
+	protected $title = 'Login';
 	
 	/*
 	 * Store the content
