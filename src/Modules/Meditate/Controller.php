@@ -31,6 +31,7 @@ class Controller extends UIController
 	{
 		$this->template->setGuid( $this->request['guid'] );
 		$this->template->setTitle( 'Meditation Timer' );
+        $this->template->setScript( 'meditation_timer.js' );
 		$this->template->setContent( $this->view->getContent() );
 		
 		echo $this->template->request();	

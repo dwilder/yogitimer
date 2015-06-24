@@ -63,18 +63,26 @@ class MeditateView extends View
 	{
 		$preparation = $this->form->newInput( 'select' );
 		$preparation->setLabel( 'Preparation' );
+		$preparation->set( 'name', 'preparation' );
+		$preparation->set( 'id', 'preparation' );
 		$preparation->setOptions( $this->preparationTimeOptions() );
 
 		$meditation = $this->form->newInput( 'select' );
 		$meditation->setLabel( 'Meditation' );
+		$meditation->set( 'name', 'meditation' );
+		$meditation->set( 'id', 'meditation' );
 		$meditation->setOptions( $this->meditationTimeOptions() );
 
 		$cooldown = $this->form->newInput( 'select' );
 		$cooldown->setLabel( 'Cool Down' );
+		$cooldown->set( 'name', 'cooldown' );
+		$cooldown->set( 'id', 'cooldown' );
 		$cooldown->setOptions( $this->cooldownTimeOptions() );
 		
 		$gong = $this->form->newInput( 'select' );
 		$gong->setLabel( 'Gong' );
+		$gong->set( 'name', 'gong' );
+		$gong->set( 'id', 'gong' );
 		$gong->setOptions( $this->gongOptions() );
 		
 		$begin = $this->form->newInput( 'submit' );
