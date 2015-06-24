@@ -1,6 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+RewriteRule ^profile_image/([^/\.]+)/([^/]+)/?$ /image.php?type=users&dir=$1&file=$2
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
