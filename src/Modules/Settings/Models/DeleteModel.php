@@ -11,7 +11,9 @@ class DeleteModel extends Model
 	 */
 	public function run()
 	{
-		$this->deleteUser();
+        if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    		$this->deleteUser();
+        }
 	}
     
     /*

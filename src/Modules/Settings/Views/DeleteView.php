@@ -29,8 +29,6 @@ class DeleteView extends View
 		$this->buildForm();
 		$content .= $this->form->getHTML();
 		
-		$content .= $this->cancelLink();
-		
 		$this->content = $content;
 	}
 	
@@ -51,6 +49,9 @@ class DeleteView extends View
 		$delete->set( 'name', 'submit' );
 		$delete->set( 'id', 'submit' );
 		$delete->set( 'value', 'Delete' );
+        
+        $cancel = $this->form->newHtml( 'p', '<a href="/settings">Cancel</a>' );
+        $cancel->set( 'class', 'form-link-cancel' );
 	}
 	
 	/*

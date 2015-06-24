@@ -26,11 +26,9 @@ class ImagesView extends View
 		$content .= '<p>You can upload a profile photo and a background photo.</p>';
 		
 		$this->form = new Form;
+        $this->form->enableFileUploading();
 		$this->buildForm();
 		$content .= $this->form->getHTML();
-		
-		$content .= $this->cancelLink();
-		$content .= $this->deleteLink();
 		
 		$this->content = $content;
 	}
@@ -53,19 +51,22 @@ class ImagesView extends View
 		$profile->set( 'name', 'profile' );
 		$profile->set( 'id', 'profile' );
 		
-		$profile_photo = $this->form->newHtml( 'img', $this->data['profile_image'] );
+		$profile_photo = $this->form->newHtml( 'img', $this->data['profile'] );
 
-		$background = $this->form->newInput( 'file' );
-		$background->setLabel( 'Background Photo' );
-		$background->set( 'name', 'background_image' );
-		$background->set( 'id', 'background_image' );
+		$banner = $this->form->newInput( 'file' );
+		$banner->setLabel( 'Banner Photo' );
+		$banner->set( 'name', 'banner' );
+		$banner->set( 'id', 'banner' );
 		
-		$background_photo = $this->form->newHtml( 'img', $this->data['background_image'] );
+		$banner_photo = $this->form->newHtml( 'img', $this->data['banner'] );
 		
 		$save = $this->form->newInput( 'submit' );
 		$save->set( 'name', 'submit' );
 		$save->set( 'id', 'submit' );
 		$save->set( 'value', 'Save Changes' );
+        
+        $cancel = $this->form->newHtml( 'p', '<a href="/settings/images">Cancel</a>' );
+        $cancel->set( 'class', 'form-link-cancel' );
 	}
 	
 	/*

@@ -31,8 +31,6 @@ class PasswordView extends View
 		$this->buildForm();
 		$content .= $this->form->getHTML();
 		
-		$content .= $this->cancelLink();
-		
 		$this->content = $content;
 	}
 	
@@ -71,6 +69,9 @@ class PasswordView extends View
 		$save->set( 'name', 'submit' );
 		$save->set( 'id', 'submit' );
 		$save->set( 'value', 'Save Changes' );
+        
+        $cancel = $this->form->newHtml( 'p', '<a href="/settings/password">Cancel</a>' );
+        $cancel->set( 'class', 'form-link-cancel' );
 	}
     
     /*
