@@ -17,7 +17,7 @@ class BlockView
 	{
 		$start = '
 			<div class="index-block">
-				<h2>' . $title . '</h2>
+				<h2><span>' . $title . '</span></h2>
 				';
 				
 		$end = '

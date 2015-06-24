@@ -57,6 +57,7 @@ class Controller extends UIController
 		$content .= $this->getBlock( 'join' );
 
 		$this->template->setContent( $content );
+		$this->template->setGuid( 'index' );
 		
 		echo $this->template->request();
 	}

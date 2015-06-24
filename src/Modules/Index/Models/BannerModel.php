@@ -19,7 +19,8 @@ class BannerModel
 	 */
 	public function __construct()
 	{
-		$this->image = 'indexBannerImage.jpg';
+		//$this->image = 'indexBannerImage.jpg';
+		$this->image = 'dial.png';
 		$this->title = "Meditation Timer and Journal";
 		$this->content = "meditate.io is a simple meditation timer and journal.";
 		$this->action = array(

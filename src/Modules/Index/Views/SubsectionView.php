@@ -12,7 +12,9 @@ class SubsectionView
 		<div class="index-block-subsection">
 		
 			<div class="index-block-subsection-image">
-				<img src="/assets/images/$image" />
+                <div class="index-block-subsection-image-inner">
+    				<img src="/assets/img/content/$image" />
+                </div>
 			</div>
 		
 			<p>$content</p>

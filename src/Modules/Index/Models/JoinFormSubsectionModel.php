@@ -9,7 +9,9 @@ class JoinFormSubsectionModel extends AbstractSubsectionModel
 	 * Set default data
 	 */
 	public function setData() {
-		$this->image = 'indexJoinForm.jpg';
-		$this->content = "Create an account to keep track of your meditations.";
+		//$this->image = 'indexJoinForm.jpg';
+		$this->image = 'index_save.png';
+		$this->content = "Your meditations are automatically saved when you sign
+in.";
 	}
 }
