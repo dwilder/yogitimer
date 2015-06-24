@@ -1,11 +1,14 @@
 <?php
 namespace Src\Includes\User;
 
+use Src\Includes\SuperClasses\AbstractCrud;
+use Src\Config\Config;
 use Src\Includes\Database\DB;
 use Src\Includes\Session\Session;
+use Src\Includes\User\UserImages;
 use Src\Includes\User\UserRoles;
 
-class User
+class User extends AbstractCrud
 {
     /*
      * Store the instance of itself
@@ -22,6 +25,7 @@ class User
     protected $pass = null;
     protected $activation_key = null;
     protected $status = null;
+    protected $level = 'beginner';
     protected $directory = null;
     protected $date_added = null;
     protected $date_modified = null;
@@ -36,13 +40,14 @@ class User
     /*
      * User images
      */
-    protected $profile_image = null;
-    protected $background_image = null;
+    protected $images = null;
     
     /*
      * Prevent duplicates
      */
-    private function __construct() {}
+    private function __construct() {
+        $this->images = new UserImages();
+    }
     private function __clone() {}
     
     /*
@@ -57,18 +62,46 @@ class User
     }
     
     /*
-     * Getter and setter
+     * Set an image name
      */
-    public function set( $key, $value = null )
+    public function setImage( $type, $image )
     {
-        $this->$key = $value;
+        $this->images->set( $type, $image );
     }
-    public function get( $key )
+    
+    /*
+     * Get an image
+     */
+    public function getImage( $type = null )
     {
-        if ( $this->$key ) {
-            return $this->$key;
+        switch ( $type ) {
+            case 'banner':
+                return $this->getImagePath('banner');
+                break;
+            case 'profile':
+            default:
+                return $this->getImagePath('profile');
+                break;
         }
-        return null;
+    }
+    
+    /*
+     * Return a specific image path
+     */
+    protected function getImagePath( $type )
+    {
+        if ( ! $this->images || ! $this->images->get( $type ) ) {
+            return '/assets/img/users/' . $type . '.jpg';
+        }
+        return '/profile_image/' . $this->directory . '/' . $this->images->get( $type );
+    }
+    
+    /*
+     * Update images
+     */
+    public function updateImages()
+    {
+        return $this->images->update();
     }
     
     /*
@@ -103,19 +136,21 @@ class User
 			UTC_TIMESTAMP()
 		)';
 	
-		$stmt = $pdo->prepare($q);
+		$sh = $pdo->prepare($q);
 		
-		$stmt->bindValue(':username', $this->username, \PDO::PARAM_STR);
-		$stmt->bindValue(':email', $this->email, \PDO::PARAM_STR);
-		$stmt->bindValue(':registered_email', $this->email, \PDO::PARAM_STR);
-		$stmt->bindValue(':pass', $this->pass, \PDO::PARAM_STR);
-		$stmt->bindValue(':activation_key', $this->activation_key, \PDO::PARAM_STR);
-		$stmt->bindValue(':status', $this->status, \PDO::PARAM_INT);
-		$stmt->bindValue(':directory', $this->directory, \PDO::PARAM_STR);
+		$sh->bindValue(':username', $this->username, \PDO::PARAM_STR);
+		$sh->bindValue(':email', $this->email, \PDO::PARAM_STR);
+		$sh->bindValue(':registered_email', $this->email, \PDO::PARAM_STR);
+		$sh->bindValue(':pass', $this->pass, \PDO::PARAM_STR);
+		$sh->bindValue(':activation_key', $this->activation_key, \PDO::PARAM_STR);
+		$sh->bindValue(':status', $this->status, \PDO::PARAM_INT);
+		$sh->bindValue(':directory', $this->directory, \PDO::PARAM_STR);
 		
 		// Check for success and get the ID
-		if ( $stmt->execute() ) {
+		if ( $sh->execute() ) {
 			$this->id = $pdo->lastInsertId();
+            $this->images->set( 'user_id', $this->id );
+            $this->images->create();
             return true;
 		}
 		return false;
@@ -134,17 +169,24 @@ class User
     
         $q = 'SELECT * FROM users WHERE id=:id LIMIT 1';
         
-        $stmt = $pdo->prepare($q);
-        $stmt->bindParam( ':id', $this->id );
+        $sh = $pdo->prepare($q);
+        $sh->bindParam( ':id', $this->id );
+        $sh->execute();
         
-        if ( $stmt->execute() ) {
-            $r = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ( ! $sh->rowCount() == 1 ) {
+            return false;
         }
-        if ( $r ) {
-            foreach ( $r as $k => $v ) {
-                $this->$k = $v;
-            }
+        $this->original = $sh->fetch(\PDO::FETCH_ASSOC);
+        if ( ! $this->original ) {
+            $this->original = array();
+            return false;
         }
+        foreach ( $this->original as $k => $v ) {
+            $this->$k = $v;
+        }
+        
+        $this->images->set('user_id', $this->id);
+        $this->images->read();
         // Get user roles
         $this->setUserRoles();
         
@@ -159,6 +201,11 @@ class User
     {
         if ( ! $this->id ) {
             return false;
+        }
+        
+        if ( ! $this->isChanged() ) {
+            echo 'no change';
+            return true;
         }
         
         $pdo = DB::getInstance();

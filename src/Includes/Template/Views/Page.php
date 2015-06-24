@@ -14,9 +14,11 @@ class Page
 	{
 		$html = <<<EOT
 		<div class="site-content">
+            <div class="site-content-inner">
 	
-			{content}
+    			{content}
 	
+            </div><!-- .site-content-inner -->
 		</div><!-- .content -->
 EOT;
 

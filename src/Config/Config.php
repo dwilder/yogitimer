@@ -31,8 +31,9 @@ class Config
     private $siteemail = 'meditate@davewilder.ca';
     
     /*
-     * Upload directories
+     * Directories
      */
+    private $root_dir = '../src';
     private $upload_dir = 'uploads_meditate';
     
     /*

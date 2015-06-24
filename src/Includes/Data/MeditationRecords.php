@@ -45,4 +45,140 @@ class MeditationRecords
         }
         return false;
     }
+    
+    /*
+     * Return the total time meditated
+     */
+    public function getTotalTime()
+    {
+        $time = 0;
+        foreach ( $this->data as $data ) {
+            $time += $data['duration'];
+        }
+        return $time;
+    }
+    
+    /*
+     * Get recent meditations
+     */
+    public function countDaysWithMeditations( $days )
+    {
+        $diff = $days * 24 * 60 * 60;
+        $now = strtotime('now');
+        $then = $now - $diff;
+        $count = 0;
+        $last = null;
+        
+        foreach ( $this->data as $data ) {
+            $current = $data['start_time'];
+            if ( strtotime( $current ) < $then ) {
+                break;
+            }
+            // Check if last record and the current record were on the same day
+            if ( substr( $current, 0, 10 ) == substr( $last, 0, 10 ) ) {
+                continue;
+            }
+            $last = $current;
+            $count += 1;
+        }
+        return $count;
+    }
+    
+    /*
+     * Get total time for recent meditations
+     */
+    public function getSumOfMeditationTimes( $days )
+    {
+        $diff = $days * 24 * 60 * 60;
+        $now = strtotime('now');
+        $then = $now - $diff;
+        $minutes = 0;
+        
+        foreach ( $this->data as $data ) {
+            $current = $data['start_time'];
+            if ( strtotime( $current ) < $then ) {
+                break;
+            }
+            $minutes += $data['duration'];
+        }
+        return $minutes;
+    }
+    
+    /*
+     * Get the total time for a given year
+     */
+    public function getTotalTimesByYear()
+    {
+        $times = array();
+        
+        foreach ( $this->data as $data ) {
+            $year = substr( $data['start_time'], 0, 4 );
+            if ( ! isset( $times[$year] ) ) {
+                $times[$year] = 0;
+            }
+            $times[$year] += $data['duration'];
+        }
+        
+        return $times;
+    }
+    
+    /*
+     * Get total meditation times per day for twelve months
+     */
+    public function getTotalTimesByDay()
+    {
+        $times = array();
+        $num_days = 0;
+
+        $start_year = date('Y');
+        $start_month = date('m') + 1;
+        if ( $start_month != 12 ) {
+            $start_year--;
+        }
+        
+        $current_year = $start_year;
+        $current_month = $start_month;
+        $last_month = $start_month;
+        $current_day = '01';
+        
+        for ( $i = 0; $i < 12; $i++ ) {
+
+            if ( strlen( $current_month ) == 1 ) {
+                $current_month = '0' . $current_month;
+            }
+            if ( $last_month == 12 && $current_month == 01 ) {
+                $current_year++;
+            }
+            
+            $days = cal_days_in_month( CAL_GREGORIAN, $current_month, $current_year );
+            $num_days += $days;
+            
+            for ( $j = 1; $j <= $days; $j++ ) {
+                $current_day = $j;
+                if ( strlen($current_day) == 1 ) {
+                    $current_day = '0' . $current_day;
+                }
+                $times[$current_year][$current_month][$current_day] = 0;
+            }
+            
+            $last_month = $current_month;
+            $current_month = ( $current_month % 12 ) + 1;
+        }
+
+        $start_date = $start_year . '-' . $start_month . '-01';
+        $then = strtotime( $start_date );
+        
+        foreach ( $this->data as $data ) {
+            if ( strtotime( $data['start_time'] ) < $then ) {
+                break;
+            }
+            $year = substr( $data['start_time'], 0, 4 );
+            $month = substr( $data['start_time'], 5, 2 );
+            $day = substr( $data['start_time'], 8, 2 );
+            
+            $times[$year][$month][$day] += $data['duration'];
+        }
+        
+        return $times;
+    }
 }

@@ -26,7 +26,7 @@ class RandomHash extends AbstractDataValue
      */
     public function set()
     {
-    	$random = rand(1, 1000) + time() + '2yiNKoGzT4=nMQOt|a*b9~6dz~fS8owfDD~tD4=a0oy';
+    	$random = ( rand(1, 1000) + time() ) . '2yiNKoGzT4=nMQOt|a*b9~6dz~fS8owfDD~tD4=a0oy';
     	for ($i = 0; $i < 50; $i += 1) {
     		$random = hash( 'sha1', $random, FALSE );
     	}

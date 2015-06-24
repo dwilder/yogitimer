@@ -95,7 +95,7 @@ class Model
     /*
      * Set guid
      */
-    public function setGuid( $guid = null )
+    public function setGuid( $guid = 'index' )
     {
 		$this->guid = $guid;
     }

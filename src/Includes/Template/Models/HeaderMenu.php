@@ -11,13 +11,18 @@ class HeaderMenu
 	 */
 	private $lists = array(
 		'anonymous' => array(
-			'login' => 'Log In',
+			'login' => 'Login',
 			'signup' => 'Sign Up'
 		),
 		'authenticated' => array(
 			'menu' => 'Menu'
 		)
 	);
+    
+    /*
+     * Is the user logged in?
+     */
+    private $logged_in = false;
 	
 	/*
 	 * Store the guid
@@ -39,15 +44,20 @@ class HeaderMenu
 	{
         $config = Config::getInstance();
         
+        $user = User::getInstance();
+		if ( $user->isSignedIn() ) {
+			$this->logged_in = true;
+		} else {
+			$this->logged_in = false;
+		}
+        
 		$html = '
 			<nav class="header-navigation">
 			';
 		
 		$html .= $this->buildTitle( $config->get('sitename') );
         
-		$user = User::getInstance();
-        
-		if ( $user->isSignedIn() ) {
+		if ( $this->logged_in ) {
 			$html .= $this->buildMenuLink();
 		} else {
 			$html .= $this->buildAnonMenu();
@@ -66,10 +76,16 @@ class HeaderMenu
 	private function buildTitle( $text )
 	{
 		$html = '';
-		if ( !$this->guid ) {
-			return '<h1 class="logo">' . $text . '</h1>';
-		} 
-		return '<p class="logo"><a href="/">' . $text . '</a></p>';
+        $img = '<img src="/assets/img/icons/icon_logo.png" alt="Lotus" />';
+		if ( ! $this->guid ) {
+			return '<h1 class="logo">' . $img . $text . '</h1>';
+		}
+        
+        $url = '/';
+        if ( $this->logged_in ) {
+            $url .= 'profile';
+        }
+		return '<p class="logo"><a href="' . $url . '">' . $img . $text . '</a></p>';
 	}
 	
 	/*
@@ -81,6 +97,7 @@ class HeaderMenu
 		foreach ( $this->lists['anonymous'] as $guid => $text ) {
 			$html .= '<li class="header-navigation-' . $guid . '"><a href="/' . $guid . '">' . $text . '</a></li>';
 		}
+        $html .= '<li class="header-navigation-anonmenu"><a href="#footer-navigation">Menu</a></li>';
 		$html .= '</ul>';
 			
 		return $html;
@@ -91,10 +108,6 @@ class HeaderMenu
 	 */
 	private function buildMenuLink()
 	{
-		$user = User::getInstance();
-        
-		$id = ( $user->isSignedIn() ) ? 'user-navigation' : 'site-navigation';
-		
-		return '<a href="#' . $id . '" class="control nav-banner-menu">Menu</a>';		
+		return '<a href="#user-navigation" class="control header-navigation-menu">Menu</a>';		
 	}
 }

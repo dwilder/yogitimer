@@ -9,10 +9,12 @@ class FooterMenu
 	 * Store the user menu sections and menu items
 	 */
 	private $list = array(
-		'/' => 'Home',
+		'' => 'Home',
 		'about' => 'About',
 		'howto' => 'How To',
-		'contact' => 'Contact'
+		'contact' => 'Contact',
+        'login' => 'Login',
+        'register' => 'Sign Up'
 	);
 	
 	/*
@@ -33,7 +35,7 @@ class FooterMenu
 	private function buildMenu()
 	{
 		$start = '
-		<nav id="footer-navigation" class="footer-navigation"  role="navigation">
+		<nav id="footer-navigation" class="footer-navigation group"  role="navigation">
 			<ul>
 				';
 				
@@ -44,7 +46,7 @@ class FooterMenu
 		
 		$menu = '';	
 		foreach ( $this->list as $guid => $text ) {
-			$menu .= '<li><a href="' . $guid . '">' . $text . '</a></li>';
+			$menu .= '<li class="footer-navigation-' . $guid . '"><a href="/' . $guid . '">' . $text . '</a></li>';
 		}
 		
 		return $start . $menu . $end;

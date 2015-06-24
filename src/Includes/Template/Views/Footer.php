@@ -19,9 +19,9 @@ class Footer
 		$year = date('Y');
 		
 		$html = <<<EOT
-<!DOCTYPE html>
 		<footer class="site-footer">
-		
+            <div class="site-footer-inner">
+            
 			{footermenu}
 			
 			<div class="colophon">
@@ -32,15 +32,14 @@ class Footer
 				
 			</div>
 			
+            </div><!-- .site-footer-inner -->
 		</footer><!-- .site-footer -->
 		
 	</main>
 
-	<div id="site-navigation" class="site-navigation"  role="navigation">
 	
-		{usermenu}
+	{usermenu}
 	
-	</div><!-- .site-navigation -->
 	
 	{scripts}
 

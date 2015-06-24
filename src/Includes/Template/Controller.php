@@ -2,6 +2,7 @@
 namespace Src\Includes\Template;
 
 use Src\Includes\SuperClasses\UIController;
+use Src\Includes\User\User;
 use Src\Includes\Template\Views\Menu;
 use Src\Includes\Template\Views\Header;
 use Src\Includes\Template\Views\Footer;
@@ -66,8 +67,20 @@ class Controller extends UIController
     /*
      * Set the guid
      */
-    public function setGuid( $guid = null ) {
+    public function setGuid( $guid = null )
+    {
+        if ( ! $guid ) {
+            $guid = 'index';
+        }
         $this->guid = $guid;
+    }
+    
+    /*
+     * Set JS
+     */
+    public function setScript( $filename )
+    {
+        $this->scripts[] = $filename;
     }
 	
 	/*
@@ -152,11 +165,17 @@ class Controller extends UIController
 	 */
 	private function replaceTags( $html )
 	{
+        $user = User::getInstance();
 		// Replace scripts
 		$scripts = '';
+        if ( $user->isSignedIn() ) {
+            $scripts .= '<script src="/assets/js/navigation.js"></script>
+                ';
+        }
 		if ( !empty( $this->scripts ) ) {
 			foreach ( $this->scripts as $script ) {
-				$scripts .= '<script src="/assets/js/' . $script . '"></script>' . "/n";
+				$scripts .= '<script src="/assets/js/' . $script . '"></script>
+                    ';
 			}
 		}
 		$html = str_replace( '{scripts}', $scripts, $html );

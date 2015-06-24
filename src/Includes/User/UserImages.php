@@ -1,7 +1,10 @@
 <?php
 namespace Src\Includes\User;
 
-class UserImages
+use Src\Includes\SuperClasses\AbstractCrud;
+use Src\Includes\Database\DB;
+
+class UserImages extends AbstractCrud
 {
     /*
      * User Image data elements
@@ -14,58 +17,130 @@ class UserImages
     protected $date_modified = null;
     
     /*
-     * Set data element
+     * Get an image
      */
-    public function set( $key, $value )
+    public function getImage( $type = null )
     {
-        $this->$key = $value;
+        switch ( $type ) {
+            case 'banner':
+                return $this->banner;
+                break;
+            case 'profile':
+            default:
+                return $this->profile;
+                break;
+        }
     }
     
     /*
-     * Get a data element
+     * Create
      */
-    public function get( $key )
+    public function create()
     {
-        if ( isset( $this->$key ) ) {
-            return $this->$key;
+        if ( ! $this->user_id ) {
+            return false;
         }
-        return null;
-    }
-    /*
-     * Return the HTML for display
-     */
-    public function getImage( $type )
-    {
-        if ( ! $type ) {
-            $type = 'profile';
+        
+        $pdo = DB::getInstance();
+        
+        $q = "INSERT INTO user_images (
+            user_id,
+            profile,
+            banner,
+            date_added
+        ) VALUES (
+            :user_id,
+            :profile,
+            :banner,
+            CURRENT_TIMESTAMP()
+        )";
+        
+        $sh = $pdo->prepare($q);
+        $sh->bindParam(':user_id', $this->user_id );
+        $sh->bindParam(':profile', $this->profile );
+        $sh->bindParam(':banner', $this->banner );
+        
+        $sh->execute();
+        
+        if ( $sh->rowCount() == 1 ) {
+            $this->id = $pdo->lastInsertId();
+            return true;
         }
-        // Path to uploads directory
-        $dir = '/uploads/';
-        
-        // Path to default image
-        $default = '/assets/images/user_' . $this->image_type . '.jpg';
-        
-        $ground = '<div class="user-image-' . $this->image_type . '">';
-        $ground .= '<img src="';
-        
-        $path = '';
-        if ( $this->hash && $this->extension ) {
-            $path .= $dir;
-            $path .= $this->hash . '.' . $this->extension;
-        } else {
-            $path .= $default;
-        }
-            
-        $fruition = '" alt="' . $this->image_type . ' image" /></div>';
-
-        return $ground . $path . $fruition;
+        return false;
     }
     
     /*
-     * Test if the image exists
+     * Read
      */
-    protected function doesFileExist()
+    public function read()
     {
+        if ( ! $this->user_id ) {
+            return false;
+        }
         
+        $pdo = DB::getInstance();
+        
+        $q = "SELECT * FROM user_images WHERE user_id=:user_id";
+        
+        $sh = $pdo->prepare($q);
+        $sh->bindParam(':user_id', $this->user_id );
+        $sh->execute();
+        
+        if ( $sh->rowCount() == 0 ) {
+            $this->create(); // Need to create new table rows for existing users
+            return false;
+        }
+        $this->original = $sh->fetch(\PDO::FETCH_ASSOC);
+        if ( ! $this->original ) {
+            $this->original = array();
+            return false;
+        }
+        foreach ( $this->original as $k => $v ) {
+            $this->$k = $v;
+        }
+        return true;
+    }
+    
+    /*
+     * Update
+     */
+    public function update()
+    {
+        if ( ! $this->user_id ) {
+            return false;
+        }
+        
+        if ( ! $this->isChanged() ) {
+            return true;
+        }
+        
+        $pdo = DB::getInstance();
+        
+        $q = "UPDATE user_images SET
+            profile=:profile,
+            banner=:banner
+            WHERE user_id=:user_id
+            LIMIT 1";
+        
+        $sh = $pdo->prepare($q);
+        $sh->bindParam(':profile', $this->profile );
+        $sh->bindParam(':banner', $this->banner );
+        $sh->bindParam(':user_id', $this->user_id );
+        
+        $sh->execute();
+        
+        if ( $sh->rowCount() == 1 ) {
+            return true;
+        }
+        return false;
+        
+    }
+    
+    /*
+     * Delete
+     */
+    public function delete()
+    {
+        return false;
     }
 }

@@ -48,9 +48,10 @@ class Header
 	<main role="container" id="top" class="container">
 	
 		<header class="site-header">
+            <div class="site-header-inner">
 		
-			{headermenu}
-	
+    			{headermenu}
+            </div><!-- .site-header-inner -->
 		</header><!-- .site-header -->
 EOT;
 

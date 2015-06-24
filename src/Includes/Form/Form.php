@@ -15,9 +15,10 @@ class Form
 	/*
 	 * Store the form attributes
 	 */
-	private $action;
-	private $method;
-	private $id;
+	private $action = null;
+	private $method = 'post';
+	private $id = null;
+	private $enctype = false;
 	
 	/*
 	 * Store the factories
@@ -39,6 +40,14 @@ class Form
 		$this->InputFactory = new InputFactory;
 		$this->HtmlFactory = new HtmlFactory;
 	}
+    
+    /*
+     * Set enctype to true
+     */
+    public function enableFileUploading( $bool = true )
+    {
+        $this->enctype = $bool;
+    }
 	
 	/*
 	 * Pass input requests to the input factory
@@ -68,8 +77,10 @@ class Form
 		$start = '
 			<form';
 		$start .= ( $this->id ) ? ' id="' . $this->id . '"' : '';
-		$start .= ( $this->action ) ? ' action="' . $this->action . '"' : '';
-		$start .= ( $this->method ) ? ' method="' . $this->method . '"' : '';
+        $start .= ' class="group"';
+        $start .= ' action="' . $this->action . '"';
+		$start .= ' method="' . $this->method . '"';
+		$start .= ( $this->enctype ) ? ' enctype="multipart/form-data"' : '';
 		$start .= ">\n";
 		
 		$end = "</form>\n";

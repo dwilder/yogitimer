@@ -10,7 +10,7 @@ class UserMenu
 	 */
 	private $lists = array(
 		'Menu' => array(
-			'profile' => 'Home',
+			'profile' => 'Profile',
 			'meditate' => 'Meditate',
 			'journal' => 'Journal'
 		),
@@ -58,11 +58,11 @@ class UserMenu
 		<div id="user-navigation" class="user-navigation"  role="navigation">
 			<div class="user-navigation-inner">
 			
-				<a href="#top" class="control menu-close-link"><img src="/assets/images/icon_close.png" class="control" alt="Dismiss" /></a>
+				<a href="#top" class="control menu-close-link"><img src="/assets/img/icons/icon_close.png" class="control" alt="Dismiss" /></a>
 				';
 				
 		$end = '
-				<a href="#top" class="control menu-dismiss-link"><img src="/assets/images/icon_close.png" />Dismiss</a>
+				<a href="#top" class="control menu-dismiss-link"><img src="/assets/img/icons/icon_close.png" />Dismiss</a>
 
 			</div>
 		</div><!-- .user-navigation -->
@@ -85,7 +85,7 @@ class UserMenu
 	 */
 	private function buildSubMenu( $title, $menu )
 	{
-		$html = "<h3>$title</h3>";
+		$html = "<h3><img src=\"/assets/img/icons/icon_" . strtolower( $title ) . ".png\" />$title</h3>";
 		$html .= '
 			<nav class="user-navigation-submenu">
 				<ul>
