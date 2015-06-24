@@ -1,0 +1,51 @@
+.banner
+    position: relative
+    padding: 0
+    text-align: center
+    background: $color-b4
+
+.banner-inner
+    position: relative
+    padding: $margin*4 0
+    @media screen and (min-width: $break10 - $margin*2)
+        margin: 0 auto
+        width: $break10
+
+.banner-image
+    position: relative
+    margin: $margin*3 0
+    @media screen and (min-width: $break9)
+        position: absolute
+        left: $margin*4
+        top: $margin*4
+        margin: 0
+    
+    
+.banner-content h2
+    margin: 0 $margin $margin
+    font-size: $font-size*1.125
+    line-height: $line-height
+    @media screen and (min-width: $break1)
+        font-size: $font-size*1.25
+    @media screen and (min-width: $break2)
+        font-size: $font-size*1.5
+    @media screen and (min-width: $break3)
+        font-size: $font-size*1.75
+    @media screen and (min-width: $break4)
+        font-size: $font-size*1.75
+    @media screen and (min-width: $break5)
+        font-size: $font-size*2
+    @media screen and (min-width: $break6)
+        font-size: $font-size*2.25
+    
+    
+.banner-content p
+    margin: $margin $margin $margin*3
+    font-size: $font-size*1.125
+    
+.banner .banner-action
+    display: inline-block
+    margin: 0
+    
+.banner-action a
+    @extend .link-button

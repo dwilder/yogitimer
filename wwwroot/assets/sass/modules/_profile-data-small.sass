@@ -1,0 +1,113 @@
+.profile-data-small
+    float: left
+    box-sizing: border-box
+    width: 50%
+    padding: 0 $margin 0 $margin
+    margin: $margin 0 $margin*2
+    color: $color-b4
+    @media screen and (min-width: $break5)
+        margin: $margin 0 $margin*2
+        padding: 0
+    
+.profile-data-inner
+    position: relative
+    float: left
+    box-sizing: border-box
+    width: 100%
+    margin: 0
+    background: $color-a0
+    
+.profile-data-small h2
+    padding: $margin 0
+    margin: 0
+    line-height: 1em
+    
+.profile-data-small-display
+    position: relative
+    width: 100%
+    height: 0
+    padding: 0 0 100% 0
+    text-align: center
+    background: $color-a3
+    
+.profile-data-small-display > canvas
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 10
+    width: 100%
+    height: 100%
+    background: $color-a0
+    
+.profile-data-small-display > div
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 30
+    width: 100%
+    height: 100%
+    opacity: 0
+    background: transparentize($color-a0, 0.2)
+    
+.profile-data-score
+    margin-top: $margin/4
+    @media screen and (min-width: $break2)
+        margin-top: 30%
+    
+.profile-data-score > span
+    font-size: $font-size*2
+    font-weight: bold
+    @media screen and (min-width: $break2)
+        font-size: $font-size*3
+    @media screen and (min-width: $break4)
+        font-size: $font-size*4
+    
+.profile-data-description
+    position: absolute
+    bottom: 0
+    left: 0
+    margin: 0 $margin $margin
+    font-size: $font-size*.75
+    @media screen and (min-width: $break2)
+        font-size: $font-size
+    
+#profile-momentum
+    padding-right: $margin/2
+    @media screen and (min-width: $break5)
+        padding-right: $margin
+    
+#profile-stability
+    padding-left: $margin/2
+    @media screen and (min-width: $break5)
+        padding-left: $margin
+    
+#profile-momentum .profile-data-inner:hover,
+#profile-stability .profile-data-inner:hover
+    cursor: pointer
+    
+div.profile-data-inspect
+    position: absolute
+    bottom: $margin/2
+    right: $margin/2
+    z-index: 20
+    width: 1em
+    height: 1em
+    padding: $margin*.25
+    color: $color-a3
+    font-family: times, serif
+    font-style: italic
+    line-height: 1em
+    text-align: center
+    border: 1px solid $color-a3
+    border-radius: 50%
+    @media screen and (min-width: $break2)
+        padding: $margin*.35
+        font-size: $font-size*1.125
+    
+.profile-data-inner:hover .profile-data-inspect,
+div.profile-data-inspect:hover
+    cursor: pointer
+    color: $color-a4
+    background: $color-a3
+    border: 1px solid $color-a4

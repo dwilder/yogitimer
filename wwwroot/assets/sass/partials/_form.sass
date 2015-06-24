@@ -1,0 +1,102 @@
+.form-input
+    margin: 0 0 $margin 0
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+input[type=date],
+input[type=time],
+input[type=datetime]
+    display: block
+    box-sizing: border-box
+    width: 100%
+    font-size: $font-size
+    font-family: $font-family
+    padding: $margin/2
+    background: $gray-5
+    border: 1px solid $color-a0
+    border-radius: $border-radius
+    
+input[type=file]
+    display: block
+    margin: $margin 0
+    font-size: $font-size
+    font-family: $font-family
+    
+
+input[type=submit]
+    box-sizing: border-box
+    margin: 0 0 $margin 0
+    padding: $margin/2 $margin
+    width: 100%
+    font-size: $font-size
+    font-weight: $regular
+    font-family: $font-family
+    color: $color-b0
+    background: $color-b4
+    border: 1px solid $color-b0
+    border-radius: $border-radius
+    @media screen and (min-width: $break5)
+        width: auto
+        float: left
+    
+input[type=submit]:hover
+    color: $color-b1
+    background: $color-b0
+    border: 1px solid $color-b1
+    
+input[type=submit]:active
+    color: $color-b1
+    background: $link
+    border: 1px solid $color-b1
+
+select
+    -webkit-appearance: none
+    box-sizing: border-box
+    width: 100%
+    padding: $margin/2
+    color: $active
+    font-size: $font-size
+    font-family: $font-family
+    background: $gray-5
+    border: 1px solid $color-a0
+    border-radius: $border-radius
+
+.form-link-cancel
+    text-align: right
+    @media screen and (min-width: $break5)
+        float: left
+        margin: 1px $margin
+        padding: $margin/2 $margin
+        line-height: 1em
+    
+.form-link-delete
+    margin: $margin*3 0 0 0
+    padding: $margin 0 0 0
+    text-align: center
+    border-top: 1px solid $color-b3
+    
+form img
+    width: 100%
+    height: auto
+    
+.form-success
+    padding: $margin/2 $margin $margin/2 $margin*2.5
+    background: $color-b4 url(//#{$url}/assets/img/icons/icon_success.png) no-repeat $margin $margin*.6
+    background-size: $margin $margin
+    border: 1px solid $color-a0
+    border-radius: $border-radius
+    
+.form-error
+    padding: $margin/2 $margin $margin/2 $margin*2.5
+    background: $color-a4 url(//#{$url}/assets/img/icons/icon_error.png) no-repeat $margin $margin*.6
+    background-size: $margin $margin
+    border-radius: $border-radius
+    
+.form-input-error
+    display: block
+    padding: $margin/2 $margin
+    background: $color-a4
+    border-radius: $border-radius
+    

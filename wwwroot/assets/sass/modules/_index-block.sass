@@ -1,0 +1,132 @@
+.index-block
+    padding: $margin*4 $margin
+    background: $gray-3
+    border-top: 4px solid $gray-5
+    @media screen and (min-width: $break7)
+        padding: $margin*4 $margin*2
+    @media screen and (min-width: $break10 + 4*$margin)
+        width: $break10
+        margin: 0 auto
+        border: 4px solid $gray-5
+        border-bottom: none
+        
+.index-block-inner
+    @media screen and (min-width: $break10 + 4*$margin)
+        width: $break10
+        margin: 0 auto
+    
+.index-block h2
+    position: relative
+    z-index: 100
+    margin: 0 0 $margin*4 0
+    font-size: $font-size*2.25
+    line-height: 0
+    text-align: center
+    
+.index-block h2 span
+    display: inline-block
+    padding: $margin*1.5 $margin*2
+    background: $color-b4
+    border: 2px solid $color-b0
+    border-radius: $border-radius
+    
+.index-block h2:after
+    content: ""
+    display: block
+    position: absolute
+    top: 50%
+    z-index: -10
+    width: 100%
+    height: 2px
+    background: $color-b0
+    
+.index-block-subsection
+    clear: both
+    width: 100%
+    @media screen and (min-width: $break4)
+        float: left
+        
+.index-block-subsection + .index-block-subsection
+    @media screen and (min-width: $break4)
+        margin-bottom: $margin*2
+
+.index-block-subsection p
+    margin: 0 0 $margin*2 0
+    @media screen and (min-width: $break4)
+        box-sizing: border-box
+        padding: $margin 0 0 $margin/2
+        font-size: $font-size*1.25
+    @media screen and (min-width: $break7)
+        padding: $margin 0 0 $margin
+        font-size: $font-size*1.5
+    
+.index-block-subsection + .index-block-subsection p
+    @media screen and (min-width: $break4)
+        padding: $margin $margin/2 0 0
+    @media screen and (min-width: $break7)
+        padding: $margin $margin 0 0
+
+.index-block-subsection-image
+    box-sizing: border-box
+    width: 100%
+    height: auto
+    margin: 0 0 $margin*2 0
+    padding: 0
+    line-height: 0
+    @media screen and (min-width: $break4)
+        float: left
+        width: 50%
+        margin-right: $margin/2
+    @media screen and (min-width: $break7)
+        margin-right: $margin
+    
+.index-block-subsection-image-inner
+    border: 2px solid $color-b0
+    @media screen and (min-width: $break4)
+        margin-right: $margin/2
+    @media screen and (min-width: $break7)
+        margin-right: $margin
+
+.index-block-subsection-image img
+    width: 100%
+    height: auto
+    margin: 0
+    padding: 0
+    line-height: 0
+
+.index-block-subsection + .index-block-subsection .index-block-subsection-image
+    @media screen and (min-width: $break4)
+        float: right
+        margin-right: 0
+        margin-left: $margin/2
+    @media screen and (min-width: $break7)
+        margin-left: $margin
+        
+.index-block-subsection + .index-block-subsection .index-block-subsection-image-inner
+    @media screen and (min-width: $break4)
+        margin-right: 0
+        margin-left: $margin/2
+    @media screen and (min-width: $break7)
+        margin-left: $margin
+
+.index-block-action
+    clear: both
+    position: relative
+    z-index: 100
+    margin: $margin*4 0 0 0
+    font-size: $font-size*1.5
+    text-align: center
+    
+.index-block-action:after
+    content: ""
+    display: block
+    position: absolute
+    top: 50%
+    z-index: -10
+    width: 100%
+    height: 1px
+    background: $color-a0
+
+.index-block-action a
+    @extend .link-button
+    background: $color-b4

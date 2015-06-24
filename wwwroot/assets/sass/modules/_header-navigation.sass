@@ -1,0 +1,70 @@
+.header-navigation
+    line-height: 1em
+    
+.header-navigation h1,
+.header-navigation p
+    margin: 0
+    
+.header-navigation-anon
+    position: absolute
+    top: $margin/2
+    right: $margin
+    
+.header-navigation-anon li
+    float: left
+    margin-left: $margin/2
+    
+.header-navigation-anon li a
+    float: left
+
+.header-navigation a:link,
+.header-navigation a:visited
+    color: $color-a4
+
+.header-navigation a:hover
+    color: $color-a3
+    
+.header-navigation-login
+    display: none
+    padding: $margin/2 $margin
+    @media screen and (min-width: $break3)
+        display: block
+        
+.header-navigation-signup
+    display: none
+    @media screen and (min-width: $break3)
+        display: block
+
+.header-navigation-anonmenu
+    @media screen and (min-width: $break3)
+        display: none
+        
+.header-navigation-signup a,
+.header-navigation-anonmenu a,
+.header-navigation-menu
+    box-sizing: border-box
+    padding: $margin/2 $margin
+    background: $color-b4
+    border: 1px solid $color-b4
+    
+.header-navigation-signup a:link,
+.header-navigation-signup a:visited,
+.header-navigation-anonmenu a:link,
+.header-navigation-anonmenu a:visited,
+a.header-navigation-menu:link,
+a.header-navigation-menu:visited
+    color: $color-a0
+    border-radius: $border-radius
+    
+.header-navigation-signup a:hover,
+.header-navigation-anonmenu a:hover,
+a.header-navigation-menu:hover
+    color: $color-b4
+    background: $color-a3
+    
+    
+.header-navigation-menu
+    @extend .link-button
+    position: absolute
+    top: $margin/2
+    right: $margin/2

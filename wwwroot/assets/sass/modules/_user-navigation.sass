@@ -1,0 +1,145 @@
+.container,
+.user-navigation
+    -webkit-box-sizing: border-box
+    box-sizing: border-box
+    display: block
+    width: 100%
+    min-height: 100%
+    padding: 0
+
+.container
+    background: $gray-4
+    
+.user-navigation
+    background: $color-a0
+
+.user-navigation-inner
+    position: relative
+    padding: $margin/4 0
+    @media screen and (min-width: $break4)
+        margin: 0 auto
+        width: $break4
+    @media screen and (min-width: $break5)
+        width: $break5
+    @media screen and (min-width: $break6)
+        width: (($break6 - 7*$margin)/6 ) * 3 + 6*$margin
+    @media screen and (min-width: $break7)
+        width: (($break7 - 7*$margin)/6 ) * 3 + 6*$margin
+            
+.user-navigation img
+    width: $margin
+    height: $margin
+    margin: 0
+    padding: 0
+    
+.user-navigation h3
+    margin: $margin/4 0
+    padding: $margin/2 $margin
+    color: $color-b1
+    background: transparentize($color-b1, 0.9)
+    
+.user-navigation li a
+    display: block
+    padding: $margin/2 $margin
+    color: $color-b1
+    
+.user-navigation li a:hover
+    background: transparentize($color-b1, 0.8)
+    background: $color-a3
+    
+.menu-close-link
+    display: block
+    position: absolute
+    top: $margin/2
+    right: $margin/2
+    padding: $margin/2
+    margin-top: 1px
+    line-height: 0
+    border: 1px solid transparent
+    border-radius: $border-radius
+
+.menu-dismiss-link
+    position: relative
+    display: block
+    padding: $margin/2 $margin $margin/2 $margin/2 + $margin + $margin/2
+    margin: $margin*2 $margin/2 $margin $margin/2
+    color: $color-b1
+    border: 1px solid $color-b1
+    border-radius: $border-radius
+
+.menu-dismiss-link img
+    position: absolute
+    top: $margin*.6
+    left: $margin/2
+    
+.menu-close-link:link,
+.menu-dismiss-link:link,
+.menu-close-link:visited,
+.menu-dismiss-link:visited
+    color: $color-b1
+    
+.menu-close-link:hover,
+.menu-dismiss-link:hover
+    color: $color-b4
+    background: $color-a3
+    border: 1px solid $color-b2
+    
+    
+.user-navigation h3 img
+    float: left
+    display: block
+    width: $margin
+    height: $margin
+    margin: 1px $margin*.5 0 0
+
+
+@media all and (max-width: $break4)
+
+    .cutsthemustard .container
+        -webkit-transition: all .25s
+        transition: all .25s
+        width: 100%
+        position: absolute
+        z-index: 2
+        top: 0
+        right: 0
+
+    .cutsthemustard .user-navigation
+        width: 75%
+        position: absolute
+        z-index: 1
+        top: 0
+        right: 0
+
+    .cutsthemustard .active .container
+        -webkit-transform: translateX(-75%)
+        -ms-transform: translateX(-75%)
+        transform: translateX(-75%)
+
+
+@media all and (min-width: $break4)
+
+    .cutsthemustard .container
+        width: 100%
+        position: absolute
+        z-index: 2
+        top: 0
+        right: 0
+
+    .cutsthemustard .user-navigation
+        -webkit-transition: all .25s
+        transition: all .25s
+        width: 100%
+        position: absolute
+        z-index: 1
+        top: 0
+        right: 0
+        opacity: 0
+
+    .cutsthemustard .active .container
+        z-index: 0
+
+
+    .cutsthemustard .active .user-navigation
+        opacity: 1
+

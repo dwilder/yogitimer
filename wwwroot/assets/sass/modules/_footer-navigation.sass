@@ -1,0 +1,38 @@
+.footer-navigation
+    margin: $margin 0 0 0
+    padding: 0 0 $margin 0
+    border-bottom: 1px solid $color-b3
+    @media screen and (min-width: $break4)
+        float: left
+        width: 100%
+        margin: 0
+        padding: $margin 0
+    @media screen and (min-width: $break7)
+        padding: $margin*2 0
+    
+.footer-navigation li
+    @media screen and (min-width: $break4)
+        float: left
+        
+.footer-navigation a
+    display: block
+    padding: $margin/4 $margin
+        
+.footer-navigation a:link,
+.footer-navigation a:visited
+    color: $color-a0
+    
+.footer-navigation a:hover
+    color: $color-b4
+    background: $color-a3
+    
+.footer-navigation-login
+    margin-top: $margin
+    
+.footer-navigation-login,
+.footer-navigation-register
+    background: $gray-5
+    border-bottom: 1px solid $color-b4
+    @media screen and (min-width: $break4)
+        margin-top: 0
+        margin-left: $margin/2
