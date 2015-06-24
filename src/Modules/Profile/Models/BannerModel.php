@@ -2,23 +2,11 @@
 namespace Src\Modules\Profile\Models;
 
 use Src\Includes\SuperClasses\Model;
+use Src\Includes\User\User;
+
 
 class BannerModel extends Model
 {
-	/*
-	 * Set the data values
-	 */
-	protected function setData()
-	{
-		// Dummy values
-		$data['username'] = 'username';
-		$data['level'] = 'beginner';
-		$data['profile'] = '/assets/img/profile-image.jpg';
-		$data['background'] = '/assets/img/profile-background.jpg';
-		
-		$this->data = $data;
-	}
-    
     /*
      * Run
      */
@@ -26,4 +14,17 @@ class BannerModel extends Model
     {
         $this->setData();
     }
+    
+	/*
+	 * Set the data values
+	 */
+	protected function setData()
+	{
+		$user = User::getInstance();
+        
+        $this->data['username'] = $user->get('username');
+        $this->data['level'] = $user->get('level');
+        $this->data['profile'] = $user->getImage('profile');
+        $this->data['banner'] = $user->getImage('banner');
+	}
 }

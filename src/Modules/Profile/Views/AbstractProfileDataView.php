@@ -35,8 +35,9 @@ abstract class AbstractProfileDataView
 		$start = '<div';
 		$start .= ' id="profile-' . str_replace( ' ', '' , strtolower( $this->title ) ) . '"';
 		$start .= ' class="profile-data-' . $this->viewSize . '">';
-		
-		$end = '</div>';
+		$start .= '<div class="profile-data-inner">';
+        
+		$end = '</div></div>';
 		
 		$title = '<h2>' . $this->title . '</h2>';
 		

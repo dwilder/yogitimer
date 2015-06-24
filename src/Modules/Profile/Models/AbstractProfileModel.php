@@ -1,20 +1,25 @@
 <?php
 namespace Src\Modules\Profile\Models;
-	
+
 class AbstractProfileModel
 {
 	/*
 	 * Store the values
 	 */
 	protected $data = array();
-	
-	/*
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->setData();
-	}
+    
+    /*
+     * Store the meditation data model
+     */
+    protected $meditation_data_model;
+    
+    /*
+     * Set the meditation data model
+     */
+    public function setMeditationDataModel( $model )
+    {
+        $this->meditation_data_model = $model;
+    }
 	
 	/*
 	 * Return the values
@@ -27,5 +32,5 @@ class AbstractProfileModel
 	/*
 	 * Set the data values
 	 */
-	protected function setData() {}
+	protected function run() {}
 }

@@ -1,37 +1,20 @@
 <?php
 namespace Src\Modules\Profile\Views;
 
-class BannerView
+use Src\Includes\SuperClasses\View;
+
+class BannerView extends View
 {
-	/*
-	 * Store the username and profile images
-	 */
-	protected $username;
-	protected $level;
-	protected $profile;
-	protected $background;
-	
-	/*
-	 * Set the values
-	 */
-	public function setData( $data = array() )
-	{
-		$this->username = $data['username'];
-		$this->level = $data['level'];
-		$this->profile = $data['profile'];
-		$this->background = $data['background'];
-	}
-	
 	/*
 	 * Build the profile banner
 	 */
-	public function getHtml()
+	public function run()
 	{
 		$start = '<div class="profile-banner">';
 		$end = '</div>';
 		
 		$html = '';
-		$html .= $this->getImage( 'background' );
+		$html .= $this->getImage( 'banner' );
 		$html .= $this->getImage( 'profile' );
 		$html .= $this->getUsername();
 		$html .= $this->getLevel();
@@ -45,11 +28,8 @@ class BannerView
 	private function getImage( $image )
 	{
 		$html = '<div class="profile-banner-' . $image . '">';
-		if ( $this->$image ) {
-			$html .= '<img src="' . $this->$image . '" alt="' . $image . ' image" />';
-		} else {
-			$html .= '<p>Failed to get ' . $image . ' image.</p>';
-		}
+			$html .= '<img src="' . $this->data[$image] . '" alt="' . $image . ' image" />';
+		
 		$html .= '</div>';
 			
 		return $html;
@@ -61,7 +41,7 @@ class BannerView
 	private function getUsername()
 	{
 		$html = '<div class="profile-banner-username">';
-		$html .= htmlspecialchars( $this->username );
+		$html .= htmlspecialchars( $this->data['username'] );
 		$html .= '</div>';
 		
 		return $html;
@@ -73,7 +53,7 @@ class BannerView
 	private function getLevel()
 	{
 		$html = '<div class="profile-banner-level">';
-		$html .= $this->level;
+		$html .= $this->data['level'];
 		$html .= '</div>';
 		
 		return $html;

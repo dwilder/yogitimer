@@ -1,9 +1,9 @@
 <?php
 namespace Src\Modules\Profile\Models;
 
-use Src\Includes\SuperClasses\Model;
+use Src\Modules\Profile\Models\AbstractProfileModel;
 
-class TimelineModel extends Model
+class TimelineModel extends AbstractProfileModel
 {	
 	/*
 	 * Set the data values
@@ -21,7 +21,15 @@ class TimelineModel extends Model
      */
     public function run()
     {
-        $this->setData();
+        $this->setDailyMeditationTimes();
+    }
+    
+    /*
+     * Set timeline values for the past 365 days
+     */
+    protected function setDailyMeditationTimes()
+    {
+        $this->data = $this->meditation_data_model->getTotalTimesByDay();
     }
 	
 	private function dummyData()

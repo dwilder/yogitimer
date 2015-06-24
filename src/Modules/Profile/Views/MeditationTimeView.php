@@ -13,9 +13,11 @@ class MeditationTimeView extends AbstractProfileDataView
 	public function buildContent()
 	{
 		$content = '';
+        $content .= '<div class="profile-meditationtime-entries">';
 		foreach ( $this->data as $k => $v ) {
 			$content .= $this->getEntry( $k, $v );
 		}
+        $content .= '</div>';
 		
 		$this->content = $content;
 	}
@@ -25,8 +27,8 @@ class MeditationTimeView extends AbstractProfileDataView
 	 */
 	private function getEntry( $k, $v )
 	{
-		$start = '<div class="profile-meditationtime-entry">';
-		$end = '</div>';
+		$start = '<div class="profile-meditationtime-entry"><div>';
+		$end = '</div></div>';
 		
 		if ( $k == 'total' ) {
 			$header = 'Total Hours';

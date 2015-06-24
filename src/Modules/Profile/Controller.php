@@ -3,6 +3,7 @@ namespace Src\Modules\Profile;
 
 use Src\Includes\SuperClasses\UIController;
 use Src\Includes\User\User;
+use Src\Modules\Profile\Models\MeditationDataModel;
 use Src\Modules\Profile\Models\BannerModel;
 use Src\Modules\Profile\Models\MomentumModel;
 use Src\Modules\Profile\Models\StabilityModel;
@@ -34,6 +35,7 @@ class Controller extends UIController
 	private $StabilityModel;
 	private $TimelineModel;
 	private $MeditationTimeModel;
+    private $meditation_data_model;
 	
 	/*
 	 * Store views
@@ -64,19 +66,25 @@ class Controller extends UIController
 	 */
 	protected function setModel()
 	{
+        $this->meditation_data_model = new MeditationDataModel();
+        
 		$this->BannerModel = new BannerModel;
 		$this->BannerModel->run();
         
 		$this->MomentumModel = new MomentumModel;
+		$this->MomentumModel->setMeditationDataModel( $this->meditation_data_model );
 		$this->MomentumModel->run();
         
 		$this->StabilityModel = new StabilityModel;
+		$this->StabilityModel->setMeditationDataModel( $this->meditation_data_model );
 		$this->StabilityModel->run();
         
 		$this->TimelineModel = new TimelineModel;
+		$this->TimelineModel->setMeditationDataModel( $this->meditation_data_model );
 		$this->TimelineModel->run();
         
 		$this->MeditationTimeModel = new MeditationTimeModel;
+		$this->MeditationTimeModel->setMeditationDataModel( $this->meditation_data_model );
 		$this->MeditationTimeModel->run();
 	}
 	
@@ -107,7 +115,7 @@ class Controller extends UIController
 	protected function getUI()
 	{
 		$html = '';
-		$html .= $this->BannerView->getHtml();
+		$html .= $this->BannerView->run();
 		$html .= $this->MomentumView->getHtml();
 		$html .= $this->StabilityView->getHtml();
 		$html .= $this->TimelineView->getHtml();
@@ -124,6 +132,9 @@ class Controller extends UIController
         if ( isset( $this->request['guid'] ) ) {
     		$this->template->setGuid( $this->request['guid'] );
         }
+        $this->template->setScript('utilities.js');
+        $this->template->setScript('momentum.js');
+        $this->template->setScript('stability.js');
 		$this->template->setContent( $this->getUI() );
 		echo $this->template->request();
 	}
