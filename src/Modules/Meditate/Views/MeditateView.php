@@ -61,28 +61,62 @@ class MeditateView extends View
 	 */
 	protected function buildForm()
 	{
-		$preparation = $this->form->newInput( 'select' );
+		/*$preparation = $this->form->newInput( 'select' );
 		$preparation->setLabel( 'Preparation' );
 		$preparation->set( 'name', 'preparation' );
 		$preparation->set( 'id', 'preparation' );
+		$preparation->set( 'value', $this->data['preparation'] );
 		$preparation->setOptions( $this->preparationTimeOptions() );
-
+        */
+        $i = 0;
+        foreach ( $this->data['sections'] as $array ) {
+            $section[$i]['name'] = $this->form->newInput( 'hidden' );
+            $section[$i]['name']->set( 'name', "sections[$i]['name']" );
+            $section[$i]['name']->set( 'id', "sections[$i]['name']" );
+            $section[$i]['name']->set( 'value', $array['name'] );
+            
+    		$section[$i]['time'] = $this->form->newInput( 'select' );
+    		$section[$i]['time']->setLabel( $array['name'] );
+    		$section[$i]['time']->set( 'name', "sections[$i]['time']" );
+    		$section[$i]['time']->set( 'id', "sections[$i]['time']" );
+    		$section[$i]['time']->set( 'value', $array['time'] );
+            
+            switch ( $array['times'] ) {
+                case 'short':
+            		$section[$i]['time']->setOptions( $this->getTimeOptions() );
+                    break;
+                case 'medium':
+            		$section[$i]['time']->setOptions( $this->getTimeOptions( 0, 10 ) );
+                    break;
+                case 'long':
+            		$section[$i]['time']->setOptions( $this->getLongTimeOptions() );
+                    break;
+            }
+            
+            $i++;
+        }
+        
+        /*
 		$meditation = $this->form->newInput( 'select' );
 		$meditation->setLabel( 'Meditation' );
 		$meditation->set( 'name', 'meditation' );
 		$meditation->set( 'id', 'meditation' );
 		$meditation->setOptions( $this->meditationTimeOptions() );
-
+        
+        
 		$cooldown = $this->form->newInput( 'select' );
 		$cooldown->setLabel( 'Cool Down' );
 		$cooldown->set( 'name', 'cooldown' );
 		$cooldown->set( 'id', 'cooldown' );
+		$cooldown->set( 'value', $this->data['cooldown'] );
 		$cooldown->setOptions( $this->cooldownTimeOptions() );
-		
+		*/
+        
 		$gong = $this->form->newInput( 'select' );
 		$gong->setLabel( 'Gong' );
 		$gong->set( 'name', 'gong' );
 		$gong->set( 'id', 'gong' );
+		$gong->set( 'value', $this->data['gong'] );
 		$gong->setOptions( $this->gongOptions() );
 		
 		$begin = $this->form->newInput( 'submit' );
@@ -90,51 +124,41 @@ class MeditateView extends View
 	}
 	
 	/*
-	 * Define the array to set the Preparation time options
+	 * Define the array to set the cool down time options
 	 */
-	protected function preparationTimeOptions()
+	protected function getTimeOptions( $start = 0, $end = 5, $increment = 1 )
 	{
-		return array(
-			[null, 0],
-			[30, '30 seconds'],
-			[60, '1 minute'],
-			[90, '90 seconds'],
-			[120, '2 minutes']
-		);
+        if ( $start == 0 ) {
+    		$array = array(
+    		    [null, 0]
+    		);
+        }
+        
+		for ( $i = $increment; $i <= $end; $i += $increment ) {
+			$minutes = $i;
+			$array[] = [$minutes, $this->getTimeSelectorText( $minutes )];
+		}
+		
+		return $array;
 	}
-	
+    
 	/*
 	 * Define the array to set the Meditation time options
 	 */
-	protected function meditationTimeOptions()
+	protected function getLongTimeOptions()
 	{
 		$array = array();
 		// 5 minute increments up to 2 hours
 		for ( $i = 0; $i < 24; $i++ ) {
 			$minutes = ($i + 1) * 5;
-			$seconds = $minutes * 60;
-			$array[] = [$seconds, $this->getTimeSelectorText( $minutes )];
+			//$seconds = $minutes * 60;
+			$array[] = [$minutes, $this->getTimeSelectorText( $minutes )];
 		}
 		// 15 minute increments from 2 hours to 4 hours
 		for ( $i = 0; $i < 8; $i++ ) {
 			$minutes = 120 + ($i + 1) * 15;
-			$seconds = $minutes * 60;
-			$array[] = [$seconds, $this->getTimeSelectorText( $minutes)];
-		}
-		
-		return $array;
-	}
-	
-	/*
-	 * Define the array to set the cool down time options
-	 */
-	protected function cooldownTimeOptions()
-	{
-		$array = array();
-		for ( $i = 0; $i < 10; $i++ ) {
-			$minutes = $i +1;
-			$seconds = $minutes * 60;
-			$array[] = [$seconds, $this->getTimeSelectorText( $minutes )];
+			//$seconds = $minutes * 60;
+			$array[] = [$minutes, $this->getTimeSelectorText( $minutes)];
 		}
 		
 		return $array;
@@ -164,9 +188,9 @@ class MeditateView extends View
 	protected function gongOptions()
 	{
 		$array = array(
+			['', 'None'],
 			['all', 'All Sections'],
-			['meditation', 'Start and End of Meditation'],
-			['none', 'None']
+			['meditation', 'Start and End of Meditation']
 		);
 		
 		return $array;

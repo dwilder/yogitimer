@@ -136,6 +136,39 @@ class MeditationRecord extends AbstractCrud
     }
     
     /*
+     * Get the most recent record
+     */
+    public function readLast()
+    {
+        $pdo = DB::getInstance();
+        $user = User::getInstance();
+        
+        $this->user_id = $user->get('id');
+        
+        if ( ! $this->user_id ) {
+            return false;
+        }
+        
+        $q = "SELECT * FROM meditation_records WHERE user_id=:user_id ORDER BY start_time DESC LIMIT 1";
+        
+        $stmt = $pdo->prepare($q);
+        $stmt->bindParam(':user_id', $this->user_id);
+        
+        if ( ! $stmt->execute() ) {
+            return false;
+        }
+        $this->original = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ( $this->original ) {
+            foreach ( $this->original as $k => $v ) {
+                $this->$k = $v;
+            }
+            return true;
+        }
+        $this->original = array();
+        return false;
+    }
+    
+    /*
      * Update
      */
     public function update()

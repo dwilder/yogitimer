@@ -9,6 +9,14 @@ class Hidden extends AbstractInput
 	use InputTrait;
 	
 	/*
+	 * Get the input
+	 */
+	public function getHtml()
+	{
+		return $this->buildInput();
+	}
+    
+	/*
 	 * Set the type
 	 */
 	protected $type = "hidden";
