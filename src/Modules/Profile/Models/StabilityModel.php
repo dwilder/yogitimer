@@ -11,7 +11,7 @@ class StabilityModel extends AbstractProfileModel
     public function run()
     {
         $this->calculateStability();
-        //$this->data['stability'] = 100;
+        //$this->data['stability'] = 70;
     }
     
     /*

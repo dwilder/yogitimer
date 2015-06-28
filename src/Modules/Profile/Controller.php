@@ -133,8 +133,7 @@ class Controller extends UIController
     		$this->template->setGuid( $this->request['guid'] );
         }
         $this->template->setScript('utilities.js');
-        $this->template->setScript('momentum.js');
-        $this->template->setScript('stability.js');
+        $this->template->setScript('profile.js');
 		$this->template->setContent( $this->getUI() );
 		echo $this->template->request();
 	}
