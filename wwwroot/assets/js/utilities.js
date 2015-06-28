@@ -21,7 +21,7 @@ var U = {
         return !!( canvas.getContext && canvas.getContext( '2d' ) );
     },
     
-    getAjaxObject() {
+    getAjaxObject: function() {
         var ajax = null;
         if ( window.XMLHttpRequest ) {
             ajax = new XMLHttpRequest();
