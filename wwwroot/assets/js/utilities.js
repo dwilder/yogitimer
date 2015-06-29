@@ -21,6 +21,32 @@ var U = {
         return !!( canvas.getContext && canvas.getContext( '2d' ) );
     },
     
+    supportedAudioFormat: function() {
+        'use strict';
+        var ext = "";
+        var aud = document.createElement('audio');
+        if ( aud.canPlayType("audio/ogg") == "probably" || aud.canPlayType("audio/ogg") == "maybe" ) {
+            ext = "ogg";
+        }
+        else if ( aud.canPlayType("audio/wav") == "probably" || aud.canPlayType("audio/wav") == "maybe" ) {
+            ext = "wav";
+        }
+        else if ( aud.canPlayType("audio/mp3") == "probably" || aud.canPlayType("audio/mp3") == "maybe" ) {
+            ext = "mp3";
+        }
+        
+        return ext;
+    },
+    
+    audioSupport: function() {
+        'use strict';
+        var format = this.supportedAudioFormat();
+        if ( format == "" ) {
+            return false;
+        }
+        return true;
+    },
+    
     getAjaxObject: function() {
         var ajax = null;
         if ( window.XMLHttpRequest ) {
