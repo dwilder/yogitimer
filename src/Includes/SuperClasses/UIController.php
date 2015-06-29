@@ -15,6 +15,7 @@ abstract class UIController extends AbstractController
 	protected $model;
 	protected $view;
 	protected $template;
+    
     /*
      * Run
      */

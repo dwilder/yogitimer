@@ -30,7 +30,7 @@ class MeditateView extends View
 		$this->form = new Form();
 		$this->buildForm();
 		$content .= $this->form->getHTML();
-		$content .= $this->getModal();
+		//$content .= $this->getModal();
 		
 		$this->content = $content;
 		return $content;
@@ -194,20 +194,5 @@ class MeditateView extends View
 		);
 		
 		return $array;
-	}
-	
-	/*
-	 * Create a modal layer to display the timer, JS like
-	 */
-	protected function getModal()
-	{
-		$start = '<div id="modal" class="modal" style="display:none;">';
-		$end = '</div>';
-		
-		$timer = '<div id="modal-timer" class="modal-timer"></div>';
-		
-		$link = '<p class="modal-endlink"><a href="">End</a></p>';
-		
-		return $start . $timer . $link . $end;
 	}
 }

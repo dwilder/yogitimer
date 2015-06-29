@@ -2,8 +2,11 @@
 namespace Src\Modules\Meditate;
 
 use Src\Includes\SuperClasses\UIController;
+use Src\Includes\Session\Session;
+use Src\Includes\User\User;
 use Src\Modules\Meditate\Models\MeditateModel;
 use Src\Modules\Meditate\Views\MeditateView;
+use Src\Includes\Data\SaveMeditation;
 
 /*
  * Controller class for the meditation section.
@@ -16,25 +19,88 @@ use Src\Modules\Meditate\Views\MeditateView;
 
 class Controller extends UIController
 {
+    /*
+     * Meditation in session has been saved
+     */
+    protected $saved = null;
+    
+    /*
+     * Run
+     */
+    public function run()
+    {
+        $this->setClass();
+        $this->setModel();
+        if ( $this->class == 'Meditate' ) {
+            $this->setView();
+            $this->setTemplate();
+            $this->respond();
+        }
+    }
+    
 	/*
 	 * Set the content
 	 */
 	public function setClass()
 	{
-		$this->class = 'Meditate';
+        if ( $this->isAjaxRequest() ) {
+            $this->class = 'AjaxRequest';
+            return;
+        }
+        
+        if ( $this->canSaveMeditation() ) {
+            $m = new SaveMeditation;
+            $m->save();
+        }
+        
+    	$this->class = 'Meditate';
 	}
+    
+    /*
+     * Test if this is an ajax request
+     */
+    private function isAjaxRequest()
+    {
+        if ( $_SERVER['REQUEST_METHOD'] == 'POST' && ! isset( $_POST['submit'] ) ) {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * Test if there is are meditations stored in the session and the user is logged in
+     */
+    private function canSaveMeditation()
+    {
+        $user = User::getInstance();
+        if ( ! $user->isSignedIn() ) {
+            return false;
+        }
+        
+        $session = Session::getInstance();
+        if ( $session->get('meditation') == null ) {
+            return false;
+        }
+        
+        return true;
+    }
 	
 	/*
 	 * Return the request
 	 */
 	public function respond()
 	{
-		$this->template->setGuid( $this->request['guid'] );
-		$this->template->setTitle( 'Meditation Timer' );
-        $this->template->setScript( 'utilities.js' );
-        $this->template->setScript( 'meditate.js' );
-		$this->template->setContent( $this->view->getContent() );
+        if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+            
+        }
+        else {
+    		$this->template->setGuid( $this->request['guid'] );
+    		$this->template->setTitle( 'Meditation Timer' );
+            $this->template->setScript( 'utilities.js' );
+            $this->template->setScript( 'meditate.js' );
+    		$this->template->setContent( $this->view->getContent() );
 		
-		echo $this->template->request();	
+    		echo $this->template->request();
+        }
 	}
 }

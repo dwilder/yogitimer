@@ -188,7 +188,7 @@ class MeditationRecord extends AbstractCrud
         
         $pdo = DB::getInstance();
         
-        $q = "UPDATE meditation_records SET start_time=:start_time, duration=:duration, date_modified=NOW() WHERE id=:id LIMIT 1";
+        $q = "UPDATE meditation_records SET start_time=:start_time, duration=:duration, date_modified=CURRENT_TIMESTAMP() WHERE id=:id LIMIT 1";
         
         $stmt = $pdo->prepare($q);
         

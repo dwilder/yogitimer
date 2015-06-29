@@ -2,6 +2,7 @@
 namespace Src\Modules\Meditate\Models;
 
 use Src\Includes\SuperClasses\Model;
+use Src\Includes\User\User;
 use Src\Includes\Data\MeditationRecord;
 
 class MeditateModel extends Model
@@ -18,8 +19,6 @@ class MeditateModel extends Model
 	{
         $this->setMeditationRecord();
         $this->setInitialValues();
-		//$raw = $this->lookupData();
-		//$this->data = $this->dummyData();
 	}
     
     /*
@@ -36,13 +35,6 @@ class MeditateModel extends Model
      */
     private function setInitialValues()
     {
-        /*$this->data = array(
-			'preparation' => 0,
-			'cooldown' => null,
-			'gong' => 'all'
-		);
-        */
-        
         // Preparation
         $this->data['sections'][0] = array(
             'name' => 'Preparation',
@@ -84,18 +76,4 @@ class MeditateModel extends Model
         // Gong
         $this->data['gong'] = 'all';
     }
-    
-	private function dummyData()
-	{
-		$data = array(
-			'preparation' => 30,
-			'sections' => array(
-			    'meditation' => 5
-			),
-			'cooldown' => null,
-			'gong' => true
-		);
-		
-		return $data;
-	}
 }
