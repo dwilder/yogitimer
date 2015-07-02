@@ -39,22 +39,28 @@
             if ( ajax.readyState == 4 ) {
                 if ( ( ajax.status >= 200 && ajax.status < 300 ) || ( ajax.status == 304 ) ) {
                     layer.parentNode.removeChild(layer);
+                    
+                    //U.log(ajax.responseText);
+                    
                     if ( ajax.responseText == 'LOGIN' ) {
                         requestLogin();
                     }
                     else {
                         dataSaved();
                     }
-                    //U.log(ajax.responseText);
                 }
                 else {
                     U.log('Ajax error');
                 }
             }
         };
+        //U.log('sending...');
         ajax.open( 'POST', 'http://meditate.dev/meditate', true );
-        ajax.setRequestHeader( 'Content-Type', 'application/json' );
-        ajax.send( data );
+        ajax.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+        ajax.send( data.join('&') );
+        
+        //ajax.setRequestHeader( 'Content-Type', 'application/json' );
+        //ajax.send( data );
     };
     
     //var sendData = function() {}; // Send the meditation to the server and see if the user needs to log in.
@@ -234,7 +240,7 @@
         last = 0;
         
         // Current section
-        var num = -1, title, section_end_time = 0, stopped = false;
+        var num = -1, title, section_end_time = 0, started = false, stopped = false;
         
         
         // Get form values
@@ -423,7 +429,7 @@
         
         // Set values for the next section
         var setSection = function(n) {
-            title = vals.sections[n]['name'];
+            title = vals.sections[n].name;
             section_end_time += vals.sections[n].time * 60;
         };
         
@@ -449,6 +455,7 @@
         
         // Start the meditation
         var start = function() {
+            started = true;
             start_time = new Date();
             var int = setInterval( function() {
                 var now = new Date();
@@ -477,24 +484,31 @@
             //if ( true ) {
                 
                 // Encode data. Start time, section names and times in minutes (round down), gong setting
-                var data = {
-                    'start_time': start_time,
-                    'sections': {},
-                    'gong': vals.gong
-                };
+                //var data = {
+                    //'start_time': start_time,
+                    //'sections': {},
+                    //'gong': vals.gong
+                    //};
+                var data = [];
+                data.push( encodeURIComponent( 'start_time' ) + '=' + encodeURIComponent( start_time.getTime() ) );
+                data.push( encodeURIComponent( 'gong' ) + '=' + encodeURIComponent( vals.gong ) );
             
                 var time = 0;
             
                 for ( var i = 0; i < last; i++ ) {
                 
-                    data.sections[i] = {};
-                    data.sections[i]['name'] = vals.sections[i].name;
-                    data.sections[i]['time'] = Math.min( vals.sections[i]['time'], Math.max( 0, (elapsed - time) / 60 ) );
+                    data.push( encodeURIComponent( "sections[" + i + "][name]" ) + '=' + encodeURIComponent(vals.sections[i].name ) );
+                    
+                    data.push( encodeURIComponent( "sections[" + i + "][time]" ) + '=' + encodeURIComponent( Math.min( vals.sections[i]['time'], Math.max( 0, (elapsed - time) / 60 ) ) ) );
+                    
+                    //data.sections[i] = {};
+                    //data.sections[i]['name'] = vals.sections[i].name;
+                    //data.sections[i]['time'] = Math.min( vals.sections[i]['time'], Math.max( 0, (elapsed - time) / 60 ) );
                     //U.log(data.sections[i]['time']);
                     time += vals.sections[i]['time'] * 60;
                 }
             
-                data = JSON.stringify( data );
+                //data = JSON.stringify( data );
             
                 sendData(data);
             }
@@ -515,9 +529,18 @@
                 
                 gong = document.createElement( 'audio' );
                 document.body.appendChild( gong );
-                gong.setAttribute( "src", '/assets/aud/gong.' + format );
+                var src = "/assets/aud/gong." + format;
+                
+                gong.setAttribute( "src", src );
                 
                 gong.addEventListener( "canplaythrough", start, false );
+                
+                setTimeout( function() {
+                    if ( started == false ) {
+                        gong.removeEventListener( "canplaythrough", start, false );
+                        start();
+                    }
+                }, 5000 );
             }
             else {
                 start();
@@ -552,8 +575,20 @@
     // ---- MEDITATE ------ //
     // -------------------- //
     
+    // Check if a save message needs to be displayed
+    var removeSaveMessage = function() {
+        var div = U.$('meditate-message-saved');
+        
+        if ( div == null ) {
+            return;
+        }
+        
+        div.parentNode.removeChild( div );
+    };
+    
     window.onload = function() {
         var meditationForm = document.forms[0];
+        U.addEvent( meditationForm, 'submit', removeSaveMessage );
         U.addEvent( meditationForm, 'submit', meditate );
     }
     
