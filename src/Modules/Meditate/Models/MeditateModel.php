@@ -22,6 +22,15 @@ class MeditateModel extends Model
 	}
     
     /*
+     * Set the "saved" message
+     */
+    public function setSaved( $bool )
+    {
+        $this->data['saved'] = $bool;
+    }
+    
+    
+    /*
      * Set the meditation record
      */
     private function setMeditationRecord()
@@ -55,8 +64,19 @@ class MeditateModel extends Model
             'counts' => null,
             'count' => null
         );
-        $duration = $this->meditation_record->get('duration');
+        
+        $duration = floor( $this->meditation_record->get('duration') );
+        
         if ( $duration ) {
+            if ( $duration > 240 ) {
+                $duration = 240;
+            }
+            else if ( $duration > 120 && $duration % 15 != 0 ) {
+                $duration = 15 * ( floor( $duration / 15 ) + 1 );
+            }
+            else if ( $duration % 5 != 0 ) {
+                $duration = 5 * ( floor( $duration / 5 ) + 1 );
+            }
             $this->data['sections'][1]['time'] = $duration;
         } else {
             $this->data['sections'][1]['time'] = 5;

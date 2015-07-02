@@ -25,7 +25,7 @@ class User extends AbstractCrud
     protected $pass = null;
     protected $activation_key = null;
     protected $status = null;
-    protected $level = 'beginner';
+    protected $level = 0;
     protected $directory = null;
     protected $date_added = null;
     protected $date_modified = null;

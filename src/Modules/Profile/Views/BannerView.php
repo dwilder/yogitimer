@@ -53,7 +53,9 @@ class BannerView extends View
 	private function getLevel()
 	{
 		$html = '<div class="profile-banner-level">';
+        $html .= '<img src="/assets/img/icons/icon_level_';
 		$html .= $this->data['level'];
+        $html .= '.png" alt="Level ' . $this->data['level'] . '" />';
 		$html .= '</div>';
 		
 		return $html;

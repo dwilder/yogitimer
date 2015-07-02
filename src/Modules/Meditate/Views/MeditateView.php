@@ -26,6 +26,8 @@ class MeditateView extends View
 	{
 		$content = $this->getTitle();
 		$content .= $this->getHelp();
+        
+        $content .= $this->getSaveMessage();
 		
 		$this->form = new Form();
 		$this->buildForm();
@@ -120,6 +122,8 @@ class MeditateView extends View
 		$gong->setOptions( $this->gongOptions() );
 		
 		$begin = $this->form->newInput( 'submit' );
+		$begin->set( 'name', 'submit' );
+		$begin->set( 'id', 'submit' );
 		$begin->set( 'value', 'Begin' );
 	}
 	
@@ -195,4 +199,16 @@ class MeditateView extends View
 		
 		return $array;
 	}
+    
+    /*
+     * Add a "saved" message indicator
+     */
+    protected function getSaveMessage()
+    {
+        if ( $this->data['saved'] ) {
+            $html = '<p class="form-success" id="meditate-message-saved">Your meditation has been saved.</p>';
+            return $html;
+        }
+        return '';
+    }
 }

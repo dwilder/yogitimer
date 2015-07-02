@@ -8,6 +8,7 @@ use Src\Includes\Session\Session;
 use Src\Includes\Data\Username;
 use Src\Includes\Data\Email;
 use Src\Includes\Data\Password;
+use Src\Includes\Data\StoredMeditation;
 
 /*
  * Attempts to log a user in.
@@ -63,6 +64,13 @@ class LoginModel extends Model
         
         if ( $this->lookUpUser() && $this->validatePassword() ) {
             $this->signInUser();
+            
+            $sm = new StoredMeditation;
+            
+            if ( $sm->isStored() ) {
+                $sm->save();
+            }
+            
             $this->redirect('profile');
         }
     }

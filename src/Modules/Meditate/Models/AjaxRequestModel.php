@@ -26,7 +26,8 @@ class AjaxRequestModel extends Model
      */
     protected function process()
     {
-        $this->submission = json_decode( file_get_contents( 'php://input' ) );
+        //$this->submission = json_decode( file_get_contents( 'php://input' ) );
+        $this->submission = $_POST;
         
         if ( ! $this->submission ) {
             exit;

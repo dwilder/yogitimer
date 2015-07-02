@@ -114,12 +114,17 @@ class JournalView extends View
 		$path = '';
 		$fruition = "</div>\n";
 		
-		$path .= '<a href="/journal/edit/' . $current_data['id'] . '">';
 		$path .= '<span class="journal-entry-date">' . date( 'D', $ts ) . ' ';
 		$path .= date( 'j', $ts ) . '</span>, ';
 		$path .= '<span class="journal-entry-time">' . date( 'g:ia', $ts ) . '</span> ';
 		$path .= '<span class="journal-entry-duration">' . $this->formatDuration( $current_data['duration'] ) . '</span>';
-		$path .= '</a>';
+		
+        if ( $current_data['add_method'] == 'form' ) {
+    		$path = '<a href="/journal/edit/' . $current_data['id'] . '">' . $path . '</a>';
+        }
+        else {
+    		$path = '<div class="journal-entry-organic">' . $path . '</div>';
+        }
 		
 		return $ground . $path . $fruition;
 	}

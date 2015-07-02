@@ -30,41 +30,50 @@ class SaveMeditation
      */
     public function save()
     {
-        if ( ! $this->data || ! $this->setDataFromSession() ) {
-            return;
-        }
+        if ( $this->data || $this->setDataFromSession() ) {
         
-        $user = User::getInstance();
+            $user = User::getInstance();
         
-        $m = new MeditationRecord;
+            $m = new MeditationRecord;
         
-        $m->set( 'user_id', $user->get('id') );
-        
-        $s = $this->data->start_time;
-        $s = str_replace( 'T', ' ', $s );
-        $s = substr( $s, 0, strpos( $s, '.' ) );
-        
-        $m->set( 'start_time', $s );
-        $m->set( 'add_method', 'organic' );
-        
-        foreach ( $this->data->sections as $section ) {
-            if ( $section->name == 'Meditation' ) {
-                $t = $section->time;
-                $t = floor( $t );
-                $m->set( 'duration', $section->time );
+            $m->set( 'user_id', $user->get('id') );
+            
+            if ( ! isset( $this->data['start_time'] ) ) {
+                return false;
             }
-        }
+            
+            $time = $this->data['start_time']/1000;
+            $s = date( 'Y-m-d H:i:s', $time );
         
-        //echo var_dump( $m );
-        
-        if ( $m->create() ) {
-            if ( $this->from_session ) {
-                $session = Session::getInstance();
-                $session->set('meditation', null);
+            $m->set( 'start_time', $s );
+            $m->set( 'add_method', 'organic' );
+            
+            if ( ! isset( $this->data['sections'] ) || empty( $this->data['sections'] ) ) {
+                return false;
             }
-            return true;
+        
+            foreach ( $this->data['sections'] as $section ) {
+                if ( ! isset( $section['name'] ) || ! isset( $section['time'] ) ) {
+                    continue;
+                }
+                if ( $section['name'] == 'Meditation' ) {
+                    $t = $section['time'];
+                    $t = floor( $t );
+                    $m->set( 'duration', $section['time'] );
+                }
+            }
+        
+            //echo var_dump( $m );
+        
+            if ( $m->create() ) {
+                if ( $this->from_session ) {
+                    $session = Session::getInstance();
+                    $session->set('meditation', null);
+                }
+                return true;
+            }
+            return false;
         }
-        return false;
     }
     
     /*
@@ -81,5 +90,7 @@ class SaveMeditation
         }
 
         $this->data = unserialize( $m );
+        $this->from_session = true;
+        return true;
     }
 }

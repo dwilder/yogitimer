@@ -22,7 +22,7 @@ class Controller extends UIController
     /*
      * Meditation in session has been saved
      */
-    protected $saved = null;
+    protected $saved = false;
     
     /*
      * Run
@@ -32,6 +32,7 @@ class Controller extends UIController
         $this->setClass();
         $this->setModel();
         if ( $this->class == 'Meditate' ) {
+            $this->model->setSaved( $this->saved );
             $this->setView();
             $this->setTemplate();
             $this->respond();
@@ -50,7 +51,9 @@ class Controller extends UIController
         
         if ( $this->canSaveMeditation() ) {
             $m = new SaveMeditation;
-            $m->save();
+            if ( $m->save() ) {
+                $this->saved = true;
+            }
         }
         
     	$this->class = 'Meditate';
@@ -90,17 +93,12 @@ class Controller extends UIController
 	 */
 	public function respond()
 	{
-        if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-            
-        }
-        else {
-    		$this->template->setGuid( $this->request['guid'] );
-    		$this->template->setTitle( 'Meditation Timer' );
-            $this->template->setScript( 'utilities.js' );
-            $this->template->setScript( 'meditate.js' );
-    		$this->template->setContent( $this->view->getContent() );
-		
-    		echo $this->template->request();
-        }
+		$this->template->setGuid( $this->request['guid'] );
+		$this->template->setTitle( 'Meditation Timer' );
+        $this->template->setScript( 'utilities.js' );
+        $this->template->setScript( 'meditate.js' );
+		$this->template->setContent( $this->view->getContent() );
+	
+		echo $this->template->request();
 	}
 }

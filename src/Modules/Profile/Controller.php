@@ -69,6 +69,7 @@ class Controller extends UIController
         $this->meditation_data_model = new MeditationDataModel();
         
 		$this->BannerModel = new BannerModel;
+		$this->BannerModel->setMeditationDataModel( $this->meditation_data_model );
 		$this->BannerModel->run();
         
 		$this->MomentumModel = new MomentumModel;
