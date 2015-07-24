@@ -11,7 +11,7 @@ class FooterMenu
 	private $list = array(
 		'' => 'Home',
 		'about' => 'About',
-		'howto' => 'How To',
+		'guide' => 'Guide',
 		'contact' => 'Contact',
         'login' => 'Login',
         'register' => 'Sign Up'

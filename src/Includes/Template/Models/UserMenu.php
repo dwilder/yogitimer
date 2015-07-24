@@ -25,7 +25,7 @@ class UserMenu
 			'logout' => 'Logout'
 		),
 		'Help' => array(
-			'howto' => 'How To',
+			'guide' => 'Guide',
 			'about' => 'About',
 			'contact' => 'Contact'
 		),
