@@ -4,6 +4,7 @@ namespace Src\Includes\Data;
 use Src\Includes\Session\Session;
 use Src\Includes\User\User;
 use Src\Includes\Data\MeditationRecord;
+use Src\Includes\Data\MeditationPractice;
 
 class SaveMeditation
 {
@@ -42,6 +43,8 @@ class SaveMeditation
                 return false;
             }
             
+            $m->set( 'meditation_practice_id', $this->getMeditationPracticeId( $user->get('id') ) );
+            
             $time = $this->data['start_time']/1000;
             $s = date( 'Y-m-d H:i:s', $time );
         
@@ -74,6 +77,30 @@ class SaveMeditation
             }
             return false;
         }
+    }
+    
+    /*
+     * Verify that a meditation id belongs to the current user
+     */
+    private function getMeditationPracticeId( $user_id )
+    {
+        if ( ! isset( $this->data['practice'] ) ) {
+            return 0;
+        }
+        
+        $id = preg_replace( '![^0-9]!', '', $this->data['practice'] );
+        
+        $mp = new MeditationPractice;
+        $mp->set( 'id', $id );
+        if ( ! $mp->read() ) {
+            return 0;
+        }
+        
+        if ( $mp->get('user_id') != $user_id ) {
+            return 0;
+        }
+        
+        return $id;
     }
     
     /*

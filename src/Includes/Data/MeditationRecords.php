@@ -13,6 +13,7 @@ class MeditationRecords
      * Store the data
      */
     private $data = array();
+    private $total_times_by_practice = array();
     
     /*
      * Return the data
@@ -180,5 +181,38 @@ class MeditationRecords
         }
         
         return $times;
+    }
+    
+    /*
+     * Get the total time for a given meditation practice
+     */
+    public function getTotalTimeByPractice( $id = 0 )
+    {
+        if ( empty( $this->total_times_by_practice ) ) {
+            $this->setTotalTimesByPractice();
+        }
+        
+        if ( isset( $this->total_times_by_practice[$id] ) ) {
+            return $this->total_times_by_practice[$id];
+        }
+        return 0;
+    }
+    
+    /*
+     * Set the total times by practice
+     */
+    protected function setTotalTimesByPractice()
+    {
+        $totals = array();
+        $totals[0] = 0;
+        
+        foreach ( $this->data as $data ) {
+            if ( ! isset( $totals[ $data['meditation_practice_id'] ] ) ) {
+                $totals[ $data['meditation_practice_id'] ] = 0;
+            }
+            $totals[$data['meditation_practice_id']] += $data['duration'];
+        }
+        
+        $this->total_times_by_practice = $totals;
     }
 }

@@ -80,6 +80,11 @@ class Model
             'login_access' => 'authenticated',
             'ssl' => false
         ),
+        'practices' => array(
+            'module' => 'Practices',
+            'login_access' => 'authenticated',
+            'ssl' => false
+        ),
 		'settings' => array(
             'module' => 'Settings',
             'login_access' => 'authenticated',
@@ -97,7 +102,7 @@ class Model
      */
     public function setGuid( $guid = 'index' )
     {
-		$this->guid = $guid;
+		$this->guid = strtolower( trim( $guid ) );
     }
     
     /*

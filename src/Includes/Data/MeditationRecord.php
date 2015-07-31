@@ -16,6 +16,7 @@ class MeditationRecord extends AbstractCrud
      */
     protected $id;
     protected $user_id;
+    protected $meditation_practice_id;
     protected $start_time;
     protected $duration;
     protected $add_method;
@@ -44,6 +45,7 @@ class MeditationRecord extends AbstractCrud
     {
         $this->id = null;
         $this->user_id = null;
+        $this->meditation_practice_id = null;
         $this->start_time = null;
         $this->duration = null;
         $this->add_method = null;
@@ -75,6 +77,7 @@ class MeditationRecord extends AbstractCrud
         
         $q = "INSERT INTO meditation_records (
             user_id,
+            meditation_practice_id,
             start_time,
             duration,
             add_method,
@@ -82,6 +85,7 @@ class MeditationRecord extends AbstractCrud
             date_added
         ) VALUES (
             :user_id,
+            :meditation_practice_id,
             :start_time,
             :duration,
             :add_method,
@@ -91,6 +95,7 @@ class MeditationRecord extends AbstractCrud
         
         $stmt = $pdo->prepare($q);
         $stmt->bindParam(':user_id', $this->user_id);
+        $stmt->bindParam(':meditation_practice_id', $this->meditation_practice_id);
         $stmt->bindParam(':start_time', $this->start_time);
         $stmt->bindParam(':duration', $this->duration);
         $stmt->bindParam(':add_method', $this->add_method);
@@ -188,10 +193,11 @@ class MeditationRecord extends AbstractCrud
         
         $pdo = DB::getInstance();
         
-        $q = "UPDATE meditation_records SET start_time=:start_time, duration=:duration, date_modified=CURRENT_TIMESTAMP() WHERE id=:id LIMIT 1";
+        $q = "UPDATE meditation_records SET meditation_practice_id=:meditation_practice_id, start_time=:start_time, duration=:duration, date_modified=CURRENT_TIMESTAMP() WHERE id=:id LIMIT 1";
         
         $stmt = $pdo->prepare($q);
-        
+
+        $stmt->bindParam(':meditation_practice_id', $this->meditation_practice_id);
         $stmt->bindParam(':start_time', $this->start_time);
         $stmt->bindParam(':duration', $this->duration);
         $stmt->bindParam(':id', $this->id);
