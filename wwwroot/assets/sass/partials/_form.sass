@@ -7,7 +7,8 @@ input[type=url],
 input[type=password],
 input[type=date],
 input[type=time],
-input[type=datetime]
+input[type=datetime],
+textarea
     display: block
     box-sizing: border-box
     width: 100%
@@ -17,6 +18,10 @@ input[type=datetime]
     background: $gray-5
     border: 1px solid $color-a0
     border-radius: $border-radius
+    
+textarea
+    height: $line-height*5
+    resize: vertical
     
 input[type=file]
     display: block

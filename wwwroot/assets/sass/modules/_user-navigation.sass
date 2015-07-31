@@ -8,7 +8,7 @@
     padding: 0
 
 .container
-    background: $gray-4
+    background: $gray-4 url(//#{$url}/assets/img/content/background.png) repeat
     
 .user-navigation
     background: $color-a0
@@ -113,12 +113,15 @@
         z-index: 1
         top: 0
         right: 0
+        opacity: 0
 
     .cutsthemustard .active .container
         -webkit-transform: translateX(-75%)
         -ms-transform: translateX(-75%)
         transform: translateX(-75%)
 
+    .cutsthemustard .active .user-navigation
+        opacity: 1
 
 @media all and (min-width: $break4)
 

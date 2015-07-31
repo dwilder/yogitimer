@@ -27,9 +27,13 @@
     text-align: center
     
 .modal-content .link-button
-    margin: 0 $margin/2
+    display: block
+    margin: 0 $margin/2 $margin/2
     cursor: pointer
     color: $color-a0
     background: $color-b4
     border-color: $color-a0
+    @media screen and (min-width: $break3)
+        display: inline
+        margin: 0 $margin/2
     
