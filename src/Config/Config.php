@@ -27,8 +27,8 @@ class Config
 	 * System settings
 	 */
 	private $url = 'meditate.dev';
-	private $sitename = 'Meditate';
-    private $siteemail = 'meditate@davewilder.ca';
+	private $sitename = 'Yogi Timer';
+    private $siteemail = 'yogitimer@davewilder.ca';
     
     /*
      * Directories

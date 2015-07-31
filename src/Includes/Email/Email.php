@@ -63,11 +63,10 @@ class Email
             && $this->cleanEmail( $this->to )
             && $this->from
         ) {
-            $success = mail( $this->cleanEmail( $this->to ), $this->subject, $this->body, 'From: ' . $this->from );
+            return mail( $this->cleanEmail( $this->to ), $this->subject, $this->body, 'From: ' . $this->from );
             //echo $success;
             //echo '<p>To: ' . $this->to . '</p><p>From: ' . $this->from . '</p><p>' . $this->subject . '</p><p>' . $this->body . '</p>';
             //exit('Sent mail');
-            return true;
         }
         return false;
     }

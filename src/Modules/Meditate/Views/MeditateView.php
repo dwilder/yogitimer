@@ -12,14 +12,6 @@ class MeditateView extends View
 	protected $form;
 	
 	/*
-	 * Get the content
-	 */
-	public function getContent()
-	{
-		return $this->content;
-	}
-	
-	/*
 	 * Build the interface
 	 */
 	public function run()

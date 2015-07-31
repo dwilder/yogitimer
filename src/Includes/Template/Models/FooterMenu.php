@@ -10,6 +10,7 @@ class FooterMenu
 	 */
 	private $list = array(
 		'' => 'Home',
+        'meditate' => 'Meditate',
 		'about' => 'About',
 		'guide' => 'Guide',
 		'contact' => 'Contact',

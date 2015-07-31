@@ -15,7 +15,7 @@ class PrivacyPage
 		$html = <<<EOT
 			<h1>Privacy Policy</h1>
 
-            <p>I respect your privacy and in no way wish to use your private information for my personal gain. If you have chosen to use meditate.io (“the Service”), then I want to assure you that I have taken precautions to secure your information and prevent the use of your information by third parties. This policy applies to all information collected or submitted to the Service, or on any meditate.io applications for iPhone or any other devices and platforms.</p>
+            <p>I respect your privacy and in no way wish to use your private information for my personal gain. If you have chosen to use yogitimer.com (“the Service”), then I want to assure you that I have taken precautions to secure your information and prevent the use of your information by third parties. This policy applies to all information collected or submitted to the Service, or on any yogitimer.com applications for iPhone or any other devices and platforms.</p>
 
             <h2>What Personal Information Do I Collect?</h2>
 
@@ -63,7 +63,7 @@ class PrivacyPage
 
             <h2>Contacting Me</h2>
 
-            <p>If you have questions regarding this privacy policy, you may email privacy@meditate.io.</p>
+            <p>If you have questions regarding this privacy policy, you may email privacy@yogitimer.com.</p>
 
             <h2>Changes To This Policy</h2>
 

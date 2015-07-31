@@ -34,7 +34,7 @@ class AboutPage
             
             <p>This meditation timer is intended for focussing the mind and is designed for minimal distraction. It is intended to be simple and easy to use. If you find anything awkward or difficult, <a href="/contact">please tell me about it</a>.</p>
             
-            <h2>The Author</h2>
+            <h2>Author</h2>
             
             <p>I am a web designer and developer, as well as a devout meditation practitioner. I have worked as a User Experience Designer, Graphic Designer, and Web Developer. I have studied mathematics and physical sciences, and have long been a student of the mind. I have a background in hands on healing, working with subtle energies, and follow a course in the Buddhist science of the mind.</p>
             

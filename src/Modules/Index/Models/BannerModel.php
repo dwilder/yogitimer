@@ -22,7 +22,7 @@ class BannerModel
 		//$this->image = 'indexBannerImage.jpg';
 		$this->image = 'dial.png';
 		$this->title = "Meditation Timer and Journal";
-		$this->content = "meditate.io is a simple meditation timer and journal.";
+		$this->content = "Yogi Timer is a simple meditation timer and journal.";
 		$this->action = array(
 			'text' => 'Meditate',
 			'guid' => 'meditate'

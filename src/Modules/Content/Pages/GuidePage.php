@@ -15,7 +15,7 @@ class GuidePage
 		$html = <<<EOT
 			<h1>Guide</h1>
         
-			<p>Need help? Direction? Information? Try reviewing the guide to find what you need...</p>
+			<p>Need help? Direction? Information? Please review the guide to find what you need or check out the <a href="/support">support page</a>.</p>
             
             <h2>Navigating the Website</h2>
             
@@ -86,9 +86,9 @@ class GuidePage
             
             <p>Meditation times are rounded to the quarter hour.</p>
             
-            <h2>Still Haven't Found What You're Looking For?</h2>
+            <h2>Need Help With a Problem?</h2>
             
-            <p><a href="/contact">Try contacting me for support.</a></p>
+            <p><a href="/support">Try the support page.</a></p>
 EOT;
 
 		return $html;

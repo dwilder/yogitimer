@@ -30,7 +30,7 @@ class UserMenu
 			'contact' => 'Contact'
 		),
 		'Legal' => array(
-			'terms' => 'Terms of Use',
+			'terms' => 'Terms of Service',
 			'privacy' => 'Privacy Policy'
 		)
 	);

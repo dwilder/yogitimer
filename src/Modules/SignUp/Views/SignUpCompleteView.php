@@ -27,7 +27,7 @@ class SignUpCompleteView extends View
 		$content = $this->getTitle();
 		
         $content .= "<p>Hey there. Thanks for signing up. You should be receiving a verification email with an activation link any second. You can start meditating any time, but it's a good idea to click that link to verify your email address.</p>";
-        $content .= '<p class="link-button"><a href="/meditate">Start Meditating</a></p>';
+        $content .= '<p><a href="/meditate">Start Meditating</a></p>';
 		
 		$this->content = $content;
 	}

@@ -140,9 +140,9 @@ class Controller extends UIController
 	public function setTitle( $title = null )
 	{
 		if ( $title ) {
-			$this->title = $title . ' | Meditate';
+			$this->title = $title . ' | Yogi Timer';
 		} else {
-			$this->title = 'Meditate | A Simple Meditation Timer and Journal';
+			$this->title = 'Yogi Timer | A Simple Meditation Timer and Journal';
 		}
 	}
 	

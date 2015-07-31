@@ -30,11 +30,11 @@ class Model
             'login_access' => 'all',
             'ssl' => false
         ),
-//        'contact' => array(
-//            'module' => 'Contact',
-//            'login_access' => 'all',
-//            'ssl' => false
-//        ),
+        'contact' => array(
+            'module' => 'Contact',
+            'login_access' => 'all',
+            'ssl' => false
+        ),
 		'signup' => array(
             'module' => 'SignUp',
             'login_access' => 'variable',
