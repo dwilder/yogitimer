@@ -16,7 +16,7 @@
     var loggedIn = false;
     
     var sendData = function( data ) {
-        var layer, inner, p;
+        var layer, inner, content, pimg, img, p, p2, link;
         var createRequestLayer = function() {
             layer = document.createElement('div');
             layer.className = 'modal';
@@ -26,13 +26,59 @@
             inner.className = 'modal-inner';
             layer.appendChild( inner );
             
-            p = document.createElement('p');
-            p.className = 'meditate-link';
-            p.innerHTML = 'Saving...';
-            inner.appendChild( p );
+            content = document.createElement('div');
+            content.className = 'modal-content';
+            inner.appendChild( content );
+            content.style.opacity = 0;
             
+            pimg = document.createElement('p');
+            pimg.className = 'meditate-modal-img';
+            content.appendChild( pimg );
+            
+            img = document.createElement('img');
+            img.src = '/assets/img/icons/icon_meditate.png';
+            pimg.appendChild( img );
+            
+            p = document.createElement('p');
+            p.className = 'meditate-modal-p';
+            p.innerHTML = 'Thank you for meditating. Now saving...';
+            content.appendChild( p );
+            
+            p2 = document.createElement('p');
+            p2.className = 'modal-link';
+            content.appendChild( p2 );
+            
+            link = document.createElement('a');
+            link.className = 'link-button';
+            link.innerHTML = 'Cancel';
+            p2.appendChild( link );
+            
+            var i = 0;
+            var fadeIn = setInterval( function() {
+                i += 0.1;
+                content.style.opacity = i;
+                if ( i >= 1.0 ) {
+                    content.style.opacity = 1;
+                    clearInterval( fadeIn );
+                }
+            }, 20);
+            
+            U.addEvent( link, 'click', dismissLayer );
         };
         createRequestLayer();
+
+        var dismissLayer = function() {
+            var i = 1;
+            var fadeOut = setInterval( function() {
+                i -= 0.1;
+                layer.style.opacity = i;
+                if ( i <= 0 ) {
+                    clearInterval( fadeOut );
+                    layer.parentNode.removeChild( layer )
+                }
+            }, 20);
+        };
+        
         
         var ajax = U.getAjaxObject();
         ajax.onreadystatechange = function() {
@@ -55,12 +101,14 @@
             }
         };
         //U.log('sending...');
-        ajax.open( 'POST', 'http://meditate.dev/meditate', true );
+        ajax.open( 'POST', 'http://yogitimer.com/meditate', true );
+        //ajax.open( 'POST', 'http://meditate.dev/meditate', true );
         ajax.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
         ajax.send( data.join('&') );
         
         //ajax.setRequestHeader( 'Content-Type', 'application/json' );
         //ajax.send( data );
+        
     };
     
     //var sendData = function() {}; // Send the meditation to the server and see if the user needs to log in.
@@ -224,7 +272,7 @@
         var layer, inner, canvas, context, p, link;
         
         // Assets
-        var gong;
+    	var gong = new Audio('/assets/aud/gong.' + U.supportedAudioFormat() );
         
         // Dimensions
         var cw, ch, x, y, radius, padding, prep_vals = {}, cool_vals = {};
@@ -524,6 +572,9 @@
             setDimensions();
             drawTimer();
             
+            start();
+            
+            /*
             if ( vals.gong != null && U.audioSupport() ) {
                 var format = U.supportedAudioFormat();
                 
@@ -532,10 +583,11 @@
                 var src = "/assets/aud/gong." + format;
                 
                 gong.setAttribute( "src", src );
-                
+                alert( gong.readyState );
                 gong.addEventListener( "canplaythrough", start, false );
                 
                 setTimeout( function() {
+                    //alert( 'gong didn\'t load' );
                     if ( started == false ) {
                         gong.removeEventListener( "canplaythrough", start, false );
                         start();
@@ -545,16 +597,8 @@
             else {
                 start();
             }
+            */
         };
-        
-        
-        
-        
-        
-        // Call the function to send the data to the server and store it
-        
-        // If the user is logged in, show meditation saved. Else, show login or register.
-        
         
         
         // Trigger the meditation

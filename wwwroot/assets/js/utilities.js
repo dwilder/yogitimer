@@ -25,14 +25,14 @@ var U = {
         'use strict';
         var ext = "";
         var aud = document.createElement('audio');
-        if ( aud.canPlayType("audio/ogg") == "probably" || aud.canPlayType("audio/ogg") == "maybe" ) {
+        if ( aud.canPlayType("audio/mp3") == "probably" || aud.canPlayType("audio/mp3") == "maybe" ) {
+            ext = "mp3";
+        }
+        else if ( aud.canPlayType("audio/ogg") == "probably" || aud.canPlayType("audio/ogg") == "maybe" ) {
             ext = "ogg";
         }
         else if ( aud.canPlayType("audio/wav") == "probably" || aud.canPlayType("audio/wav") == "maybe" ) {
             ext = "wav";
-        }
-        else if ( aud.canPlayType("audio/mp3") == "probably" || aud.canPlayType("audio/mp3") == "maybe" ) {
-            ext = "mp3";
         }
         
         return ext;
