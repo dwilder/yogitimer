@@ -4,6 +4,7 @@ namespace Src\Modules\Journal\Models;
 use Src\Includes\SuperClasses\Model;
 use Src\Includes\User\User;
 use Src\Includes\Data\MeditationRecords;
+use Src\Includes\Data\MeditationPractices;
 use Src\Modules\Journal\Helpers\tDummyData;
 
 /*
@@ -17,6 +18,7 @@ class JournalModel extends Model
      * Store Meditation Records object
      */
     private $records;
+    private $practices;
     
     /*
      * Run
@@ -48,6 +50,10 @@ class JournalModel extends Model
         for ( $i = 0; $i < $count; $i++ ) {
             $this->data[$i]['start_time'] = strtotime( $this->data[$i]['start_time'] );
         }
+        
+        $this->practices = new MeditationPractices;
+        $this->practices->read( $user->get('id') );
+        $this->data['practices'] = $this->practices;
 	}
 	
 }

@@ -22,7 +22,7 @@ trait tSetRecord
         if ( ! isset( $_GET['mid'] ) ) {
             $this->error = true;
             $this->data['status'] = 'NOT FOUND';
-            return;
+            return false;
         }
         
         $this->data['id'] = preg_replace('/[^0-9]/', '', $_GET['mid'] );
@@ -31,7 +31,7 @@ trait tSetRecord
         if ( ! $this->record->read() ) {
             $this->error = true;
             $this->data['status'] = 'NOT FOUND';
-            return;
+            return false;
         }
         
         $user = User::getInstance();
@@ -40,7 +40,7 @@ trait tSetRecord
         if ( $this->record->get('user_id') != $this->data['user_id'] ) {
             $this->error = true;
             $this->data['status'] = 'NOT FOUND';
-            return;
+            return false;
         }
         
         $this->data['start_time']       = $this->record->get('start_time');
@@ -48,9 +48,15 @@ trait tSetRecord
         $this->data['duration']         = $this->record->get('duration');
         $this->data['add_method']       = $this->record->get('add_method');
         
+        if ( $this->data['add_method'] == 'organic' ) {
+            return false;
+        }
+        
         $this->datetime = new DateTime($this->data['start_time']);
         $this->data['date'] = $this->datetime->getDate();
         $this->data['long_date'] = $this->datetime->getLongDate();
         $this->data['time'] = $this->datetime->getTime();
+        
+        return true;
     }
 }

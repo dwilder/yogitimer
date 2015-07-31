@@ -25,7 +25,10 @@ class EditModel extends Model
      */
     public function run()
     {
-        $this->setRecord();
+        if ( ! $this->setRecord() ) {
+            $this->redirect('journal');
+        }
+        
         $this->isRecordDeleted();
         
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {

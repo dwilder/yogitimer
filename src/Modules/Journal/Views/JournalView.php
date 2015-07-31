@@ -5,11 +5,18 @@ use Src\Includes\SuperClasses\View;
 
 class JournalView extends View
 {
+    /*
+     * Store objects
+     */
+    private $practices;
+    
 	/*
 	 * Get the HTML content
 	 */
 	public function run()
 	{
+        $this->setPracticesMapping();
+        
 		$start = '<div class="journal-entries">';
 		$end = '</div>';
 		
@@ -19,6 +26,15 @@ class JournalView extends View
 		
 		$this->content = $start . $header . $entries . $end;
 	}
+    
+    /*
+     * Set up the array for mapping practice ids to names
+     */
+    private function setPracticesMapping()
+    {
+		$practices = $this->data['practices'];
+        $this->practices = $practices->getIdToNameArray();
+    }
 	
 	/*
 	 * Build the HTML header
@@ -44,9 +60,9 @@ class JournalView extends View
 	protected function getEntriesHtml()
 	{
 		$html = '';
-		
-		if ( !empty( $this->data ) ) {
-			$count = count( $this->data );
+        
+		if ( count( $this->data ) > 1 ) {
+			$count = count( $this->data ) - 1;
 			for ( $i = 0; $i < $count; $i++ ) {
                 
                 if ( $i == 0 ) {
@@ -118,6 +134,11 @@ class JournalView extends View
 		$path .= date( 'j', $ts ) . '</span>, ';
 		$path .= '<span class="journal-entry-time">' . date( 'g:ia', $ts ) . '</span> ';
 		$path .= '<span class="journal-entry-duration">' . $this->formatDuration( $current_data['duration'] ) . '</span>';
+        
+        $name = $this->practices[ $current_data['meditation_practice_id'] ];
+        if ( $name ) {
+            $path .= '<span class="journal-entry-name">' . strip_tags( $name ) . '</span>';
+        }
 		
         if ( $current_data['add_method'] == 'form' ) {
     		$path = '<a href="/journal/edit/' . $current_data['id'] . '">' . $path . '</a>';

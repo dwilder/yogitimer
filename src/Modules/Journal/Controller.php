@@ -38,8 +38,8 @@ class Controller extends MultiUIController
      */
     protected function setClass()
     {
-		if ( isset( $_GET['action'] ) ) {
-			switch ( $_GET['action'] ) {
+		if ( isset( $this->request['action'] ) ) {
+			switch ( $this->request['action'] ) {
 				case 'edit':
 					$class = 'Edit';
 					break;
