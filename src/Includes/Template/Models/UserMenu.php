@@ -12,7 +12,8 @@ class UserMenu
 		'Menu' => array(
 			'profile' => 'Profile',
 			'meditate' => 'Meditate',
-			'journal' => 'Journal'
+			'journal' => 'Journal',
+            'practices' => 'Practices'
 		),
 		'Admin' => array(
 			'users' => 'Users',

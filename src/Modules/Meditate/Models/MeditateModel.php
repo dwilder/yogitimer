@@ -4,6 +4,7 @@ namespace Src\Modules\Meditate\Models;
 use Src\Includes\SuperClasses\Model;
 use Src\Includes\User\User;
 use Src\Includes\Data\MeditationRecord;
+use Src\Includes\Data\MeditationPractices;
 
 class MeditateModel extends Model
 {
@@ -11,6 +12,7 @@ class MeditateModel extends Model
      * Objects
      */
     protected $meditation_record;
+    protected $meditation_practices;
     
 	/*
 	 * Run
@@ -18,6 +20,7 @@ class MeditateModel extends Model
 	public function run()
 	{
         $this->setMeditationRecord();
+        $this->setMeditationPractices();
         $this->setInitialValues();
 	}
     
@@ -40,10 +43,28 @@ class MeditateModel extends Model
     }
     
     /*
+     * Set meditation practices
+     */
+    private function setMeditationPractices()
+    {
+        $user = User::getInstance();
+        $this->meditation_practices = new MeditationPractices;
+        
+        if ( $user->isSignedIn() ) {
+            $this->meditation_practices->read();
+        }
+        
+        $this->data['practices'] = $this->meditation_practices;
+    }
+    
+    /*
      * Set initial values for the meditation
      */
     private function setInitialValues()
     {
+        // Practice
+        $this->data['practice'] = $this->meditation_record->get('meditation_practice_id');
+        
         // Preparation
         $this->data['sections'][0] = array(
             'name' => 'Preparation',
