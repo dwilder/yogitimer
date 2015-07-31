@@ -282,6 +282,7 @@
         
         // Values
         var vals = {
+            'practice': null,
             'sections': {},
             'gong': null
         },
@@ -298,8 +299,12 @@
             // Iterate over inputs, building an object. Ignore submit.
             for ( var i = 0, count = inputs.length; i < count; i++ ) {
                 var iname = inputs[i].name;
+                // Check for practice value
+                if ( iname == 'practice' ) {
+                    vals.practice = inputs[i].value;
+                }
                 // Check for gong value
-                if ( iname == 'gong' ) {
+                else if ( iname == 'gong' ) {
                     vals.gong = inputs[i].value;
                 }
                 // Ignore submit button
@@ -363,6 +368,7 @@
                 i += .1;
                 layer.style.opacity = i;
                 if ( i >= 1 ) {
+                    layer.style.opacity = 1;
                     clearInterval( fadeIn );
                 }
             }, 20);
@@ -538,6 +544,7 @@
                     //'gong': vals.gong
                     //};
                 var data = [];
+                data.push( encodeURIComponent( 'practice' ) + '=' + encodeURIComponent( vals.practice ) );
                 data.push( encodeURIComponent( 'start_time' ) + '=' + encodeURIComponent( start_time.getTime() ) );
                 data.push( encodeURIComponent( 'gong' ) + '=' + encodeURIComponent( vals.gong ) );
             
