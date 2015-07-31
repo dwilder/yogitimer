@@ -55,7 +55,7 @@ class VerificationEmail extends AdminEmail
         $body .= "Hey there,\n\n";
         $body .= "Thank you for registering to meditate.\n\n";
         $body .= "Please confirm your email address and activate your account by clicking the link:\n";
-        $body .= "https://$this->url/activate/";
+        $body .= "http://$this->url/activate/";
         $body .= $to . '/' . $this->activation_key;
         $body .= "\n\nHappy meditating";
         

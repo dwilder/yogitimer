@@ -100,6 +100,6 @@ class SignUpView
 		$submit = $this->Form->newInput( 'submit' );
 		$submit->set( 'name', 'submit' );
 		$submit->set( 'id', 'submit' );
-		$submit->set( 'value', 'Join Meditate' );
+		$submit->set( 'value', 'Join Yogi Timer' );
 	}
 }

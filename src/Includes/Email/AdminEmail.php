@@ -16,6 +16,6 @@ class AdminEmail extends Email
      */
     public function setFrom( $email )
     {
-        $this->from = 'Admin <' . $email . '>';
+        $this->from = 'Yogi Timer <' . $email . '>';
     }
 }

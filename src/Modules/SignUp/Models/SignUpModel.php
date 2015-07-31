@@ -14,6 +14,7 @@ use Src\Includes\Data\Roles;
 use Src\Includes\Data\UserDirectory;
 use Src\Includes\User\UserRoles;
 use Src\Modules\SignUp\Helpers\VerificationEmail;
+use Src\Modules\SignUp\Helpers\AdminNotificationEmail;
 
 /*
  * On failure:
@@ -77,6 +78,7 @@ class SignUpModel extends Model
 
 		$this->setSessionData();
 		$this->sendVerificationEmail();
+        $this->sendAdminNotificationEmail();
 		$this->redirect('signup/success');
 	}
 	
@@ -250,6 +252,19 @@ class SignUpModel extends Model
         $email->setUrl( $config->get( 'url' ) );
         $email->setKey( $this->activation_key->get() );
         $email->setBody();
+        
+        $email->send();
+    }
+    
+    /*
+     * Send the admin an email
+     */
+    private function sendAdminNotificationEmail()
+    {
+        $config = Config::getInstance();
+        $email = new AdminNotificationEmail;
+        
+        $email->setFrom( $config->get( 'siteemail' ) );
         
         $email->send();
     }
