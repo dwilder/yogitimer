@@ -135,9 +135,8 @@ class JournalView extends View
 		$path .= '<span class="journal-entry-time">' . date( 'g:ia', $ts ) . '</span> ';
 		$path .= '<span class="journal-entry-duration">' . $this->formatDuration( $current_data['duration'] ) . '</span>';
         
-        $name = $this->practices[ $current_data['meditation_practice_id'] ];
-        if ( $name ) {
-            $path .= '<span class="journal-entry-name">' . strip_tags( $name ) . '</span>';
+        if ( isset( $this->practices[ $current_data['meditation_practice_id'] ] ) ) {
+            $path .= '<span class="journal-entry-name">' . strip_tags( $this->practices[ $current_data['meditation_practice_id'] ] ) . '</span>';
         }
 		
         if ( $current_data['add_method'] == 'form' ) {
