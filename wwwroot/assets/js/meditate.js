@@ -433,7 +433,7 @@
             context.clearRect( 0, 0, cw, ch );
             
             context.beginPath();
-            context.strokeStyle = '#8C8254';
+            context.strokeStyle = '#AD9E99';
             context.fillStyle = '#D0CFD7';
             context.lineWidth = 4;
             context.arc( x, y, radius, 0, (Math.PI/180)*360, false );
