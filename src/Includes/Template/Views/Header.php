@@ -16,15 +16,15 @@ class Header
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	
 	<title>{title}</title>
 	
-	<meta type="description" content="{meta}">
+	<meta name="description" content="Yogi Timer is an online meditation timer that tracks your practices. Sign up for free.">
 	
 	<!-- Icons -->
-	<link rel="icon" type="image/png" href="/favicon.png">
+	<link rel="icon" type="image/png" href="favicon.png">
 	<!-- Apple Touch icons-->
 	<link rel="apple-touch-icon" sizes="57x57" href="/assets/touch-icons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="/assets/touch-icons/apple-touch-icon-114x114.png">
@@ -45,7 +45,7 @@ class Header
 
 <body{bodyclass}>
 
-	<main role="container" id="top" class="container">
+	<main id="top" class="container">
 	
 		<header class="site-header">
             <div class="site-header-inner">

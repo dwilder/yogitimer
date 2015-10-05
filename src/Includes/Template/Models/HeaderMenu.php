@@ -11,7 +11,7 @@ class HeaderMenu
 	 */
 	private $lists = array(
 		'anonymous' => array(
-			'login' => 'Login',
+			'login' => 'Log In',
 			'signup' => 'Sign Up'
 		),
 		'authenticated' => array(
@@ -76,7 +76,7 @@ class HeaderMenu
 	private function buildTitle( $text )
 	{
 		$html = '';
-        $img = '<img src="/assets/img/icons/icon_logo.png" alt="Lotus" />';
+        $img = '<img src="/assets/img/content/logo.png" alt="Lotus" />';
 		if ( ! $this->guid ) {
 			return '<h1 class="logo">' . $img . $text . '</h1>';
 		}

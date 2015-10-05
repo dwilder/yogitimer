@@ -15,7 +15,7 @@ class FooterMenu
 		'guide' => 'Guide',
 		'contact' => 'Contact',
         'login' => 'Login',
-        'register' => 'Sign Up'
+        'signup' => 'Sign Up'
 	);
 	
 	/*
@@ -36,7 +36,7 @@ class FooterMenu
 	private function buildMenu()
 	{
 		$start = '
-		<nav id="footer-navigation" class="footer-navigation group"  role="navigation">
+		<nav id="footer-navigation" class="footer-navigation group">
 			<ul>
 				';
 				

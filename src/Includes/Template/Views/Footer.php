@@ -28,7 +28,7 @@ class Footer
 			
 				{colophonmenu}
 				
-				<p class="copyright">&copy $year <a href="http://$url">$url</a></p>
+				<p class="copyright">&copy; $year <a href="http://$url">$url</a></p>
 				
 			</div>
 			
