@@ -1,51 +1,333 @@
 .banner
     position: relative
+    height: 300px
     padding: 0
-    text-align: center
-    background: $color-b4
+    background: $color-a2
+    @media screen and (min-width: $break4)
+        height: 400px
+    @media screen and (min-width: $break7)
+        height: 450px
 
 .banner-inner
-    position: relative
-    padding: $margin*4 0
-    @media screen and (min-width: $break10 - $margin*2)
-        margin: 0 auto
-        width: $break10
+    @media screen and (min-width: $break10)
+        position: relative
+        height: 450px
 
-.banner-image
-    position: relative
-    margin: $margin*3 0
-    @media screen and (min-width: $break9)
+.banner-tagline
+    position: absolute
+    bottom: $margin
+    right: 0
+    z-index: 50
+    padding: 0 $margin
+    color: $color-a5
+    @media screen and (min-width: $break4)
+        bottom: $margin*1.45
+        right: $margin
+        font-size: 1.125em
+    @media screen and (min-width: $break7)
+        bottom: $margin*1.9
+        right: $margin*2
+        font-size: 1.4em
+    @media screen and (min-width: $break10)
+        position: relative
+        bottom: 0
+        right: 0
+        width: $break10
+        margin: 0 auto
+        
+.banner-tagline > p
+    color: $color-a5
+    @media screen and (min-width: $break10)
         position: absolute
-        left: $margin*4
-        top: $margin*4
-        margin: 0
-    
-    
-.banner-content h2
-    margin: 0 $margin $margin
+        top: 350px
+        right: $margin*4
+        
+.banner-foreground
+    position: relative
+    z-index: 40
+    width: 100%
+    color: $color-a3
+    font-size: $font-size*1.25
+    @media screen and (min-width: $break1)
+        font-size: $font-size*1.5
+    @media screen and (min-width: $break2)
+        font-size: $font-size*1.75
+    @media screen and (min-width: $break3)
+        font-size: $font-size*2
+    @media screen and (min-width: $break4)
+        font-size: $font-size*2.125
+    @media screen and (min-width: $break5)
+        font-size: $font-size*2.25
+    @media screen and (min-width: $break6)
+        font-size: $font-size*2.375
+    @media screen and (min-width: $break7)
+        font-size: $font-size*2.5
+    @media screen and (min-width: $break8)
+        font-size: $font-size*2.625
+    @media screen and (min-width: $break9)
+        font-size: $font-size*2.75
+    @media screen and (min-width: $break10)
+        width: $break10
+        margin: 0 auto
+        font-size: $font-size*3
+
+.banner-midground
+    position: relative
+    z-index: 30
+    width: 100%
+    color: $color-a0
+    font-size: $font-size*3
+    @media screen and (min-width: $break1)
+        font-size: $font-size*4
+    @media screen and (min-width: $break2)
+        font-size: $font-size*4.75
+    @media screen and (min-width: $break3)
+        font-size: $font-size*6
+    @media screen and (min-width: $break4)
+        font-size: $font-size*7.25
+    @media screen and (min-width: $break5)
+        font-size: $font-size*8.5
+    @media screen and (min-width: $break6)
+        font-size: $font-size*10
+    @media screen and (min-width: $break7)
+        font-size: $font-size*11
+    @media screen and (min-width: $break8)
+        font-size: $font-size*12
+    @media screen and (min-width: $break9)
+        font-size: $font-size*13
+    @media screen and (min-width: $break10)
+        width: $break10
+        margin: 0 auto
+        font-size: $font-size*15
+
+.banner-background
+    position: relative
+    z-index: 20
+    width: 100%
+    color: $color-a3
     font-size: $font-size*1.125
-    line-height: $line-height
     @media screen and (min-width: $break1)
         font-size: $font-size*1.25
     @media screen and (min-width: $break2)
-        font-size: $font-size*1.5
+        font-size: $font-size*1.375
     @media screen and (min-width: $break3)
-        font-size: $font-size*1.75
+        font-size: $font-size*1.5
     @media screen and (min-width: $break4)
-        font-size: $font-size*1.75
-    @media screen and (min-width: $break5)
         font-size: $font-size*2
+    @media screen and (min-width: $break5)
+        font-size: $font-size*2.125
     @media screen and (min-width: $break6)
         font-size: $font-size*2.25
+    @media screen and (min-width: $break7)
+        font-size: $font-size*2.375
+    @media screen and (min-width: $break8)
+        font-size: $font-size*2.5
+    @media screen and (min-width: $break9)
+        font-size: $font-size*2.625
+    @media screen and (min-width: $break10)
+        font-size: $font-size*3
+    @media screen and (min-width: $break10*1.25)
+        width: $break10*1.25
+        margin: 0 auto
+
+.banner-foreground > span,
+.banner-midground > span,
+.banner-background > span
+    position: absolute
+    font-family: $font-title
+    font-weight: $bold
     
+.banner-background > span
+    text-shadow: 0 0 1px rgba(0,0,0,0.3)
+
+#banner-foreground-1 // Cut Through The Noise
+    top: 40px
+    left: $margin
+    color: $color-a5
+    @media screen and (min-width: $break2)
+        left: 40px
+    @media screen and (min-width: $break4)
+        top: 80px
+        left: 10%
+    @media screen and (min-width: $break7)
+        top: 114px
+        left: 113px
     
-.banner-content p
-    margin: $margin $margin $margin*3
-    font-size: $font-size*1.125
+#banner-foreground-2 // Reconnect
+    top: 85px
+    right: 6%
+    @media screen and (min-width: $break4)
+        top: 45px
+    @media screen and (min-width: $break7)
+        top: 80px
     
-.banner .banner-action
-    display: inline-block
+#banner-foreground-3 // Rest Your Mind
+    top: 150px
+    right: 15%
+    @media screen and (min-width: $break4)
+        top: 195px
+    @media screen and (min-width: $break7)
+        top: 234px
+        left: 435px
+    
+#banner-foreground-4 // Get Focussed
+    top: 185px
+    left: 5%
+    @media screen and (min-width: $break4)
+        top: 240px
+        left: 7%
+    @media screen and (min-width: $break7)
+        top: 283px
+        left: 73px
+
+#banner-midground-1 // Meditate
+    top: 130px
     margin: 0
+    text-align: center
+    width: 100%
+    @media screen and (min-width: $break4)
+        top: 175px
+    @media screen and (min-width: $break7)
+        top: 195px
+
+#banner-background-1 // Equanimity
+    top: 10px
+    left: 10%
+    font-size: 133.3333333333%
+    @media screen and (min-width: $break2)
+        left: 35%
+    @media screen and (min-width: $break4)
+        top: 20px
+        left: 20%
+    @media screen and (min-width: $break7)
+        top: 57px
+        left: 37.3%
     
-.banner-action a
-    @extend .link-button
+#banner-background-2 // Loving Kindness
+    top: 215px
+    right: 3%
+    font-size: 133.3333333333%
+    @media screen and (min-width: $break4)
+        top: 275px
+    @media screen and (min-width: $break7)
+        top: 297px
+        right: 2%
+    
+#banner-background-3 // Compassion
+    top: 110px
+    right: 7%
+    font-size: 133.3333333333%
+    @media screen and (min-width: $break4)
+    @media screen and (min-width: $break7)
+        top: 158px
+        right: 3.65%
+    
+#banner-background-4 // Joy
+    top: 15px
+    right: 4%
+    font-size: 133.3333333333%
+    @media screen and (min-width: $break4)
+    @media screen and (min-width: $break7)
+        top: 20px
+        right: 2%
+    @media screen and (min-width: $break10)
+        top: 70px
+        right: 2%
+    
+#banner-background-5 // Patience
+    top: 60px
+    right: 28%
+    @media screen and (min-width: $break4)
+        top: 150px
+        right: 31%
+    @media screen and (min-width: $break7)
+        top: 158px
+        right: 41.85%
+    
+#banner-background-6 // Generosity
+    top: 130px
+    left: 18%
+    @media screen and (min-width: $break4)
+        top: 177px
+        left: 4%
+    @media screen and (min-width: $break7)
+        top: 207px
+        left: 12.35%
+    
+#banner-background-7 // Diligence
+    top: 140px
+    right: 20%
+    @media screen and (min-width: $break4)
+        top: 180px
+        right: 23%
+    @media screen and (min-width: $break7)
+        top: 227px
+        right: 25.5%
+
+#banner-background-8 // Exertion
+    top: 185px
+    right: 5%
+    @media screen and (min-width: $break4)
+        top: 215px
+        right: 5%
+    @media screen and (min-width: $break7)
+        top: 245px
+        right: 5%
+    
+#banner-background-9 // Meditation
+    top: 160px
+    left: 9%
+    @media screen and (min-width: $break4)
+        top: 207px
+        left: 22.5%
+    @media screen and (min-width: $break7)
+        top: 267px
+        left: 32.5%
+
+#banner-background-10 // Wisdom
+    top: 105px
+    left: 2%
+    @media screen and (min-width: $break4)
+        top: 130px
+    @media screen and (min-width: $break7)
+        top: 126px
+        left: 4.5%
+    
+#banner-background-11 // Mindfulness
+    top: 55px
+    left: 4%
+    @media screen and (min-width: $break4)
+    @media screen and (min-width: $break7)
+        top: 66px
+        left: 12.25%
+    
+#banner-background-12 // Prajna
+    top: 210px
+    left: 17%
+    @media screen and (min-width: $break4)
+        top: 290px
+        left: 13%
+    @media screen and (min-width: $break7)
+        top: 325px
+        left: 47.35%
+    
+#banner-background-13 // Bodhicitta
+    top: 250px
+    left: 3%
+    font-size: 133.3333333333%
+    @media screen and (min-width: $break4)
+        top: 336px
+    @media screen and (min-width: $break7)
+        top: 336px
+        left: 3%
+    
+#banner-background-14 // Egoless
+    top: 80px
+    left: 26%
+    @media screen and (min-width: $break4)
+        top: 120px
+        left: 26%
+    @media screen and (min-width: $break7)
+        top: 147px
+        left: 24.45%
+    

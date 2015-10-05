@@ -1,4 +1,3 @@
-.container,
 .user-navigation
     -webkit-box-sizing: border-box
     box-sizing: border-box
@@ -33,18 +32,22 @@
     padding: 0
     
 .user-navigation h3
-    margin: $margin/4 0
+    margin: 1px 0
     padding: $margin/2 $margin
-    color: $color-b1
+    color: $color-b4
     background: transparentize($color-b1, 0.9)
+    @media screen and (min-width: $break7)
+        margin: $margin/4 0
 
 .user-navigation li
-    margin: $margin/4 0
+    margin: 1px 0
+    @media screen and (min-width: $break7)
+        margin: $margin/4 0
     
 .user-navigation li a
     display: block
     padding: $margin/2 $margin
-    color: $color-b1
+    color: $color-b4
     
 .user-navigation li a:hover
     background: transparentize($color-b1, 0.8)
@@ -53,13 +56,16 @@
 .menu-close-link
     display: block
     position: absolute
-    top: $margin/2
+    top: $margin/4
     right: $margin/2
     padding: $margin/2
-    margin-top: 1px
+    margin-top: 2px
     line-height: 0
     border: 1px solid transparent
     border-radius: $border-radius
+    @media screen and (min-width: $break7)
+        top: $margin/2
+        margin-top: 1px
 
 .menu-dismiss-link
     position: relative
@@ -99,8 +105,8 @@
 @media all and (max-width: $break4)
 
     .cutsthemustard .container
-        -webkit-transition: all .25s
-        transition: all .25s
+        -webkit-transition: -webkit-transform .25s
+        transition: transform .25s
         width: 100%
         position: absolute
         z-index: 2
@@ -122,6 +128,10 @@
 
     .cutsthemustard .active .user-navigation
         opacity: 1
+        
+    .cutsthemustard .active .site-header
+        top: -3.65rem
+        
 
 @media all and (min-width: $break4)
 
@@ -145,7 +155,9 @@
     .cutsthemustard .active .container
         z-index: 0
 
-
     .cutsthemustard .active .user-navigation
         opacity: 1
+        
+    .cutsthemustard .active .site-header
+        opacity: 0
 

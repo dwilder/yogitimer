@@ -1,10 +1,18 @@
 .site-header
+    position: fixed
+    top: 0
+    z-index: 1000
+    width: 100%
     padding: 1px 0 1px 0
     background: $color-a0
+    background: transparentize( $color-a-1, .05 )
+    border-bottom: 2px solid #fff
     
 .site-header-inner
     position: relative
-    padding: $margin
+    padding: $margin*.75 0 $margin*.65 $margin/2
+    @media screen and (min-width: $break4)
+        padding: $margin*.75 $margin
     @media screen and (min-width: $break10 + 2*$margin)
         width: $break10
         margin: 0 auto

@@ -1,5 +1,9 @@
-.header-navigation
+.header-navigation li,
+.header-navigation-menu
+    font-size: 1em
     line-height: 1em
+    @media screen and (min-width: $break4)
+        font-size: 1.25em
     
 .header-navigation h1,
 .header-navigation p
@@ -7,23 +11,28 @@
     
 .header-navigation-anon
     position: absolute
-    top: $margin/2
-    right: $margin
+    top: $margin*.4
+    right: $margin/2
+    @media screen and (min-width: $break4)
+        right: $margin
     
 .header-navigation-anon li
     float: left
     margin: 0 0 0 $margin/2
     line-height: 1em
+    @media screen and (min-width: $break4)
+        margin: 0 0 0 $margin
     
 .header-navigation-anon li a
     float: left
 
 .header-navigation a:link,
 .header-navigation a:visited
-    color: $color-a4
+    color: $color-b2
 
 .header-navigation a:hover
-    color: $color-a3
+    color: $color-b4
+    //text-shadow: 0 0 2px transparentize( $color-a1, .5 )
     
 .header-navigation-login
     display: none
@@ -45,8 +54,8 @@
 .header-navigation-menu
     box-sizing: border-box
     padding: $margin/2 $margin
-    background: $color-b4
-    border: 1px solid $color-b4
+    background: $color-b2
+    border: 1px solid $color-b2
     
 .header-navigation-signup a:link,
 .header-navigation-signup a:visited,
@@ -60,12 +69,12 @@ a.header-navigation-menu:visited
 .header-navigation-signup a:hover,
 .header-navigation-anonmenu a:hover,
 a.header-navigation-menu:hover
-    color: $color-b4
-    background: $color-a3
+    background: $color-b4
+    border: 1px solid $color-b1
     
     
 .header-navigation-menu
     @extend .link-button
     position: absolute
-    top: $margin/2
+    top: $margin*.4
     right: $margin/2

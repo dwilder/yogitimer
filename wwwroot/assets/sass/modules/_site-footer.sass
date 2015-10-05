@@ -1,7 +1,7 @@
 .site-footer
     clear: both
     padding: 0
-    background: $color-b4
+    background: $color-b4 url(//#{$url}/assets/img/content/footer_background.png) repeat-x 0 0
     border-top: 4px solid $gray-5
 
 .site-footer-inner
@@ -17,6 +17,8 @@
     clear: both
     position: relative
     padding: $margin
+    @media screen and (min-width: $break7)
+        padding: $margin*1.5 $margin*2
     
 .copyright
     margin: 0

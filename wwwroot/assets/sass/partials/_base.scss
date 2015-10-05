@@ -11,17 +11,28 @@ $url: "yogitimer.com";
 
 // As hex codes */
 
+$color-a-1: #2B2836; // Transparent banner
 $color-a0: #383445;	// Main Primary color */
 $color-a1: #DFDAF2;
-$color-a2: #463F61;
-$color-a3: #746F88;
+$color-a2: #463F61; // Old
+$color-a2: #474353; // New
+$color-a3: #746F88; // Old
+$color-a3: #595567; // New
 $color-a4: #D0CFD7;
+$color-a5: #C7C6CB; // New
+
+//$color-b0: #8C8254;	// Main Complement color */
+//$color-b1: #FFF9E2;
+//$color-b2: #D7CC9D;
+//$color-b3: #C5C0A9;
+//$color-b4: #E2DFD4;
 
 $color-b0: #8C8254;	// Main Complement color */
-$color-b1: #FFF9E2;
-$color-b2: #D7CC9D;
-$color-b3: #C5C0A9;
-$color-b4: #E2DFD4;
+$color-b1: #AD9E99; // New
+$color-b2: #D9C6BF; // New
+$color-b3: #C5C0A9; // Old
+$color-b4: #E2DFD4; // Old
+$color-b4: #F1ECEA; // New
 
 $gray-3: #EEEEEE;
 $gray-4: #F4F4F4;
@@ -53,23 +64,24 @@ $rgba-b4: rgba( 29, 24,  3,1);
 $font-size: 1em;
 
 // Font-family
-$font-family: 'Helvetica Neue', Helvetica, Arial, 'Sans Serif';
-$font-title: 'Gill Sans', 'Helvetica Neue', Helvetica, Arial, 'Sans Serif';
+$font-family: 'Gill Sans', Helvetica, Arial, 'Sans Serif';
+$font-title: 'American Typewriter', 'Times', 'Serif';
 
 // Font-weight
 $light: 100;
-$regular: 300;
-$bold: 600;
+$regular: 400;
+$semibold: 500;
+$bold: 700;
 
 // Line-height
 $line-height: 1.5em;
 
 
 // Link colors
-$link: $color-a3;
-$visited: $color-a3;
-$hover: $color-b0;
-$active: $color-a2;
+$link: darken( $color-b1, 10% );
+$visited: $link;
+$hover: $color-a2;
+$active: $color-a0;
 
 
 // Margins
