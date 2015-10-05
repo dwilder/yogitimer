@@ -6,29 +6,54 @@ class BannerView
 	/*
 	 * Build the HTML
 	 */
-	public function getHTML( $image, $title, $content, $action )
+	public function getHTML( $content, $foreground, $midground, $background )
 	{
+        $fore   = $this->buildList( $foreground, 'banner-foreground' );
+        $mid    = $this->buildList( $midground, 'banner-midground' );
+        $back   = $this->buildList( $background, 'banner-background' );
+        
 		$html = <<<EOT
 
 <div class="banner">
+        
     <div class="banner-inner">
-    
-    	<div class="banner-content">
-    		<h2>$title</h2>
+        
+        <div class="banner-tagline">
     		<p>$content</p>
-            
-        	<div class="banner-image">
-        		<img src="/assets/img/content/$image" alt="Timer dial" />
-        	</div>
-            
-    		<p class="banner-action"><a href="{$action['guid']}">{$action['text']}</a></p>
-    	</div>
-	
-    </div>
-</div>	
+        </div>
+    
+        <div class="banner-foreground">
+            $fore
+        </div>
+    
+        <div class="banner-midground">
+            $mid
+        </div>
+    
+        <div class="banner-background">
+            $back
+        </div>
+        
+    </div><!-- .banner-inner -->
+    
+</div><!-- .banner -->
 			
 EOT;
 
 		return $html;
 	}
+    
+    /*
+     * Build lists
+     */
+    private function buildList( $items, $id_prefix )
+    {
+        $list = '';
+        $i = 1;
+        foreach ( $items as $item ) {
+            $list .= '<span id="' . $id_prefix . '-' . $i . '">' . $item . '</span>';
+            $i++;
+        }
+        return $list;
+    }
 }

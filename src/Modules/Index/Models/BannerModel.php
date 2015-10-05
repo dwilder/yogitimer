@@ -6,27 +6,42 @@ class BannerModel
 	/*
 	 * Store data
 	 */
-	private $image;
-	private $title;
 	private $content;
-	private $action = array(
-		'text' => null,
-		'guid' => null
-	);
+	private $foreground;
+    private $midground;
+    private $background;
 	
 	/*
 	 * Assign values
 	 */
 	public function __construct()
 	{
-		//$this->image = 'indexBannerImage.jpg';
-		$this->image = 'dial.png';
-		$this->title = "Meditation Timer and Journal";
-		$this->content = "Yogi Timer is a simple meditation timer and journal.";
-		$this->action = array(
-			'text' => 'Meditate',
-			'guid' => 'meditate'
+		$this->content = "Yogi Timer is a simple meditation timer and journal";
+		$this->foreground = array(
+            'Cut Through The Noise',
+            'Reconnect',
+            'Rest Your Mind',
+            'Get Focussed'
 		);
+        $this->midground = array(
+            'Meditate'
+        );
+        $this->background = array(
+            'Equanimity',
+            'Loving Kindness',
+            'Compassion',
+            'Joy',
+            'Patience',
+            'Generosity',
+            'Diligence',
+            'Exertion',
+            'Meditation',
+            'Wisdom',
+            'Mindfulness',
+            'Prajna',
+            'Bodhicitta',
+            'Egoless'
+        );
 	}
 	
 	/*
