@@ -1,0 +1,54 @@
+.index-action
+    margin: $margin*2 $margin
+    text-align: center
+    border-radius: $border-radius*2
+    @media screen and (min-width: $break5)
+        margin: $margin*2
+    @media screen and (min-width: $break10 + $margin*4)
+        margin: $margin*2 auto
+        width: $break10
+    
+.index-action > a
+    display: block
+    padding: $margin*1.5 0 $margin 0
+    border-radius: $border-radius*2
+    
+.index-action h2
+    margin: 0
+    @media screen and (min-width: $break4)
+        font-size: 1.5em
+    @media screen and (min-width: $break7)
+        font-size: 2em
+    
+.index-action p
+    margin: 0
+    font-size: 1.25em
+    
+.index-action-meditate
+    background: $color-b1 url(//#{$url}/assets/img/content/index_action_meditate_background.png) repeat-x -30% 0
+    
+.index-action-meditate > a h2,
+.index-action-meditate > a p
+    color: $color-a0
+    
+.index-action-meditate > a:hover h2,
+.index-action-meditate > a:hover p
+    color: $color-a2
+        
+.index-action-register
+    margin-bottom: $margin*5.75
+    background: $color-a1 url(//#{$url}/assets/img/content/index_action_register_background.png) repeat-x -40% 0
+
+.index-action-register > a h2,
+.index-action-register > a p
+    color: $color-b2
+    
+.index-action-register > a:hover h2,
+.index-action-register > a:hover p
+    color: $color-b1
+    
+.index-action-meditate > a:hover
+    box-shadow: 0 0 2px 2px $color-a3
+
+.index-action-register > a:hover
+    box-shadow: 0 0 2px 2px $color-b1

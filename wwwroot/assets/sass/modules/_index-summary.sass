@@ -1,0 +1,73 @@
+.index-summary
+    padding: $margin*3 $margin $margin*2
+    color: $color-b2
+    background: $color-a0
+    @media screen and (min-width: $break2)
+        padding: $margin*4 $margin/2 $margin*2.5
+    @media screen and (min-width: $break4)
+    @media screen and (min-width: $break7)
+        padding: $margin*5 $margin $margin*4
+        
+.index-summary > div
+    @media screen and (min-width: $break10 + $margin*2)
+        width: $break10
+        margin: 0 auto
+    
+.index-summary h2
+    margin: 0 0 $margin*2 0
+    font-size: 1.5em
+    text-align: center
+    @media screen and (min-width: $break2)
+        font-size: 2em
+    @media screen and (min-width: $break4)
+        margin: 0 0 $margin*3 0
+        font-size: 2.5em
+    @media screen and (min-width: $break7)
+        margin: 0 0 $margin*3.25 0
+        font-size: 3em
+        
+.index-summary-item
+    position: relative
+    clear: left
+    width: 100%
+    min-height: 3rem
+    margin: $margin 0 $margin*2 0
+    @media screen and (min-width: $break2)
+        clear: none
+        float: left
+        width: 33.3333333333%
+        margin: $margin 0 $margin 0
+        text-align: center
+    
+.index-summary-item img
+    position: absolute
+    width: 3rem
+    height: auto
+    margin: 0
+    @media screen and (min-width: $break2)
+        position: relative
+        width: 4rem
+        margin: 0 auto $margin
+    @media screen and (min-width: $break4)
+        width: 5rem
+    @media screen and (min-width: $break5)
+        width: 6rem
+    @media screen and (min-width: $break6)
+        width: 7rem
+    @media screen and (min-width: $break7)
+        width: 120px
+    
+.index-summary-item p
+    clear: none
+    float: left
+    margin: 0 0 0 4.25rem
+    color: $color-b3
+    @media screen and (min-width: $break2)
+        float: none
+        margin: 0 $margin/2
+    @media screen and (min-width: $break4)
+        font-weight: $light
+    @media screen and (min-width: $break7)
+        margin: 0 $margin
+    @media screen and (min-width: $break9)
+        font-size: 1.5em
