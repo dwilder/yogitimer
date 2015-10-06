@@ -11,8 +11,9 @@ class HeaderMenu
 	 */
 	private $lists = array(
 		'anonymous' => array(
-			'login' => 'Log In',
-			'signup' => 'Sign Up'
+            'meditate'  => 'Meditate',
+			'login'     => 'Log In',
+			'signup'    => 'Sign Up'
 		),
 		'authenticated' => array(
 			'menu' => 'Menu'

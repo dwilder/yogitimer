@@ -6,35 +6,96 @@
         float: left
         width: 100%
         margin: 0
-        padding: $margin 0
+        padding: $margin*1.35 0 $margin
+    @media screen and (min-width: $break6)
+        padding: $margin*1.35 0
     @media screen and (min-width: $break7)
-        padding: $margin*2 0
-    
+        padding: $margin*3.4 0
+
+.footer-navigation-user
+    @media screen and (min-width: $break4)
+        clear: both
+        float: right
+        margin: $margin*0.7 $margin $margin*0.8 0
+    @media screen and (min-width: $break6)
+        clear: none
+        margin: 0 $margin 0 0
+    @media screen and (min-width: $break7)
+        margin: 0 $margin*2 0 0
+        
 .footer-navigation li
     line-height: 1em
     @media screen and (min-width: $break4)
-        float: left
+        display: inline-block
         margin: 0 0 0 $margin/2
+        font-size: 1.125em
+    @media screen and (min-width: $break6)
+        float: left
+    
+.footer-navigation li:first-child
+    @media screen and (min-width: $break4)
+        margin-left: 0
+    @media screen and (min-width: $break7)
+        margin-left: $margin
+
+.footer-navigation-user li
+    @media screen and (min-width: $break4)
+        display: inline-block
+        box-sizing: border-box
+        margin: 0
+        text-align: center
+    @media screen and (min-width: $break6)
+        display: block
+        float: left
+        width: auto
         
+
+.footer-navigation-user li:first-child
+    @media screen and (min-width: $break4)
+        margin: 0
+    
+    
 .footer-navigation a
+    box-sizing: border-box
     display: block
     padding: $margin/2 $margin
+    @media screen and (min-width: $break4)
+        border-radius: $border-radius
         
 .footer-navigation a:link,
 .footer-navigation a:visited
     color: $color-a0
     
+.footer-navigation-user a
+    @media screen and (min-width: $break4)
+        margin: 0
+        border-radius: $border-radius
+            
+.footer-navigation-login
+    margin-top: $margin
+    @media screen and (min-width: $break4)
+        margin-top: 0
+            
+.footer-navigation-signup
+    @media screen and (min-width: $break4)
+        margin-left: $margin
+
+.footer-navigation-login a:link,
+.footer-navigation-login a:visited
+    background: $gray-5
+    border-bottom: 1px solid $color-b4
+    @media screen and (min-width: $break4)
+        margin-left: $margin
+            
+.footer-navigation-signup a:link,
+.footer-navigation-signup a:visited
+    color: $color-b1
+    background: $color-a0
+    @media screen and (min-width: $break4)
+        margin-left: $margin
+    
 .footer-navigation a:hover
     color: $color-b4
     background: $color-a3
     
-.footer-navigation-login
-    margin-top: $margin
-    
-.footer-navigation-login,
-.footer-navigation-signup
-    background: $gray-5
-    border-bottom: 1px solid $color-b4
-    @media screen and (min-width: $break4)
-        margin-top: 0
-        margin-left: $margin/2
+        
