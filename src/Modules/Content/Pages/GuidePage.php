@@ -21,7 +21,7 @@ class GuidePage
             
             <p>When you are logged in, click or tap the Menu link in the top right corner of the screen to expose a list of the pages you can access. Click or tap an option in the menu to get to the page you want to see. You can dismiss the menu by clicking or tapping the <b>X</b> icon at the top or the <b>Dismiss</b> button at the bottom of the menu.</p>
             
-            <p>The Menu gives you access to <a href="#profile">your Profile,</a> <a href="#timer">the Meditation Timer,</a> and <a href="#journal">your Journal.</a></p>
+            <p>The Menu gives you access to <a href="#profile">your Profile,</a> <a href="#timer">the Meditation Timer,</a> <a href="#journal">your Journal,</a> and <a href="#practices"> your Practices.</a></p>
             
             <p>It also gives you access to your personal settings, if you want to change your username, email address, password, or to customize your profile with your own images. It also gives you access to help pages, like this Guide, and to legal information about this service.</p>
             
@@ -88,6 +88,14 @@ class GuidePage
             <p>The listing for your meditation time includes the total number of hours you have meditated, plus total s for the current year and any previous year. This is the sum of hours where your time was saved automatically using the time, and any additional time you have entered in your journal. Hopefully, you will see some progress over the years.</p>
             
             <p>Meditation times are rounded to the quarter hour.</p>
+            
+            <a id="practices"></a>
+            <h2>Tracking Practices</h2>
+            
+            <p>Practices add another level of tracking to your meditations. You can use Practices to keep track of specific techniques you are using and provide an option to set goals.</p>
+            
+            <p><a href="/aboutpractices">More about Practices</a></p>
+            
             
             <h2>Need Help With a Problem?</h2>
             

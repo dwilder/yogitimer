@@ -12,8 +12,14 @@ class UserMenu
 		'Menu' => array(
 			'profile' => 'Profile',
 			'meditate' => 'Meditate',
-			'journal' => 'Journal',
-            'practices' => 'Practices'
+			'journal' => array(
+			    'primary'   => 'Journal',
+                'secondary' => 'add'
+			),
+            'practices' => array(
+                'primary'   => 'Practices',
+                'secondary' => 'add'
+            )
 		),
 		'Admin' => array(
 			'users' => 'Users',
@@ -92,8 +98,8 @@ class UserMenu
 				<ul>
 				';
 				
-		foreach ( $menu as $guid => $text ) {
-			$html .= '<li><a href="/' . $guid . '">' . $text . '</a></li>';
+		foreach ( $menu as $guid => $item ) {
+			$html .= $this->buildSubMenuItem( $guid, $item );
 		}
 		
 		$html .= "
@@ -103,4 +109,15 @@ class UserMenu
 			
 		return $html;
 	}
+    
+    /*
+     * Build submenu item
+     */
+    private function buildSubMenuItem( $guid, $item )
+    {
+        if ( ! is_array( $item ) ) {
+            return '<li><a href="/' . $guid . '">' . $item . '</a></li>';
+        }
+        return '<li><a href="/' . $guid . '">' . $item['primary'] . '</a><a href="/' . $guid . '/' . $item['secondary'] . '">' . $item['secondary'] . '</a></li>';
+    }
 }

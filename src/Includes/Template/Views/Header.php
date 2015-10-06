@@ -24,7 +24,7 @@ class Header
 	<meta name="description" content="Yogi Timer is an online meditation timer that tracks your practices. Sign up for free.">
 	
 	<!-- Icons -->
-	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="icon" type="image/png" href="/favicon.png">
 	<!-- Apple Touch icons-->
 	<link rel="apple-touch-icon" sizes="57x57" href="/assets/touch-icons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="/assets/touch-icons/apple-touch-icon-114x114.png">

@@ -40,6 +40,7 @@
         margin: $margin/4 0
 
 .user-navigation li
+    position: relative
     margin: 1px 0
     @media screen and (min-width: $break7)
         margin: $margin/4 0
@@ -49,9 +50,21 @@
     padding: $margin/2 $margin
     color: $color-b4
     
+.user-navigation li a + a
+    position: absolute
+    top: 0
+    right: $margin/2
+    width: 1.5rem
+    padding: $margin/2
+    overflow: hidden
+    text-indent: 100%
+    background: url(//#{$url}/assets/img/icons/icon_add.png) no-repeat 50% 50%
+    background-size: 1.5rem
+        
 .user-navigation li a:hover
-    background: transparentize($color-b1, 0.8)
-    background: $color-a3
+    background-color: transparentize($color-b1, 0.8)
+    background-color: $color-a3
+    
     
 .menu-close-link
     display: block

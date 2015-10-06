@@ -100,7 +100,7 @@ class ListView extends View
         
         //$path .= '<p>Id: ' . $practice['id'] . '; User ID: ' . $practice['user_id'] . '</p>';
 
-        $path .= '<p>Practice Time: ';
+        $path .= '<p class="practice-time">Practice Time: ';
         // Different formats if a goal is set
         if ( $practice['goal_time'] != null ) {
             $path .= '<b class="strong">' . ( floor( $current_time/15 ) / 4 ) . '</b>';

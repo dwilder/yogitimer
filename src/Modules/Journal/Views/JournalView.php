@@ -140,6 +140,7 @@ class JournalView extends View
         }
 		
         if ( $current_data['add_method'] == 'form' ) {
+        //if (true) {
     		$path = '<a href="/journal/edit/' . $current_data['id'] . '">' . $path . '</a>';
         }
         else {

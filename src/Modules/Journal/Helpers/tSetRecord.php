@@ -50,6 +50,7 @@ trait tSetRecord
         $this->data['add_method']       = $this->record->get('add_method');
         
         if ( $this->data['add_method'] == 'organic' ) {
+            //return true;
             return false;
         }
         
