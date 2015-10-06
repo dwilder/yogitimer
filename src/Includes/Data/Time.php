@@ -25,6 +25,9 @@ class Time extends AbstractDataValue
     {
         // Remove illegal characters
         $value = preg_replace('![^0-9 :apm]!i', '', $value);
+        if ( $value == '' ) {
+            $value = '12:00pm';
+        }
         
         // Get the hours value
         list( $hours, $remainder ) = explode( ':', $value, 2 );

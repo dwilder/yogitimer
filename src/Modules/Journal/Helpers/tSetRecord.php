@@ -43,6 +43,7 @@ trait tSetRecord
             return false;
         }
         
+        $this->data['practice']         = $this->record->get('meditation_practice_id');
         $this->data['start_time']       = $this->record->get('start_time');
         $this->data['timezone_offset']  = $this->record->get('timezone_offset');
         $this->data['duration']         = $this->record->get('duration');

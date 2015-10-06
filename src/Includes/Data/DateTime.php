@@ -30,7 +30,7 @@ class DateTime extends AbstractDataValue
     {
         if ( $this->value != null ) {
             $date = strtotime( $this->value );
-            return date( 'l, F t, Y', $date );
+            return date( 'l, F j, Y', $date );
         }
         return null;
     }

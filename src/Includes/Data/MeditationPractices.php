@@ -75,4 +75,18 @@ class MeditationPractices
         
         return $map;
     }
+    
+    /*
+     * Check if a practice exists for a user
+     */
+    public function hasPractice( $id )
+    {
+        $data = $this->get();
+        foreach ( $data as $practice ) {
+            if ( $practice['id'] == $id ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

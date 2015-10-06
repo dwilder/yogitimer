@@ -16,10 +16,17 @@ class Date extends AbstractDataValue
      */
     protected function sanitize( $value )
     {
+        // Remove leading/trailing whitespace
+        $value = strtolower( trim( $value ) );
+        
+        if ( $value == 'today' || $value == 't' ) {
+            return $this->set();
+        }
+        else if ( $value == 'yesterday' || $value == 'y' ) {
+            return $this->set(1);
+        }
         // Remove illegal characters
         $value = preg_replace('![^0-9 ./-]!', '', $value);
-        // Remove leading/trailing whitespace
-        $value = trim( $value );
         // Get rid of leading non-digits
         $value = trim( $value, " ./-" );
         // Replace ./- with space
@@ -47,5 +54,20 @@ class Date extends AbstractDataValue
     public function getFormatted()
     {
         return str_replace( ' ', '-', $this->value );
+    }
+    
+    /*
+     * Set the current date
+     */
+    protected function set( $offset = 0 )
+    {
+        if ( ! $this->value ) {
+            if ( $offset > 0 ) {
+                return $this->value = date('d m Y', time() - $offset * 24 * 60 * 60 );
+            }
+            else {
+                return $this->value = date( 'd m Y' );
+            }
+        }
     }
 }

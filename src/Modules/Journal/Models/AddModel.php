@@ -3,6 +3,7 @@ namespace Src\Modules\Journal\Models;
 
 use Src\Includes\SuperClasses\Model;
 use Src\Includes\Data\MeditationRecord;
+use Src\Includes\Data\MeditationPractices;
 use Src\Modules\Journal\Helpers\tSetSubmittedData;
 
 class AddModel extends Model
@@ -13,6 +14,7 @@ class AddModel extends Model
      * Store the record
      */
     protected $record;
+    protected $practices;
     
     /*
      * Store an error
@@ -23,12 +25,24 @@ class AddModel extends Model
      * Run
      */
     public function run()
-    {
+    {   
+        $this->setPractices();
+        
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $this->record = new MeditationRecord;
             $this->processRequest();
         }
         $this->setDefaults();
+    }
+    
+    /*
+     * Set practices
+     */
+    protected function setPractices()
+    {
+        $this->practices = new MeditationPractices;
+        $this->practices->read();
+        $this->data['practices'] = $this->practices;
     }
     
     /*
@@ -63,6 +77,9 @@ class AddModel extends Model
         }
         if ( ! isset( $this->data['time'] ) ) {
             $this->data['time'] = date('g:i a', $time);
+        }
+        if ( ! isset( $this->data['practice'] ) ) {
+            $this->data['practice'] = 0;
         }
     }
 }

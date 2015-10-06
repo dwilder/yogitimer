@@ -4,6 +4,7 @@ namespace Src\Modules\Journal\Models;
 use Src\Includes\SuperClasses\Model;
 use Src\Modules\Journal\Helpers\tSetRecord;
 use Src\Modules\Journal\Helpers\tSetSubmittedData;
+use Src\Includes\Data\MeditationPractices;
 
 class EditModel extends Model
 {
@@ -30,6 +31,7 @@ class EditModel extends Model
         }
         
         $this->isRecordDeleted();
+        $this->setPractices();
         
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $this->processRequest();
@@ -43,6 +45,16 @@ class EditModel extends Model
         if ( $this->record->isDeleted() ) {
             $this->redirect('/journal/restore/' . $this->record->get('id'));
         }
+    }
+    
+    /*
+     * Set practices
+     */
+    protected function setPractices()
+    {
+        $this->practices = new MeditationPractices;
+        $this->practices->read();
+        $this->data['practices'] = $this->practices;
     }
     
     /*

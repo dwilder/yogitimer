@@ -82,6 +82,8 @@ class AbstractActionForm extends View
 	 */
 	protected function buildForm()
 	{	
+        $this->setPractices();
+        
 		$date = $this->form->newInput( 'date' );
 		$date->setLabel( 'Date' );
 		$date->set( 'name', 'date' );
@@ -126,6 +128,35 @@ class AbstractActionForm extends View
         $cancel = $this->form->newHtml( 'p', '<a href="/journal">Cancel</a>' );
         $cancel->set( 'class', 'form-link-cancel' );
 	}
+    
+    /*
+     * Set the practices selection
+     */
+    protected function setPractices()
+    {
+        $practices_obj = $this->data['practices'];
+        $practices = $practices_obj->get();
+    
+        if ( count( $practices ) == 1 ) {
+            // Create a hidden input with value 0
+            $practice = $this->form->newInput( 'hidden' );
+            $practice->set( 'name', 'practice' );
+            $practice->set( 'value', '0' );
+        }
+        else {
+            // Create a select box with practice ids and names
+            $options = array();
+            foreach ( $practices as $practice ) {
+                $options[] = [ $practice['id'], $practice['name'] ];
+            }
+            $practice = $this->form->newInput( 'select' );
+    		$practice->setLabel( 'Practice' );
+    		$practice->set( 'name', 'practice' );
+    		$practice->set( 'id', 'practice' );
+    		$practice->set( 'value', $this->data['practice'] );
+    		$practice->setOptions( $options );
+        }
+    }
 	
 	/*
 	 * Define the array to set the Meditation time options
