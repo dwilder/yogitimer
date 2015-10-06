@@ -13,6 +13,8 @@ class MomentumPage
 	public function getContent()
 	{
 		$html = <<<EOT
+            <p><a href="/guide">From the Guide</a></p>
+        
             <h1>Momentum</h1>
 
             <p>Let&#8217;s start with the goal of have a daily meditation practice. Yes, that may be ambitious and lofty, but it&#8217;s something to work towards. We don&#8217;t need to be discouraged if we miss a day, or only meditate on Sundays. We are building up a habit of getting to the cushion.</p>
@@ -32,6 +34,8 @@ class MomentumPage
             <h2>Increasing Your Momentum</h2>
 
             <p>There is an easy way to increase your momentum: meditated daily. Even if it&#8217;s only a few minutes, it will help you build the habit. Momentum is about getting to the cushion on a daily basis. That is the practice of momentum.</p>
+            
+            <p><a href="/guide#momentum">&larr; Guide</a></p>
 EOT;
 
 		return $html;

@@ -13,6 +13,8 @@ class StabilityPage
 	public function getContent()
 	{
 		$html = <<<EOT
+            <p><a href="/guide">From the Guide</a></p>
+        
             <h1>Stability</h1>
 
             <p>The mind wanders. It wanders here. It wanders there. Sometimes it will come to rest in some dull state, not even aware of where it is. Often it zips around, spinning on its thoughts, bouncing off the walls. Our mind is wild. With meditation, we can tame it.</p>
@@ -32,6 +34,8 @@ class StabilityPage
             <h2>Increasing Your Stability</h2>
 
             <p>So, you want a stable mind. The only way to get there is to practice making it stable. That takes time, and better if its longer periods of time. Remember, stability is about training your mind to come back to its object (of your choice) whenever it wanders and you&#8217;ll have more opportunities with this cycle if your meditation is longer. So, practice for longer periods of time.</p>
+            
+            <p><a href="/guide#stability">&larr; Guide</a></p>
 EOT;
 
 		return $html;

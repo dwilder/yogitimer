@@ -19,7 +19,7 @@ class GuidePage
             
             <h2>Navigating the Website</h2>
             
-            <p>Click or tap the Menu link in the top right corner of the screen to expose a list of the pages you can access. Click or tap an option in the menu to get to the page you want to see. You can dismiss the menu by clicking or tapping the <b>X</b> icon at the top or the <b>Dismiss</b> button at the bottom of the menu.</p>
+            <p>When you are logged in, click or tap the Menu link in the top right corner of the screen to expose a list of the pages you can access. Click or tap an option in the menu to get to the page you want to see. You can dismiss the menu by clicking or tapping the <b>X</b> icon at the top or the <b>Dismiss</b> button at the bottom of the menu.</p>
             
             <p>The Menu gives you access to <a href="#profile">your Profile,</a> <a href="#timer">the Meditation Timer,</a> and <a href="#journal">your Journal.</a></p>
             
@@ -36,9 +36,10 @@ class GuidePage
             
             <p><a href="/meditate">Start Meditating</a></p>
             
+            <a id="meditating"></a>
             <h3>Meditating</h3>
             
-            <p>This application is intended to provide a tool to support meditation, not to provide instruction. However, I have provided brief instructions to get you going in case you haven't previously received instruction or want to try this approach. It is a foundational meditation common to many tradition.
+            <p>This application is intended to provide a tool to support meditation, not to provide instruction. However, I have provided brief instructions to get you going in case you haven't previously received instruction or want to try this approach. It is a foundational meditation common to many traditions.
             
             <p><a href="/meditating">Learn about Meditating</a></p>
             
@@ -64,12 +65,14 @@ class GuidePage
             
             <p><a href="/profile">View your Profile</a></p>
             
+            <a id="momentum"></a>
             <h3>Your Momentum Score</h3>
             
             <p>Momentum is a representation of how frequently you meditate and how that is impacting your habit of meditating. It is a score out of 100 based on the number of days you have meditated in the recent past, and the total number of hours you have meditated. The ball moves like a pendulum, and when your Momentum score gets high enough it will start swinging around.</p>
             
             <p><a href="/momentum">More about Momentum</a></p>
             
+            <a id="stability"></a>
             <h3>Your Stability Score</h3>
             
             <p>Stability represents your ability to keep your mind focussed on the object of meditation. It is a score out of 100 based on the length of your recent meditations and the total number of hours you have meditated. The ball moves around randomly, like an untamed mind, occasionally settling somewhere. As your Stability score increases, the ball settles more frequently, and more often in the center - the focal point.</p>
