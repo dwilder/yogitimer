@@ -96,7 +96,7 @@ class ListView extends View
         $fruition = '</div>';
         
         // Title
-        $path .= '<h2 class="practice-title-' . $subclass . '">' . $practice['name'] . '</h2>';
+        $path .= '<p class="practice-title-' . $subclass . '">' . $practice['name'] . '</p>';
         
         //$path .= '<p>Id: ' . $practice['id'] . '; User ID: ' . $practice['user_id'] . '</p>';
 

@@ -35,7 +35,7 @@ class MeditateView extends View
 	 */
 	protected function getTitle()
 	{
-		return '<h1>Meditation Timer</h1>';
+		return '<h1>Meditate</h1>';
 	}
 	
 	/*

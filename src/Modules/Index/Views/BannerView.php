@@ -14,7 +14,7 @@ class BannerView
         
 		$html = <<<EOT
 
-<div class="banner">
+<div id="banner" class="banner">
         
     <div class="banner-inner">
         
@@ -22,7 +22,7 @@ class BannerView
     		<p>$content</p>
         </div>
     
-        <div class="banner-foreground">
+        <div id="banner-foreground" class="banner-foreground">
             $fore
         </div>
     
@@ -30,7 +30,7 @@ class BannerView
             $mid
         </div>
     
-        <div class="banner-background">
+        <div id="banner-background" class="banner-background">
             $back
         </div>
         

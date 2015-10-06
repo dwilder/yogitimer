@@ -69,7 +69,10 @@ class Controller extends UIController
         
 		$this->template->setContent( $content );
 		$this->template->setGuid( 'index' );
-		
+
+        $this->template->setScript( 'utilities.js' );
+        $this->template->setScript( 'index.js' );
+        
 		echo $this->template->request();
 	}
 	

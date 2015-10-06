@@ -45,6 +45,7 @@
 .banner-foreground
     position: relative
     z-index: 40
+    //height: 300px
     width: 100%
     color: $color-a3
     font-size: $font-size*1.25
@@ -55,12 +56,14 @@
     @media screen and (min-width: $break3)
         font-size: $font-size*2
     @media screen and (min-width: $break4)
+        //height: 400px
         font-size: $font-size*2.125
     @media screen and (min-width: $break5)
         font-size: $font-size*2.25
     @media screen and (min-width: $break6)
         font-size: $font-size*2.375
     @media screen and (min-width: $break7)
+        //height: 450px
         font-size: $font-size*2.5
     @media screen and (min-width: $break8)
         font-size: $font-size*2.625
@@ -73,6 +76,8 @@
 
 .banner-midground
     position: relative
+    top: 0
+    left: 0
     z-index: 30
     width: 100%
     color: $color-a0
@@ -102,6 +107,8 @@
 
 .banner-background
     position: relative
+    top: 0
+    left: 0
     z-index: 20
     width: 100%
     color: $color-a3
@@ -139,6 +146,9 @@
     
 .banner-background > span
     text-shadow: 0 0 1px rgba(0,0,0,0.3)
+    
+.js .banner-background > span
+    opacity: 0
 
 #banner-foreground-1 // Cut Through The Noise
     top: 40px
