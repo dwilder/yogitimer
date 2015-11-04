@@ -107,6 +107,7 @@ trait tSetSubmittedData
         
         $this->time = new Time($_POST['time']);
         $this->data['time'] = $this->time->get();
+        $this->data['testTime'] = $this->time->testValue;
         
         if ( ! $this->time->isValid() ) {
             $this->error = true;

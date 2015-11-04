@@ -20,12 +20,14 @@
     z-index: 50
     padding: 0 $margin
     color: $color-a5
+    @media screen and (min-width: $break3)
+        bottom: $margin*2.35
     @media screen and (min-width: $break4)
-        bottom: $margin*1.45
+        bottom: $margin*2.45
         right: $margin
         font-size: 1.125em
     @media screen and (min-width: $break7)
-        bottom: $margin*1.9
+        bottom: $margin*2.9
         right: $margin*2
         font-size: 1.4em
     @media screen and (min-width: $break10)
@@ -37,6 +39,7 @@
         
 .banner-tagline > p
     color: $color-a5
+    margin: 0
     @media screen and (min-width: $break10)
         position: absolute
         top: 350px
@@ -45,7 +48,6 @@
 .banner-foreground
     position: relative
     z-index: 40
-    //height: 300px
     width: 100%
     color: $color-a3
     font-size: $font-size*1.25
@@ -56,14 +58,12 @@
     @media screen and (min-width: $break3)
         font-size: $font-size*2
     @media screen and (min-width: $break4)
-        //height: 400px
         font-size: $font-size*2.125
     @media screen and (min-width: $break5)
         font-size: $font-size*2.25
     @media screen and (min-width: $break6)
         font-size: $font-size*2.375
     @media screen and (min-width: $break7)
-        //height: 450px
         font-size: $font-size*2.5
     @media screen and (min-width: $break8)
         font-size: $font-size*2.625

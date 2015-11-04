@@ -133,7 +133,11 @@ class MeditationRecords
 
         $start_year = date('Y');
         $start_month = date('m') + 1;
-        if ( $start_month != 12 ) {
+        
+        if ( $start_month == 13 ) {
+            $start_month = 1;
+        }
+        if ( $start_month != 1 ) {
             $start_year--;
         }
         

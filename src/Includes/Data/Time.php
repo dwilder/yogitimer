@@ -24,7 +24,8 @@ class Time extends AbstractDataValue
     protected function sanitize( $value )
     {
         // Remove illegal characters
-        $value = preg_replace('![^0-9 :apm]!i', '', $value);
+        $value = strtolower( $value );
+        $value = preg_replace('![^0-9 :apm]!', '', $value);
         if ( $value == '' ) {
             $value = '12:00pm';
         }
@@ -32,13 +33,13 @@ class Time extends AbstractDataValue
         // Get the hours value
         list( $hours, $remainder ) = explode( ':', $value, 2 );
         
-        // Get the am or pm value
-        $this->setMeridiem( $value );
         $this->setHours( $hours );
         $this->setMinutes( $remainder );
+        // Get the am or pm value
+        $this->setMeridiem( $value, $hours );
         
-        
-        return $this->hours . ':' . $this->minutes . ' ' . $this->meridiem;
+        $time = $this->hours . ':' . $this->minutes . ' ' . $this->meridiem;
+        return $time;
     }
     
     /*
@@ -120,9 +121,14 @@ class Time extends AbstractDataValue
     /*
      * Set the meridiem
      */
-    private function setMeridiem( $meridiem )
+    private function setMeridiem( $time, $hours )
     {
-        $this->meridiem = ( stripos( $meridiem, 'pm') ) ? 'pm' : 'am';
+        if ( ! stripos( $time, 'am') && ! stripos( $time, 'pm') ) {
+            $this->meridiem = ( $hours < 12 ) ? 'am' : 'pm';
+        }
+        else {
+            $this->meridiem = ( stripos( $time, 'pm') ) ? 'pm' : 'am';
+        }
     }
     
     /*

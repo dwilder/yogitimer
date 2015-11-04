@@ -26,7 +26,7 @@ class Config
 	/*
 	 * System settings
 	 */
-	private $url = 'meditate.dev';
+	private $url = 'yogitimer.dev';
 	private $sitename = 'Yogi Timer';
     private $siteemail = 'yogitimer@davewilder.ca';
     
@@ -34,7 +34,7 @@ class Config
      * Directories
      */
     private $root_dir = '../src';
-    private $upload_dir = 'uploads_meditate';
+    private $upload_dir = 'uploads_yogitimer';
     
     /*
      * Stripe keys

@@ -41,7 +41,9 @@ class MeditationTimeView extends AbstractProfileDataView
 		
 		//$hours = number_format( ( floor($v/15)/4 ), 2 );
 		$hours = floor($v/15)/4;
-		$data = '<p class="profile-meditationtime-hours" data-hours="' . $hours . '">' . $hours . '</p>';
+		$data = '<p class="profile-meditationtime-hours" data-hours="' . $hours . '">' . $hours . ' hr';
+        $data .= ( $hours == 1 ) ? '' : 's';
+        $data .= '</p>';
 		
 		return $start . $header . $data . $end;
 		

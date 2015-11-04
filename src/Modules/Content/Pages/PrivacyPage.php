@@ -47,7 +47,7 @@ class PrivacyPage
 
             <h2>Security</h2>
 
-            <p>We implement a variety of security measures to help keep your information secure. For example, any page where you are asked for your password uses HTTPS so that communications between your web browser and the Service are secure.</p>
+            <p>I implement a variety of security measures to help keep your information secure. If there is sufficient usage of the site, I will institute HTTPS. However, your best protection is to use a complex and unique password for your account.<!-- For example, any page where you are asked for your password uses HTTPS so that communications between your web browser and the Service are secure.--></p>
 
             <h2>Accessing Your Information</h2>
 

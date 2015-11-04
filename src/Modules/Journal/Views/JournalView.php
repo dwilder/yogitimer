@@ -224,7 +224,7 @@ class JournalView extends View
 	 */
 	protected function isNewMonth( $current, $last )
 	{
-		if ( date( 'm', $current) == date( 'm', $last ) ) {
+		if ( date( 'm', $current) == date( 'm', $last ) && date( 'Y', $current ) == date( 'Y', $last ) ) {
 			return false;
 		}
 		
