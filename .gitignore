@@ -2,6 +2,7 @@
 support
 uploads
 uploads_*
+*.zip
 
 # ignore .DS_Store
 .DS_Store
