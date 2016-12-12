@@ -3,6 +3,7 @@ support
 uploads
 uploads_*
 *.zip
+Config.php
 
 # ignore .DS_Store
 .DS_Store

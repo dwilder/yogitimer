@@ -10,9 +10,9 @@ class Config
 	 * Database configuration
 	 */
 	private $dbhost = 'localhost';
-	private $dbname = 'meditate';
-	private $dbuser = 'root';
-	private $dbpass = 'root';
+	private $dbname = '';
+	private $dbuser = '';
+	private $dbpass = '';
 	private $dbchar = 'utf8';
 	
 	/*
@@ -26,9 +26,9 @@ class Config
 	/*
 	 * System settings
 	 */
-	private $url = 'yogitimer.dev';
+	private $url = 'example.com';
 	private $sitename = 'Yogi Timer';
-    private $siteemail = 'yogitimer@davewilder.ca';
+    private $siteemail = 'email@example.com';
     
     /*
      * Directories
@@ -62,20 +62,6 @@ class Config
             self::$instance = new Config();
         }
         return self::$instance;
-    }
-    
-    /*
-     * Set Stripe keys
-     */
-    private function setStripeKeys()
-    {
-        if ( $this->live ) {
-            $this->stripe_private_key = null;
-            $this->stripe_public_key = null;
-        } else {
-            $this->stripe_private_key = null;
-            $this->stripe_public_key = null;
-        }
     }
     
     /*
