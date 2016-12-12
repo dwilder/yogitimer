@@ -11,3 +11,5 @@ CSS is compiled from Sass. The Sass directory is in wwwroot/assets/sass/
 ## Set Up
 
 Set the database credentials, site URL, and contact email in the the Config.php file in the src/Config/ directory. 
+
+Try it out at http://yogitimer.com
